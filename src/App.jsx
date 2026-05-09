@@ -20,7 +20,6 @@ function App() {
         {
           path: "training",
           children: [
-            { index: true, element: <TrainingCatalog /> },
             { path: "formal-education", element: <FormalEducation /> },
             { path: "short-term", element: <ShortTermCourses /> },
             { path: "languages", element: <LanguageTraining /> },
