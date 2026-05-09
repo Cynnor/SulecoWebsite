@@ -1,14 +1,39 @@
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import Layout from "./components/layout";
 import HomePage from "./pages/homePage";
+
+// About Us Pages
 import GeneralIntroduction from "./pages/aboutUs/generalIntroduction";
 import PhilosophyAndMotto from "./pages/aboutUs/philosophyAndMotto";
 import ExpertAdvisors from "./pages/aboutUs/expertAdvisors";
 import FacilitiesAndVirtualTour from "./pages/aboutUs/facilitiesAndVirtualTour";
+
+// Training Pages
 import FormalEducation from "./pages/training/formalEducation";
 import ShortTermCourses from "./pages/training/shortTermCourses";
 import LanguageTraining from "./pages/training/languageTraining";
 import TrainingPartnerships from "./pages/training/trainingPartnerships";
+
+// Admission Pages
+import AdmissionGuide from "./pages/admission/admissionGuide";
+import ScholarshipsAndTuition from "./pages/admission/scholarshipsAndTuition";
+import OnlineApplication from "./pages/admission/onlineApplication";
+
+// Career Pages
+import PartnerNetwork from "./pages/career/partnerNetwork";
+import DomesticOpportunities from "./pages/career/domesticOpportunities";
+import InternationalCareer from "./pages/career/internationalCareer";
+import InternshipDiary from "./pages/career/internshipDiary";
+
+// News Pages
+import NewsAndEvents from "./pages/news/newsAndEvents";
+import StudentActivities from "./pages/news/studentActivities";
+import TrainingNotifications from "./pages/news/trainingNotifications";
+import ResourceLibrary from "./pages/news/resourceLibrary";
+
+// Contact Pages
+import ContactInfo from "./pages/contact/contactInfo";
+import ConsultationForm from "./pages/contact/consultationForm";
 
 function App() {
   const router = createBrowserRouter([
@@ -26,20 +51,53 @@ function App() {
             { path: "partnerships", element: <TrainingPartnerships /> },
           ],
         },
-      ],
-    },
-    {
-      path: "/about-us",
-      element: <Layout />,
-      children: [
-        {path: "introduction", element: <GeneralIntroduction />},
-        {path: "philosophy", element: <PhilosophyAndMotto />},
-        {path: "experts", element: <ExpertAdvisors />},
-        {path: "facilities", element: <FacilitiesAndVirtualTour />},
-        {index: true,element: <Navigate to="/about-us/introduction" replace />},
+        {
+          path: "admission",
+          children: [
+            { path: "guide", element: <AdmissionGuide /> },
+            { path: "scholarships", element: <ScholarshipsAndTuition /> },
+            { path: "apply", element: <OnlineApplication /> },
+          ],
+        },
+        {
+          path: "career",
+          children: [
+            { path: "partners", element: <PartnerNetwork /> },
+            { path: "domestic", element: <DomesticOpportunities /> },
+            { path: "international", element: <InternationalCareer /> },
+            { path: "diary", element: <InternshipDiary /> },
+          ],
+        },
+        {
+          path: "news",
+          children: [
+            { path: "events", element: <NewsAndEvents /> },
+            { path: "student-activities", element: <StudentActivities /> },
+            { path: "notifications", element: <TrainingNotifications /> },
+            { path: "library", element: <ResourceLibrary /> },
+          ],
+        },
+        {
+          path: "contact",
+          children: [
+            { path: "info", element: <ContactInfo /> },
+            { path: "consultation", element: <ConsultationForm /> },
+          ],
+        },
+        {
+          path: "about-us",
+          children: [
+            { path: "introduction", element: <GeneralIntroduction /> },
+            { path: "philosophy", element: <PhilosophyAndMotto /> },
+            { path: "experts", element: <ExpertAdvisors /> },
+            { path: "facilities", element: <FacilitiesAndVirtualTour /> },
+            { index: true, element: <Navigate to="/about-us/introduction" replace /> },
+          ],
+        },
       ],
     },
   ]);
+
   return <RouterProvider router={router} />;
 }
 

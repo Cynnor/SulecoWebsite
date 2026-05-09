@@ -1,42 +1,88 @@
+import React from 'react';
+
+const FooterColumn = ({ title, links }) => (
+  <div>
+    <h3 className="text-xs font-black uppercase tracking-[0.2em] text-white border-b border-white/10 pb-4 mb-6">
+      {title}
+    </h3>
+    <ul className="space-y-4 text-[11px] font-bold uppercase tracking-widest">
+      {links.map((link, idx) => (
+        <li key={idx}>
+          <a href={link.to} className="transition hover:text-blue-500">
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
 export default function Footer() {
+  const footerData = [
+    {
+      title: "Đào tạo",
+      links: [
+        { label: "Hệ chính quy", to: "/training/formal-education" },
+        { label: "Hệ ngắn hạn", to: "/training/short-term" },
+        { label: "Ngoại ngữ", to: "/training/languages" },
+        { label: "Liên kết đào tạo", to: "/training/partnerships" },
+      ]
+    },
+    {
+      title: "Tuyển sinh",
+      links: [
+        { label: "Hướng dẫn hồ sơ", to: "/admission/guide" },
+        { label: "Học bổng & Học phí", to: "/admission/scholarships" },
+        { label: "Đăng ký trực tuyến", to: "/admission/apply" },
+      ]
+    },
+    {
+      title: "Nghề nghiệp",
+      links: [
+        { label: "Mạng lưới đối tác", to: "/career/partners" },
+        { label: "Việc làm trong nước", to: "/career/domestic" },
+        { label: "Tu nghiệp quốc tế", to: "/career/international" },
+        { label: "Nhật ký thực tập", to: "/career/diary" },
+      ]
+    },
+    {
+      title: "Tin tức",
+      links: [
+        { label: "Tin tức & Sự kiện", to: "/news/events" },
+        { label: "Hoạt động sinh viên", to: "/news/student-activities" },
+        { label: "Thông báo đào tạo", to: "/news/notifications" },
+        { label: "Thư viện tư liệu", to: "/news/library" },
+      ]
+    },
+    {
+      title: "Về chúng tôi",
+      links: [
+        { label: "Giới thiệu chung", to: "/about-us/introduction" },
+        { label: "Hội đồng chuyên gia", to: "/about-us/experts" },
+        { label: "Triết lý giáo dục", to: "/about-us/philosophy" },
+      ]
+    }
+  ];
+
   return (
     <footer id="lien-he" className="border-t border-slate-900 bg-slate-950 text-slate-400 py-20">
-      <div className="mx-auto grid max-w-[1400px] gap-20 px-6 lg:grid-cols-4 lg:px-20">
-        <div className="lg:col-span-1">
-          <h2 className="text-2xl font-black text-white uppercase tracking-tight">Suleco <span className="text-blue-500">City</span></h2>
-          <p className="mt-6 text-sm leading-7 text-slate-500 text-justify">
+      <div className="mx-auto grid max-w-[1400px] gap-x-12 gap-y-16 px-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 lg:px-20">
+        <div className="col-span-2 md:col-span-1 xl:col-span-1">
+          <h2 className="text-2xl font-black text-white uppercase tracking-tight">Suleco <span className="text-blue-700">City</span></h2>
+          <p className="mt-6 text-[11px] leading-7 text-slate-500 text-justify">
             Hệ thống Giáo dục Quốc tế Suleco City - Nơi kiến tạo tương lai và nâng tầm trí tuệ cho thế hệ trẻ Việt Nam thông qua các chương trình đào tạo chuẩn mực.
           </p>
         </div>
 
-        <div>
-          <h3 className="text-xs font-black uppercase tracking-[0.2em] text-white border-b border-white/10 pb-4 mb-6">
-            Đào tạo
-          </h3>
-          <ul className="space-y-4 text-xs font-bold uppercase tracking-widest">
-            <li><a href="/training/formal-education" className="transition hover:text-blue-500">Hệ chính quy</a></li>
-            <li><a href="/training/short-term" className="transition hover:text-blue-500">Hệ ngắn hạn</a></li>
-            <li><a href="/training/languages" className="transition hover:text-blue-500">Ngoại ngữ</a></li>
-            <li><a href="/training/partnerships" className="transition hover:text-blue-500">Liên kết đào tạo</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 className="text-xs font-black uppercase tracking-[0.2em] text-white border-b border-white/10 pb-4 mb-6">
-            Về chúng tôi
-          </h3>
-          <ul className="space-y-4 text-xs font-bold uppercase tracking-widest">
-            <li><a href="/about-us/introduction" className="transition hover:text-blue-500">Giới thiệu chung</a></li>
-            <li><a href="/about-us/experts" className="transition hover:text-blue-500">Hội đồng chuyên gia</a></li>
-            <li><a href="/about-us/philosophy" className="transition hover:text-blue-500">Triết lý giáo dục</a></li>
-          </ul>
-        </div>
+        {footerData.map((col, idx) => (
+          <FooterColumn key={idx} title={col.title} links={col.links} />
+        ))}
 
         <div>
           <h3 className="text-xs font-black uppercase tracking-[0.2em] text-white border-b border-white/10 pb-4 mb-6">
             Kết nối
           </h3>
-          <div className="space-y-4 text-xs font-bold uppercase tracking-widest">
+          <div className="space-y-4 text-[11px] font-bold uppercase tracking-widest">
             <p className="flex items-center gap-3"><span className="text-blue-500">E:</span> contact@sulecocity.edu.vn</p>
             <p className="flex items-center gap-3"><span className="text-blue-500">H:</span> 1900 1234</p>
             <p className="flex items-center gap-3"><span className="text-blue-500">A:</span> TP. Hồ Chí Minh, Việt Nam</p>
@@ -47,8 +93,8 @@ export default function Footer() {
       <div className="mx-auto max-w-[1400px] border-t border-white/5 mt-20 pt-8 px-20 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-black uppercase tracking-widest text-slate-600">
         <p>© {new Date().getFullYear()} Suleco City International Education. All rights reserved.</p>
         <div className="flex gap-8">
-           <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-           <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+           <a href="#" className="hover:text-white transition-colors text-[10px]">Privacy Policy</a>
+           <a href="#" className="hover:text-white transition-colors text-[10px]">Terms of Service</a>
         </div>
       </div>
     </footer>

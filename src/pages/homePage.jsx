@@ -3,318 +3,218 @@ import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   const stats = [
-    { value: "20+", label: "Năm kinh nghiệm", icon: "🏆" },
-    { value: "5000+", label: "Học viên thành đạt", icon: "👨‍🎓" },
-    { value: "100+", label: "Đối tác Nhật Bản", icon: "🤝" },
-    { value: "98%", label: "Tỉ lệ có việc làm", icon: "📈" },
+    { label: "Năm kinh nghiệm", value: "20+", icon: "⏳" },
+    { label: "Học viên tốt nghiệp", value: "15,000+", icon: "👨‍🎓" },
+    { label: "Đối tác chiến lược", value: "500+", icon: "🤝" },
+    { label: "Tỷ lệ có việc làm", value: "100%", icon: "🎯" }
   ];
 
-  const services = [
-    {
-      title: "Tuyển sinh Trung cấp",
-      desc: "Chương trình đào tạo thực tiễn, cam kết đầu ra và hỗ trợ việc làm ngay sau khi tốt nghiệp.",
-      features: ["Đào tạo 1.5 - 2 năm", "Học phí ưu đãi", "Bằng chính quy"],
-      link: "/admissions",
-      color: "blue"
-    },
-    {
-      title: "XKLĐ Nhật Bản",
-      desc: "Cung cấp các đơn hàng chất lượng cao, chi phí minh bạch và quy trình hỗ trợ tận tâm.",
-      features: ["Đơn hàng đa dạng", "Lương cao", "Hỗ trợ vay vốn"],
-      link: "/career-export",
-      color: "indigo"
-    }
+  const coreValues = [
+    { title: "Tâm thế", desc: "Luôn đặt đạo đức nghề nghiệp và trách nhiệm xã hội lên hàng đầu trong mọi hoạt động đào tạo.", icon: "💎" },
+    { title: "Trí tuệ", desc: "Không ngừng cập nhật kiến thức công nghệ hiện đại, nâng tầm trí tuệ cho thế hệ trẻ Việt Nam.", icon: "💡" },
+    { title: "Tầm vóc", desc: "Kiến tạo môi trường học thuật chuẩn quốc tế, giúp học viên sẵn sàng vươn ra thế giới.", icon: "🌍" }
   ];
 
-  const highlights = [
-    {
-      title: "Môi trường hiện đại",
-      desc: "Cơ sở vật chất chuẩn quốc tế, trang thiết bị tiên tiến phục vụ tối đa cho việc học.",
-      icon: "🏢"
-    },
-    {
-      title: "Chương trình chuẩn",
-      desc: "Giáo trình được biên soạn bởi các chuyên gia hàng đầu, cập nhật theo xu hướng thị trường.",
-      icon: "📜"
-    },
-    {
-      title: "Hỗ trợ tận tâm",
-      desc: "Đội ngũ tư vấn và giảng viên luôn sẵn sàng đồng hành cùng học viên 24/7.",
-      icon: "🎧"
-    }
+  const newsPreview = [
+    { category: "Sự kiện", date: "30/05/2024", title: "Khai mạc tuần lễ đổi mới sáng tạo Suleco City 2024", img: "🚀" },
+    { category: "Đào tạo", date: "28/05/2024", title: "Hợp tác đào tạo nhân lực kỹ thuật cao với đối tác Đức", img: "🇩🇪" },
+    { category: "Sinh viên", date: "25/05/2024", title: "Vinh danh thủ khoa tốt nghiệp ngành Công nghệ Ô tô", img: "🥇" }
   ];
 
   return (
-    <div className="w-full bg-white font-sans text-slate-800 overflow-hidden">
+    <div className="w-full bg-[#FDFDFD] font-sans text-slate-900 overflow-x-hidden">
       
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center px-6 md:px-12 lg:px-20 py-16">
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-slate-50 -z-10 opacity-70 hidden lg:block"></div>
-        <div className="absolute top-20 right-40 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl -z-10"></div>
+      <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-50/50 to-transparent -z-10"></div>
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-700/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-10 w-64 h-64 bg-blue-700/5 rounded-full blur-3xl"></div>
         
-        <div className="grid lg:grid-cols-2 gap-16 items-center w-full max-w-[1400px] mx-auto">
-          <div>
-            <div className="inline-flex items-center gap-2 border-l-4 border-blue-600 bg-blue-50/50 px-4 py-2 text-sm font-bold text-blue-700 mb-8 uppercase tracking-widest">
-              Hệ thống Giáo dục Quốc tế Suleco City
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-20 grid lg:grid-cols-2 gap-16 items-center">
+          <div className="space-y-8">
+            <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 px-4 py-2 rounded-full">
+               <span className="w-2 h-2 bg-blue-700 rounded-full animate-pulse"></span>
+               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-700">Tuyển sinh kỳ Thu 2024</span>
             </div>
-            <h1 className="text-5xl md:text-6xl font-black text-slate-900 leading-tight mb-8 tracking-tight uppercase">
-              Nâng tầm trí tuệ <br/> 
-              <span className="text-blue-700">Kiến tạo sự nghiệp</span>
+            <h1 className="text-5xl md:text-7xl font-black leading-[1.1] tracking-tight uppercase">
+              Kiến tạo <span className="text-blue-700">Tương lai</span> <br/>
+              Nâng tầm <span className="text-slate-400">Trí tuệ</span>
             </h1>
-            <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-12 max-w-xl">
-              Suleco City cung cấp các chương trình đào tạo học thuật chuyên sâu và giải pháp cung ứng nhân lực trình độ cao cho thị trường quốc tế.
+            <p className="text-lg text-slate-500 max-w-xl leading-relaxed italic border-l-4 border-blue-700 pl-6">
+              "Suleco City không chỉ là một ngôi trường, đó là nơi bắt đầu của những giấc mơ toàn cầu. Chúng tôi cung cấp nền tảng học thuật vững chắc và cơ hội nghề nghiệp không biên giới."
             </p>
-            <div className="flex flex-wrap gap-4">
-              <button className="bg-blue-700 text-white px-10 py-4 rounded-lg font-bold hover:bg-blue-800 transition-all shadow-lg flex items-center gap-2">
-                Chương trình đào tạo
-              </button>
-              <button className="bg-white border-2 border-slate-200 text-slate-700 px-10 py-4 rounded-lg font-bold hover:bg-slate-50 transition-all">
-                Tư vấn học thuật
-              </button>
+            <div className="flex flex-wrap gap-4 pt-4">
+               <Link to="/admission/apply" className="bg-slate-900 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs shadow-2xl hover:bg-blue-700 transition-all hover:-translate-y-1">
+                  Đăng ký xét tuyển
+               </Link>
+               <Link to="/about-us/introduction" className="bg-white text-slate-900 border border-slate-200 px-10 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs shadow-lg hover:bg-slate-50 transition-all">
+                  Khám phá Suleco
+               </Link>
             </div>
           </div>
           
-          <div className="relative hidden lg:block">
-            <div className="relative z-10 w-full aspect-[4/3] bg-slate-200 rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-100 flex items-center justify-center text-8xl">
-               🏫
-            </div>
-            <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl z-20 border border-slate-100">
-              <p className="text-sm font-bold text-slate-900 uppercase tracking-wider border-b border-blue-100 pb-2 mb-2">Chứng nhận quốc tế</p>
-              <p className="text-xs text-slate-500 font-medium">Standard Academic Excellence</p>
-            </div>
+          <div className="relative">
+             <div className="aspect-[4/5] bg-slate-100 rounded-[4rem] shadow-2xl relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent"></div>
+                <div className="absolute inset-0 flex items-center justify-center text-[15rem] opacity-20 grayscale group-hover:scale-110 transition-transform duration-700">🏛️</div>
+                <div className="absolute bottom-12 left-12 right-12 text-white">
+                   <p className="text-xs font-black uppercase tracking-[0.3em] mb-2">Campus Overview</p>
+                   <h3 className="text-3xl font-black uppercase leading-tight">Môi trường học tập <br/> hiện đại bậc nhất</h3>
+                </div>
+             </div>
+             {/* Floating Badge */}
+             <div className="absolute -bottom-10 -left-10 bg-white p-8 rounded-[2.5rem] shadow-2xl border border-blue-50 animate-bounce-slow">
+                <p className="text-4xl font-black text-blue-700 mb-1">98%</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Tỷ lệ hài lòng</p>
+             </div>
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="px-6 md:px-12 lg:px-20 -mt-12 relative z-30 max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((stat, idx) => (
-            <div key={idx} className="bg-white p-8 rounded-3xl shadow-md border border-slate-100 flex items-start gap-4 hover:border-blue-200 transition-colors">
-              <div className="text-3xl">{stat.icon}</div>
-              <div>
-                <h3 className="text-3xl font-bold text-slate-900">{stat.value}</h3>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">{stat.label}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section className="py-24 px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          <div className="order-2 lg:order-1 relative">
-             <div className="bg-slate-100 aspect-video rounded-3xl mb-6 shadow-inner flex items-center justify-center text-4xl text-slate-300">CAMPUS PHOTO</div>
-             <div className="grid grid-cols-2 gap-6">
-                <div className="bg-blue-700 h-32 rounded-3xl shadow-lg flex items-center justify-center text-white font-bold">KHÁT VỌNG</div>
-                <div className="bg-slate-900 h-32 rounded-3xl shadow-lg flex items-center justify-center text-white font-bold">THÀNH CÔNG</div>
-             </div>
-          </div>
-          <div className="order-1 lg:order-2">
-            <div className="inline-block text-blue-700 font-bold text-sm tracking-[0.2em] uppercase mb-4">VỀ CHÚNG TÔI</div>
-            <h2 className="text-4xl font-bold text-slate-900 mb-8 leading-tight">
-              Định chế giáo dục uy tín <br/> với tầm nhìn chiến lược
-            </h2>
-            <div className="text-slate-600 text-lg leading-relaxed space-y-6 text-justify">
-              <p>
-                Suleco City được thành lập với mục tiêu xây dựng một hệ sinh thái giáo dục hiện đại, nơi tri thức và kỹ năng thực tiễn được kết hợp hài hòa để tạo ra giá trị bền vững cho người học.
-              </p>
-              <p>
-                Chúng tôi không ngừng đầu tư vào công tác nghiên cứu học thuật và phát triển các chương trình đào tạo đạt chuẩn quốc tế, đảm bảo học viên được tiếp cận với những tinh hoa tri thức mới nhất của nhân loại.
-              </p>
-              <Link to="/about-us/introduction" className="inline-flex items-center gap-3 text-blue-700 font-bold hover:gap-5 transition-all">
-                Tìm hiểu chi tiết về tổ chức
-                <span className="text-xl">→</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-24 bg-slate-50 border-y border-slate-100">
-        <div className="px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
-          <div className="mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 uppercase tracking-tight">Chương trình đào tạo trọng điểm</h2>
-            <div className="h-1 w-24 bg-blue-700"></div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-10">
-            {services.map((service, idx) => (
-              <div key={idx} className="bg-white p-12 rounded-[2.5rem] shadow-sm border border-slate-100 hover:shadow-xl transition-all flex flex-col h-full relative overflow-hidden group">
-                <div className="absolute top-0 left-0 w-2 h-full bg-blue-700 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-6 uppercase tracking-wider">{service.title}</h3>
-                <p className="text-slate-600 leading-relaxed mb-8 flex-grow">
-                  {service.desc}
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-                  {service.features.map((feat, fIdx) => (
-                    <div key={fIdx} className="flex items-center gap-3 text-sm font-semibold text-slate-700">
-                      <div className="w-2 h-2 bg-blue-700 rounded-full"></div>
-                      {feat}
-                    </div>
-                  ))}
-                </div>
-                <button className="inline-flex items-center justify-center py-4 px-8 rounded-xl bg-blue-700 text-white font-bold hover:bg-blue-800 transition-all uppercase text-sm tracking-widest">
-                  Chi tiết chương trình
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="py-24 px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto text-center">
-        <h2 className="text-3xl font-bold text-slate-900 mb-16 uppercase tracking-widest">Giá trị khác biệt</h2>
-        <div className="grid md:grid-cols-3 gap-12">
-          {highlights.map((item, idx) => (
-            <div key={idx} className="p-10 border border-slate-100 rounded-3xl hover:bg-white hover:shadow-2xl transition-all">
-              <div className="text-5xl mb-8 grayscale group-hover:grayscale-0 transition-all">{item.icon}</div>
-              <h4 className="text-lg font-bold text-slate-900 mb-4 uppercase tracking-wider">{item.title}</h4>
-              <p className="text-slate-500 text-sm leading-relaxed">
-                {item.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-24 bg-slate-900 text-white overflow-hidden">
-        <div className="px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
-          <div className="grid lg:grid-cols-3 gap-16 items-center">
-             <div className="lg:col-span-1">
-                <h2 className="text-4xl font-bold mb-6 uppercase leading-tight">Cảm nhận từ <br/> <span className="text-blue-500">Người trong cuộc</span></h2>
-                <p className="text-slate-400 mb-8 leading-relaxed">Sự thành công của học viên là minh chứng rõ rệt nhất cho giá trị học thuật mà Suleco City mang lại.</p>
-                <div className="flex gap-4">
-                   <button className="w-12 h-12 border border-white/20 rounded-full flex items-center justify-center hover:bg-white hover:text-slate-900 transition-all">←</button>
-                   <button className="w-12 h-12 border border-white/20 rounded-full flex items-center justify-center hover:bg-white hover:text-slate-900 transition-all">→</button>
-                </div>
-             </div>
-             <div className="lg:col-span-2">
-                <div className="bg-white/5 backdrop-blur-sm p-12 rounded-3xl border border-white/10 relative">
-                  <div className="text-6xl text-blue-500 font-serif absolute top-6 right-10 opacity-20">"</div>
-                  <div className="flex items-center gap-6 mb-10">
-                    <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-2xl font-bold">K</div>
-                    <div>
-                      <h4 className="text-xl font-bold">Kaushi Rowel Jayathilake</h4>
-                      <p className="text-blue-400 text-sm font-bold uppercase tracking-widest mt-1">Học viên xuất sắc</p>
-                    </div>
-                  </div>
-                  <p className="text-slate-300 text-xl leading-relaxed italic font-light">
-                    "Chương trình đào tạo tại Suleco City thực sự chuyên sâu và có tính ứng dụng rất cao. Tôi đã được trang bị không chỉ kiến thức chuyên môn mà còn là tư duy giải quyết vấn đề trong môi trường làm việc chuyên nghiệp."
-                  </p>
-                </div>
-             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Partners & Presence Section */}
-      <section className="py-24 bg-white border-b border-slate-100">
-        <div className="px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-slate-900 mb-8 uppercase tracking-tight">Mạng lưới kết nối toàn cầu</h2>
-              <p className="text-slate-600 text-lg leading-relaxed mb-10">
-                Suleco City duy trì mối quan hệ hợp tác chiến lược với các tổ chức giáo dục và tập đoàn hàng đầu thế giới, mở ra cơ hội không giới hạn cho học viên.
-              </p>
-              <div className="grid grid-cols-2 gap-8 grayscale opacity-50">
-                 <div className="font-black italic text-2xl text-slate-400">STUDY MELBOURNE</div>
-                 <div className="font-black italic text-2xl text-slate-400">velg</div>
-                 <div className="font-black italic text-2xl text-slate-400">Southern Cross</div>
-                 <div className="font-black italic text-2xl text-slate-400">iteca</div>
-              </div>
-            </div>
-            <div className="bg-slate-50 p-12 rounded-3xl border border-slate-100 text-center">
-               <h3 className="text-5xl font-black text-blue-700 mb-4">50+</h3>
-               <p className="text-xl font-bold text-slate-900 mb-6 uppercase tracking-wider">Quốc gia & Vùng lãnh thổ</p>
-               <p className="text-slate-500 leading-relaxed">Học viên của chúng tôi hiện diện và thành công tại nhiều quốc gia, khẳng định chất lượng đào tạo quốc tế.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Campus Section */}
-      <section className="py-24 px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
-         <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="rounded-3xl overflow-hidden shadow-2xl">
-               <div className="aspect-video bg-slate-900 flex items-center justify-center text-white text-4xl uppercase font-bold">Academic Environment</div>
-            </div>
-            <div>
-               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-8 uppercase">Môi trường học thuật hiện đại</h2>
-               <p className="text-slate-600 text-lg leading-relaxed mb-10">
-                 Hệ thống phòng học, thư viện và trung tâm thực hành được thiết kế theo tiêu chuẩn quốc tế, tạo điều kiện lý tưởng cho việc nghiên cứu và học tập chuyên sâu.
-               </p>
-               <button className="bg-slate-900 text-white px-10 py-4 rounded-xl font-bold hover:bg-slate-800 transition-all uppercase tracking-widest text-sm">
-                 Tham quan Virtual Tour 360
-               </button>
+      <section className="py-24 bg-white">
+         <div className="max-w-[1400px] mx-auto px-6 lg:px-20">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+               {stats.map((stat, i) => (
+                 <div key={i} className="p-10 rounded-[2.5rem] bg-slate-50 border border-slate-100 group hover:bg-blue-700 transition-all duration-500 hover:-translate-y-2">
+                    <div className="text-4xl mb-6 grayscale group-hover:grayscale-0 transition-all">{stat.icon}</div>
+                    <p className="text-4xl font-black text-slate-900 mb-2 group-hover:text-white transition-colors">{stat.value}</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-blue-100 transition-colors">{stat.label}</p>
+                 </div>
+               ))}
             </div>
          </div>
       </section>
 
-      {/* Subscription Section */}
-      <section className="py-20 bg-slate-50 border-t border-slate-100">
-        <div className="px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
-          <div className="bg-blue-700 p-12 md:p-16 rounded-3xl shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-12">
-            <div className="text-white text-center lg:text-left max-w-xl">
-              <h2 className="text-3xl font-bold mb-4 uppercase">Đăng ký bản tin học thuật</h2>
-              <p className="text-blue-100 opacity-80">Nhận thông tin mới nhất về các chương trình đào tạo, hội thảo và cơ hội nghề nghiệp quốc tế.</p>
+      {/* Philosophy Section */}
+      <section className="py-32 relative overflow-hidden bg-slate-50">
+         <div className="absolute top-0 right-0 w-1/4 h-full bg-blue-700/5 -skew-x-12 translate-x-20"></div>
+         <div className="max-w-[1400px] mx-auto px-6 lg:px-20 relative z-10">
+            <div className="text-center mb-24 space-y-4">
+               <h2 className="text-blue-700 font-black uppercase tracking-[0.4em] text-xs">Our Foundation</h2>
+               <h3 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-slate-900">Giá trị cốt lõi</h3>
+               <div className="w-24 h-1.5 bg-blue-700 mx-auto rounded-full"></div>
             </div>
-            <form className="flex w-full max-w-lg">
-              <input type="email" placeholder="Địa chỉ email của bạn" className="flex-grow px-6 py-4 rounded-l-xl outline-none" />
-              <button className="bg-slate-900 text-white px-8 py-4 rounded-r-xl font-bold hover:bg-slate-800 transition-all uppercase text-sm">Gửi</button>
-            </form>
-          </div>
-        </div>
+
+            <div className="grid lg:grid-cols-3 gap-12">
+               {coreValues.map((val, i) => (
+                 <div key={i} className="bg-white p-12 rounded-[3.5rem] shadow-sm border border-slate-100 hover:shadow-2xl transition-all group">
+                    <div className="w-20 h-20 bg-blue-50 text-blue-700 rounded-3xl flex items-center justify-center text-4xl mb-10 group-hover:bg-blue-700 group-hover:text-white transition-all shadow-md">
+                       {val.icon}
+                    </div>
+                    <h4 className="text-2xl font-black uppercase tracking-tight text-slate-900 mb-6">{val.title}</h4>
+                    <p className="text-slate-500 leading-relaxed text-justify italic">
+                       {val.desc}
+                    </p>
+                 </div>
+               ))}
+            </div>
+         </div>
       </section>
 
-      {/* Final CTA Section */}
-      <section id="lien-he" className="py-24 px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
-        <div className="grid lg:grid-cols-2 gap-20">
-          <div>
-            <h2 className="text-4xl font-bold text-slate-900 mb-8 uppercase leading-tight">Bắt đầu hành trình <br/> <span className="text-blue-700">Chinh phục tri thức</span></h2>
-            <p className="text-slate-600 text-lg mb-10 leading-relaxed">
-              Chúng tôi luôn sẵn sàng hỗ trợ bạn định hướng con đường học tập và nghề nghiệp phù hợp nhất với năng lực và mục tiêu cá nhân.
-            </p>
-            <div className="space-y-6">
-               <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-50 text-blue-700 rounded-xl flex items-center justify-center font-bold">📍</div>
-                  <div>
-                     <p className="text-sm font-bold uppercase text-slate-400">Địa chỉ</p>
-                     <p className="text-slate-900 font-bold">Suleco City Building, Hồ Chí Minh, Việt Nam</p>
+      {/* Featured Programs */}
+      <section className="py-32 bg-white">
+         <div className="max-w-[1400px] mx-auto px-6 lg:px-20">
+            <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
+               <div className="space-y-4">
+                  <h2 className="text-blue-700 font-black uppercase tracking-[0.4em] text-xs">Excellence in Training</h2>
+                  <h3 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-slate-900">Chương trình Đào tạo <br/> Trọng điểm</h3>
+               </div>
+               <Link to="/training/formal-education" className="text-xs font-black uppercase tracking-widest text-slate-400 hover:text-blue-700 border-b-2 border-slate-100 hover:border-blue-700 pb-2 transition-all">
+                  Xem tất cả khóa học →
+               </Link>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12">
+               <div className="group relative rounded-[4rem] overflow-hidden aspect-video bg-slate-900 text-white">
+                  <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent group-hover:scale-105 transition-transform duration-700"></div>
+                  <div className="relative h-full p-16 flex flex-col justify-end">
+                     <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-400 mb-4">Hệ chính quy</span>
+                     <h4 className="text-4xl font-black uppercase tracking-tight mb-6">Công nghệ Ô tô</h4>
+                     <p className="text-slate-300 text-sm max-w-md mb-8 leading-relaxed">Đào tạo kỹ sư thực hành với công nghệ chẩn đoán hiện đại, cam kết đầu ra tại các hãng xe lớn.</p>
+                     <Link to="/training/formal-education" className="inline-block w-fit bg-white text-slate-900 px-8 py-3 rounded-xl font-black uppercase tracking-widest text-[10px]">Chi tiết ngành học</Link>
                   </div>
                </div>
-               <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-blue-50 text-blue-700 rounded-xl flex items-center justify-center font-bold">📞</div>
-                  <div>
-                     <p className="text-sm font-bold uppercase text-slate-400">Hotline</p>
-                     <p className="text-slate-900 font-bold">1900 1234 - 090 123 4567</p>
+               <div className="group relative rounded-[4rem] overflow-hidden aspect-video bg-blue-800 text-white shadow-2xl shadow-blue-900/20">
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent group-hover:scale-105 transition-transform duration-700"></div>
+                  <div className="relative h-full p-16 flex flex-col justify-end">
+                     <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-200 mb-4">Hệ ngắn hạn</span>
+                     <h4 className="text-4xl font-black uppercase tracking-tight mb-6">Cơ khí Chế tạo</h4>
+                     <p className="text-blue-100 text-sm max-w-md mb-8 leading-relaxed">Kỹ năng vận hành CNC và hàn công nghiệp theo tiêu chuẩn quốc tế AWS.</p>
+                     <Link to="/training/short-term" className="inline-block w-fit bg-slate-900 text-white px-8 py-3 rounded-xl font-black uppercase tracking-widest text-[10px]">Khám phá ngay</Link>
                   </div>
                </div>
             </div>
-          </div>
-          <div className="bg-white p-12 rounded-3xl border border-slate-100 shadow-2xl">
-            <h3 className="text-2xl font-bold text-slate-900 mb-8 uppercase tracking-wider text-center">Form tư vấn học thuật</h3>
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <input type="text" placeholder="Họ và tên" className="w-full border-b border-slate-200 py-3 outline-none focus:border-blue-700 transition-colors" />
-                <input type="tel" placeholder="Số điện thoại" className="w-full border-b border-slate-200 py-3 outline-none focus:border-blue-700 transition-colors" />
-              </div>
-              <input type="email" placeholder="Địa chỉ email" className="w-full border-b border-slate-200 py-3 outline-none focus:border-blue-700 transition-colors" />
-              <select className="w-full border-b border-slate-200 py-3 outline-none focus:border-blue-700 transition-colors text-slate-500">
-                <option>Chương trình quan tâm</option>
-                <option>Trung cấp chuyên nghiệp</option>
-                <option>XKLĐ Nhật Bản chất lượng cao</option>
-              </select>
-              <button className="w-full bg-blue-700 text-white py-4 rounded-xl font-bold hover:bg-blue-800 transition-all uppercase tracking-widest text-sm shadow-xl">
-                Gửi yêu cầu tư vấn ngay
-              </button>
-            </form>
-          </div>
-        </div>
+         </div>
+      </section>
+
+      {/* Global Partnership Strip */}
+      <section className="py-20 border-y border-slate-100 bg-slate-50/50">
+         <div className="max-w-[1400px] mx-auto px-6 lg:px-20 text-center">
+            <p className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-400 mb-12">Trusted by Global Leaders</p>
+            <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
+               <span className="text-2xl font-black tracking-tighter">TOYOTA</span>
+               <span className="text-2xl font-black tracking-tighter">VINFAST</span>
+               <span className="text-2xl font-black tracking-tighter">MITSUBISHI</span>
+               <span className="text-2xl font-black tracking-tighter">KOMATSU</span>
+               <span className="text-2xl font-black tracking-tighter">FPT SHOP</span>
+            </div>
+         </div>
+      </section>
+
+      {/* News Preview Section */}
+      <section className="py-32 bg-white">
+         <div className="max-w-[1400px] mx-auto px-6 lg:px-20">
+            <div className="flex justify-between items-end mb-20">
+               <div>
+                  <h2 className="text-blue-700 font-black uppercase tracking-[0.4em] text-xs mb-4">News & Media</h2>
+                  <h3 className="text-4xl font-black uppercase tracking-tight text-slate-900">Tin tức & Sự kiện</h3>
+               </div>
+               <Link to="/news/events" className="text-blue-700 font-black text-xs uppercase tracking-widest border-b-2 border-blue-700 pb-2">Xem tất cả</Link>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-12">
+               {newsPreview.map((item, i) => (
+                 <div key={i} className="group cursor-pointer">
+                    <div className="aspect-[16/10] bg-slate-50 rounded-[2.5rem] mb-8 flex items-center justify-center text-7xl shadow-inner border border-slate-100 group-hover:bg-blue-50 transition-colors">
+                       <div className="group-hover:scale-110 transition-transform duration-500">{item.img}</div>
+                    </div>
+                    <div className="space-y-4">
+                       <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-widest">
+                          <span className="text-blue-700">{item.category}</span>
+                          <span className="w-1.5 h-1.5 bg-slate-200 rounded-full"></span>
+                          <span className="text-slate-400">{item.date}</span>
+                       </div>
+                       <h4 className="text-xl font-black uppercase leading-tight text-slate-900 group-hover:text-blue-700 transition-colors">{item.title}</h4>
+                    </div>
+                 </div>
+               ))}
+            </div>
+         </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-32">
+         <div className="max-w-[1400px] mx-auto px-6 lg:px-20">
+            <div className="bg-slate-900 rounded-[4rem] p-16 md:p-24 text-white text-center relative overflow-hidden shadow-2xl">
+               <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+               <div className="absolute -top-32 -right-32 w-96 h-96 bg-blue-700/20 rounded-full blur-[120px]"></div>
+               <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-blue-700/10 rounded-full blur-[120px]"></div>
+               
+               <div className="relative z-10 max-w-3xl mx-auto space-y-10">
+                  <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-[1.1]">Bắt đầu hành trình <br/> tại Suleco City</h2>
+                  <p className="text-slate-400 text-lg md:text-xl font-light italic leading-relaxed">
+                     Tham gia cộng đồng học thuật tiên phong và mở khóa những cơ hội nghề nghiệp toàn cầu ngay hôm nay.
+                  </p>
+                  <div className="flex flex-wrap justify-center gap-6 pt-6">
+                     <Link to="/admission/apply" className="bg-blue-700 text-white px-12 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs shadow-2xl hover:bg-white hover:text-slate-900 transition-all">Nộp hồ sơ ngay</Link>
+                     <Link to="/contact/consultation" className="bg-transparent border-2 border-white/20 text-white px-12 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-white/10 transition-all">Nhận tư vấn 1:1</Link>
+                  </div>
+               </div>
+            </div>
+         </div>
       </section>
 
     </div>
