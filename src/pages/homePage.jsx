@@ -1,222 +1,358 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const HomePage = () => {
-  const stats = [
-    { label: "Năm kinh nghiệm", value: "20+", icon: "⏳" },
-    { label: "Học viên tốt nghiệp", value: "15,000+", icon: "👨‍🎓" },
-    { label: "Đối tác chiến lược", value: "500+", icon: "🤝" },
-    { label: "Tỷ lệ có việc làm", value: "100%", icon: "🎯" }
-  ];
+  const [consultationForm, setConsultationForm] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    program: '',
+    message: ''
+  });
 
-  const coreValues = [
-    { title: "Tâm thế", desc: "Luôn đặt đạo đức nghề nghiệp và trách nhiệm xã hội lên hàng đầu trong mọi hoạt động đào tạo.", icon: "💎" },
-    { title: "Trí tuệ", desc: "Không ngừng cập nhật kiến thức công nghệ hiện đại, nâng tầm trí tuệ cho thế hệ trẻ Việt Nam.", icon: "💡" },
-    { title: "Tầm vóc", desc: "Kiến tạo môi trường học thuật chuẩn quốc tế, giúp học viên sẵn sàng vươn ra thế giới.", icon: "🌍" }
-  ];
+  const handleConsultationChange = (e) => {
+    const { name, value } = e.target;
+    setConsultationForm(prev => ({ ...prev, [name]: value }));
+  };
 
-  const newsPreview = [
-    { category: "Sự kiện", date: "30/05/2024", title: "Khai mạc tuần lễ đổi mới sáng tạo Suleco City 2024", img: "🚀" },
-    { category: "Đào tạo", date: "28/05/2024", title: "Hợp tác đào tạo nhân lực kỹ thuật cao với đối tác Đức", img: "🇩🇪" },
-    { category: "Sinh viên", date: "25/05/2024", title: "Vinh danh thủ khoa tốt nghiệp ngành Công nghệ Ô tô", img: "🥇" }
-  ];
+  const handleConsultationSubmit = (e) => {
+    e.preventDefault();
+    alert("Yêu cầu tư vấn của bạn đã được gửi!");
+  };
 
   return (
-    <div className="w-full bg-[#FDFDFD] font-sans text-slate-900 overflow-x-hidden">
-      
+    <div className="w-full min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-50/50 to-transparent -z-10"></div>
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-700/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-10 w-64 h-64 bg-blue-700/5 rounded-full blur-3xl"></div>
+      <section className="relative overflow-hidden" style={{ minHeight: '819px' }}>
+        <img 
+          src="https://placehold.co/1280x819" 
+          alt="Hero"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-linear-to-r from-sky-950/90 via-sky-950/40 to-sky-950/0"></div>
         
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-20 grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
-            <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 px-4 py-2 rounded-full">
-               <span className="w-2 h-2 bg-blue-700 rounded-full animate-pulse"></span>
-               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-700">Tuyển sinh kỳ Thu 2024</span>
-            </div>
-            <h1 className="text-5xl md:text-7xl font-black leading-[1.1] tracking-tight uppercase">
-              Kiến tạo <span className="text-blue-700">Tương lai</span> <br/>
-              Nâng tầm <span className="text-slate-400">Trí tuệ</span>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex items-center" style={{ minHeight: '600px' }}>
+          <div className="max-w-2xl">
+            <h1 className="text-5xl font-bold text-white mb-6 leading-tight">
+              Newcitygroup - Suleco<br/>Đào tạo nghề gắn kết doanh nghiệp
             </h1>
-            <p className="text-lg text-slate-500 max-w-xl leading-relaxed italic border-l-4 border-blue-700 pl-6">
-              "Suleco City không chỉ là một ngôi trường, đó là nơi bắt đầu của những giấc mơ toàn cầu. Chúng tôi cung cấp nền tảng học thuật vững chắc và cơ hội nghề nghiệp không biên giới."
+            <p className="text-lg text-white/90 mb-8 leading-relaxed">
+              Hệ thống đào tạo nghề và kết nối doanh nghiệp, giúp học viên lựa chọn chương trình phù hợp, đăng ký tuyển sinh trực tuyến và tiếp cận cơ hội việc làm sau đào tạo.
             </p>
-            <div className="flex flex-wrap gap-4 pt-4">
-               <Link to="/admission/apply" className="bg-slate-900 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs shadow-2xl hover:bg-blue-700 transition-all hover:-translate-y-1">
-                  Đăng ký xét tuyển
-               </Link>
-               <Link to="/about-us/introduction" className="bg-white text-slate-900 border border-slate-200 px-10 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs shadow-lg hover:bg-slate-50 transition-all">
-                  Khám phá Suleco
-               </Link>
+            <div className="flex gap-4">
+              <Link
+                to="/admission/apply"
+                className="px-8 py-4 bg-amber-500 text-yellow-900 font-semibold rounded-xl hover:bg-amber-600 transition-colors shadow-lg"
+              >
+                Đăng ký xét tuyển
+              </Link>
+              <Link
+                to="/training/formal-education"
+                className="px-8 py-4 border-2 border-white text-white font-semibold rounded-xl hover:bg-white/10 transition-colors"
+              >
+                Xem chương trình được phê duyệt
+              </Link>
             </div>
           </div>
-          
-          <div className="relative">
-             <div className="aspect-[4/5] bg-slate-100 rounded-[4rem] shadow-2xl relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent"></div>
-                <div className="absolute inset-0 flex items-center justify-center text-[15rem] opacity-20 grayscale group-hover:scale-110 transition-transform duration-700">🏛️</div>
-                <div className="absolute bottom-12 left-12 right-12 text-white">
-                   <p className="text-xs font-black uppercase tracking-[0.3em] mb-2">Campus Overview</p>
-                   <h3 className="text-3xl font-black uppercase leading-tight">Môi trường học tập <br/> hiện đại bậc nhất</h3>
-                </div>
-             </div>
-             {/* Floating Badge */}
-             <div className="absolute -bottom-10 -left-10 bg-white p-8 rounded-[2.5rem] shadow-2xl border border-blue-50 animate-bounce-slow">
-                <p className="text-4xl font-black text-blue-700 mb-1">98%</p>
-                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Tỷ lệ hài lòng</p>
-             </div>
+        </div>
+
+        {/* Statistics Section - Overlay on bottom of hero */}
+        <div className="relative z-20 max-w-7xl mx-auto px-6 md:px-12 lg:px-20 -translate-y-20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { number: "2,500+", label: "Học viên" },
+              { number: "120+", label: "Đối tác" },
+              { number: "90%", label: "Tỷ lệ hỗ trợ" },
+              { number: "25+", label: "Chương trình" }
+            ].map((stat, idx) => (
+              <div key={idx} className="bg-white p-8 rounded-xl shadow-sm border border-neutral-300/30 flex flex-col items-center text-center">
+                <div className="w-8 h-4 bg-amber-500 mb-4"></div>
+                <p className="text-3xl font-bold text-sky-950 mb-2">{stat.number}</p>
+                <p className="text-zinc-700 text-sm font-semibold">{stat.label}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-24 bg-white">
-         <div className="max-w-[1400px] mx-auto px-6 lg:px-20">
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-               {stats.map((stat, i) => (
-                 <div key={i} className="p-10 rounded-[2.5rem] bg-slate-50 border border-slate-100 group hover:bg-blue-700 transition-all duration-500 hover:-translate-y-2">
-                    <div className="text-4xl mb-6 grayscale group-hover:grayscale-0 transition-all">{stat.icon}</div>
-                    <p className="text-4xl font-black text-slate-900 mb-2 group-hover:text-white transition-colors">{stat.value}</p>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-blue-100 transition-colors">{stat.label}</p>
-                 </div>
-               ))}
+      {/* Featured Programs Section */}
+      <section className="bg-white py-20 px-6 md:px-12 lg:px-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-end mb-12">
+            <div className="max-w-xl">
+              <h2 className="text-3xl font-bold text-sky-950 mb-4">Chương trình đào tạo trọng điểm</h2>
+              <p className="text-zinc-700 text-base leading-relaxed">
+                Các khóa học được thiết kế bám sát thực tiễn, kết nối trực tiếp với doanh nghiệp và mạng lưới Garage. Phù hợp cho cả người mới bắt đầu và kỹ thuật viên muốn nâng cao tay nghề.
+              </p>
             </div>
-         </div>
-      </section>
+            <Link to="/training/formal-education" className="flex items-center gap-2 text-sky-950 font-normal hover:text-blue-700 transition-colors">
+              Xem tất cả chương trình
+              <div className="w-4 h-4 bg-sky-950"></div>
+            </Link>
+          </div>
 
-      {/* Philosophy Section */}
-      <section className="py-32 relative overflow-hidden bg-slate-50">
-         <div className="absolute top-0 right-0 w-1/4 h-full bg-blue-700/5 -skew-x-12 translate-x-20"></div>
-         <div className="max-w-[1400px] mx-auto px-6 lg:px-20 relative z-10">
-            <div className="text-center mb-24 space-y-4">
-               <h2 className="text-blue-700 font-black uppercase tracking-[0.4em] text-xs">Our Foundation</h2>
-               <h3 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-slate-900">Giá trị cốt lõi</h3>
-               <div className="w-24 h-1.5 bg-blue-700 mx-auto rounded-full"></div>
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Featured Program Image - Left */}
+            <div className="relative bg-sky-950 rounded-xl overflow-hidden" style={{ height: '500px' }}>
+              <img 
+                src="https://placehold.co/500x500" 
+                alt="Program"
+                className="absolute inset-0 w-full h-full object-cover opacity-70"
+              />
+              <div className="absolute inset-0 bg-linear-to-r from-sky-950 via-sky-950/40 to-sky-950/0"></div>
+              <div className="absolute bottom-8 left-8 z-10">
+                <div className="inline-block px-3 py-1 bg-amber-500 rounded-sm mb-4">
+                  <span className="text-yellow-900 text-sm font-semibold">Hệ chính quy</span>
+                </div>
+                <h3 className="text-3xl font-semibold text-white mb-3">Công nghệ Ô tô</h3>
+                <p className="text-white/90 text-base leading-relaxed">
+                  Chương trình đào tạo toàn diện từ nền tảng đến chuyên sâu về kỹ thuật ô tô. Học viên được thực hành trực tiếp các quy trình bảo dưỡng, chẩn đoán và sửa chữa theo tiêu chuẩn xưởng dịch vụ hiện đại.
+                </p>
+              </div>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-12">
-               {coreValues.map((val, i) => (
-                 <div key={i} className="bg-white p-12 rounded-[3.5rem] shadow-sm border border-slate-100 hover:shadow-2xl transition-all group">
-                    <div className="w-20 h-20 bg-blue-50 text-blue-700 rounded-3xl flex items-center justify-center text-4xl mb-10 group-hover:bg-blue-700 group-hover:text-white transition-all shadow-md">
-                       {val.icon}
+            {/* Programs Cards - Right */}
+            <div className="space-y-6">
+              {/* Short Term Program */}
+              <div className="bg-blue-50 p-6 rounded-xl border border-neutral-300 flex flex-col justify-between" style={{ height: '220px' }}>
+                <div className="space-y-4">
+                  <div className="flex gap-3 items-start">
+                    <div className="text-2xl mt-1">📋</div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-sky-950">Đào tạo ngắn hạn</h3>
                     </div>
-                    <h4 className="text-2xl font-black uppercase tracking-tight text-slate-900 mb-6">{val.title}</h4>
-                    <p className="text-slate-500 leading-relaxed text-justify italic">
-                       {val.desc}
-                    </p>
-                 </div>
-               ))}
-            </div>
-         </div>
-      </section>
-
-      {/* Featured Programs */}
-      <section className="py-32 bg-white">
-         <div className="max-w-[1400px] mx-auto px-6 lg:px-20">
-            <div className="flex flex-col lg:flex-row justify-between items-end mb-20 gap-8">
-               <div className="space-y-4">
-                  <h2 className="text-blue-700 font-black uppercase tracking-[0.4em] text-xs">Excellence in Training</h2>
-                  <h3 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-slate-900">Chương trình Đào tạo <br/> Trọng điểm</h3>
-               </div>
-               <Link to="/training/formal-education" className="text-xs font-black uppercase tracking-widest text-slate-400 hover:text-blue-700 border-b-2 border-slate-100 hover:border-blue-700 pb-2 transition-all">
-                  Xem tất cả khóa học →
-               </Link>
-            </div>
-
-            <div className="grid lg:grid-cols-2 gap-12">
-               <div className="group relative rounded-[4rem] overflow-hidden aspect-video bg-slate-900 text-white">
-                  <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent group-hover:scale-105 transition-transform duration-700"></div>
-                  <div className="relative h-full p-16 flex flex-col justify-end">
-                     <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-400 mb-4">Hệ chính quy</span>
-                     <h4 className="text-4xl font-black uppercase tracking-tight mb-6">Công nghệ Ô tô</h4>
-                     <p className="text-slate-300 text-sm max-w-md mb-8 leading-relaxed">Đào tạo kỹ sư thực hành với công nghệ chẩn đoán hiện đại, cam kết đầu ra tại các hãng xe lớn.</p>
-                     <Link to="/training/formal-education" className="inline-block w-fit bg-white text-slate-900 px-8 py-3 rounded-xl font-black uppercase tracking-widest text-[10px]">Chi tiết ngành học</Link>
                   </div>
-               </div>
-               <div className="group relative rounded-[4rem] overflow-hidden aspect-video bg-blue-800 text-white shadow-2xl shadow-blue-900/20">
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent group-hover:scale-105 transition-transform duration-700"></div>
-                  <div className="relative h-full p-16 flex flex-col justify-end">
-                     <span className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-200 mb-4">Hệ ngắn hạn</span>
-                     <h4 className="text-4xl font-black uppercase tracking-tight mb-6">Cơ khí Chế tạo</h4>
-                     <p className="text-blue-100 text-sm max-w-md mb-8 leading-relaxed">Kỹ năng vận hành CNC và hàn công nghiệp theo tiêu chuẩn quốc tế AWS.</p>
-                     <Link to="/training/short-term" className="inline-block w-fit bg-slate-900 text-white px-8 py-3 rounded-xl font-black uppercase tracking-widest text-[10px]">Khám phá ngay</Link>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-
-      {/* Global Partnership Strip */}
-      <section className="py-20 border-y border-slate-100 bg-slate-50/50">
-         <div className="max-w-[1400px] mx-auto px-6 lg:px-20 text-center">
-            <p className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-400 mb-12">Trusted by Global Leaders</p>
-            <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
-               <span className="text-2xl font-black tracking-tighter">TOYOTA</span>
-               <span className="text-2xl font-black tracking-tighter">VINFAST</span>
-               <span className="text-2xl font-black tracking-tighter">MITSUBISHI</span>
-               <span className="text-2xl font-black tracking-tighter">KOMATSU</span>
-               <span className="text-2xl font-black tracking-tighter">FPT SHOP</span>
-            </div>
-         </div>
-      </section>
-
-      {/* News Preview Section */}
-      <section className="py-32 bg-white">
-         <div className="max-w-[1400px] mx-auto px-6 lg:px-20">
-            <div className="flex justify-between items-end mb-20">
-               <div>
-                  <h2 className="text-blue-700 font-black uppercase tracking-[0.4em] text-xs mb-4">News & Media</h2>
-                  <h3 className="text-4xl font-black uppercase tracking-tight text-slate-900">Tin tức & Sự kiện</h3>
-               </div>
-               <Link to="/news/events" className="text-blue-700 font-black text-xs uppercase tracking-widest border-b-2 border-blue-700 pb-2">Xem tất cả</Link>
-            </div>
-
-            <div className="grid lg:grid-cols-3 gap-12">
-               {newsPreview.map((item, i) => (
-                 <div key={i} className="group cursor-pointer">
-                    <div className="aspect-[16/10] bg-slate-50 rounded-[2.5rem] mb-8 flex items-center justify-center text-7xl shadow-inner border border-slate-100 group-hover:bg-blue-50 transition-colors">
-                       <div className="group-hover:scale-110 transition-transform duration-500">{item.img}</div>
-                    </div>
-                    <div className="space-y-4">
-                       <div className="flex items-center gap-4 text-[10px] font-black uppercase tracking-widest">
-                          <span className="text-blue-700">{item.category}</span>
-                          <span className="w-1.5 h-1.5 bg-slate-200 rounded-full"></span>
-                          <span className="text-slate-400">{item.date}</span>
-                       </div>
-                       <h4 className="text-xl font-black uppercase leading-tight text-slate-900 group-hover:text-blue-700 transition-colors">{item.title}</h4>
-                    </div>
-                 </div>
-               ))}
-            </div>
-         </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-32">
-         <div className="max-w-[1400px] mx-auto px-6 lg:px-20">
-            <div className="bg-slate-900 rounded-[4rem] p-16 md:p-24 text-white text-center relative overflow-hidden shadow-2xl">
-               <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-               <div className="absolute -top-32 -right-32 w-96 h-96 bg-blue-700/20 rounded-full blur-[120px]"></div>
-               <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-blue-700/10 rounded-full blur-[120px]"></div>
-               
-               <div className="relative z-10 max-w-3xl mx-auto space-y-10">
-                  <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-[1.1]">Bắt đầu hành trình <br/> tại Suleco City</h2>
-                  <p className="text-slate-400 text-lg md:text-xl font-light italic leading-relaxed">
-                     Tham gia cộng đồng học thuật tiên phong và mở khóa những cơ hội nghề nghiệp toàn cầu ngay hôm nay.
+                  <p className="text-zinc-700 text-base leading-relaxed">
+                    Lộ trình học tập trung 100% vào thực hành (điện ô tô, đồng sơn, cố vấn dịch vụ,...), giúp học viên nhanh chóng trang bị kỹ năng và sẵn sàng làm việc ngay.
                   </p>
-                  <div className="flex flex-wrap justify-center gap-6 pt-6">
-                     <Link to="/admission/apply" className="bg-blue-700 text-white px-12 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs shadow-2xl hover:bg-white hover:text-slate-900 transition-all">Nộp hồ sơ ngay</Link>
-                     <Link to="/contact/consultation" className="bg-transparent border-2 border-white/20 text-white px-12 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-white/10 transition-all">Nhận tư vấn 1:1</Link>
+                </div>
+                <Link to="/training/short-term" className="flex items-center gap-1 text-orange-600 font-semibold hover:text-orange-700 transition-colors">
+                  Tìm hiểu thêm 
+                  <span>→</span>
+                </Link>
+              </div>
+
+              {/* Advanced Skills Program */}
+              <div className="bg-blue-50 p-6 rounded-xl border border-neutral-300 flex flex-col justify-between" style={{ height: '220px' }}>
+                <div className="space-y-4">
+                  <div className="flex gap-3 items-start">
+                    <div className="text-2xl mt-1">🔧</div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-sky-950">Kỹ năng nâng cao</h3>
+                    </div>
                   </div>
-               </div>
+                  <p className="text-zinc-700 text-base leading-relaxed">
+                    Thiết kế riêng cho các kỹ thuật viên đã có kinh nghiệm, muốn cập nhật công nghệ mới trên các dòng xe hiện đại và phát triển con đường chuyên môn sâu.
+                  </p>
+                </div>
+                <Link to="/training/languages" className="flex items-center gap-1 text-orange-600 font-semibold hover:text-orange-700 transition-colors">
+                  Tìm hiểu thêm 
+                  <span>→</span>
+                </Link>
+              </div>
             </div>
-         </div>
+          </div>
+        </div>
       </section>
 
+      {/* Partners & Career Section */}
+      <section className="bg-white py-20 px-6 md:px-12 lg:px-20">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-sky-950 text-center mb-12">Đối tác & Cơ hội nghề nghiệp</h2>
+          
+          <div className="grid lg:grid-cols-3 gap-6">
+            {[
+              {
+                location: "Tokyo, Nhật Bản",
+                title: "Doanh nghiệp liên kết",
+                salary: "45-60 Tr/tháng",
+                deadline: "Hạn: 30/11",
+                desc: "Mạng lưới công ty, đơn vị tuyển dụng và đối tác hợp tác trong đào tạo - việc làm."
+              },
+              {
+                location: "Berlin, Đức",
+                title: "Gara & xưởng thực hành",
+                salary: "65-80 Tr/tháng",
+                deadline: "Hạn: 15/12",
+                desc: "Kết nối các gara, xưởng dịch vụ và môi trường thực tế để học viên rèn luyện tay nghề."
+              },
+              {
+                location: "Seoul, Hàn Quốc",
+                title: "Trường học liên kết",
+                salary: "40-55 Tr/tháng",
+                deadline: "Hạn: 05/12",
+                desc: "Hợp tác với các đơn vị giáo dục nhằm mở rộng chương trình đào tạo, định hướng nghề nghiệp."
+              }
+            ].map((partner, idx) => (
+              <div key={idx} className="bg-white rounded-xl border border-neutral-300 shadow-sm overflow-hidden">
+                <div className="relative h-48">
+                  <img 
+                    src="https://placehold.co/393x192" 
+                    alt={partner.location}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute top-4 left-4 px-3 py-1 bg-sky-950/90 rounded-sm">
+                    <span className="text-white text-sm font-semibold">{partner.location}</span>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h3 className="text-2xl font-semibold text-sky-950 mb-4">{partner.title}</h3>
+                  <div className="flex gap-4 mb-4">
+                    <div className="flex items-center gap-1">
+                      <div className="w-3 h-2.5 bg-zinc-700"></div>
+                      <span className="text-zinc-700 text-sm">{partner.salary}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <div className="w-2.5 h-3 bg-zinc-700"></div>
+                      <span className="text-zinc-700 text-sm">{partner.deadline}</span>
+                    </div>
+                  </div>
+                  <p className="text-zinc-700 text-base mb-4">{partner.desc}</p>
+                  <button className="w-full py-3 border-2 border-sky-950 text-sky-950 font-normal rounded-lg hover:bg-sky-50 transition-colors">
+                    Xem đối tác
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Consultation CTA Section */}
+      <section className="bg-sky-950 py-20 px-6 md:px-12 lg:px-20">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Content */}
+            <div className="text-white flex flex-col justify-center">
+              <h2 className="text-5xl font-bold mb-6 leading-tight">Bạn cần tư vấn lộ trình học?</h2>
+              <p className="text-lg mb-8 opacity-90 leading-relaxed">
+                Để lại thông tin, đội ngũ tư vấn tuyển sinh sẽ liên hệ và hỗ trợ bạn chọn chương trình phù hợp.
+              </p>
+              <div className="space-y-4">
+                {[
+                  "Tư vấn chương trình đào tạo phù hợp",
+                  "Hướng dẫn hồ sơ đăng ký",
+                  "Kết nối thông tin học phí, lịch học và cơ hội nghề nghiệp"
+                ].map((item, idx) => (
+                  <div key={idx} className="flex gap-3 items-center">
+                    <div className="w-5 h-5 bg-amber-500 shrink-0"></div>
+                    <span className="text-base">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Form */}
+            <div className="bg-blue-100 p-8 rounded-xl">
+              <form onSubmit={handleConsultationSubmit} className="space-y-4">
+                <input 
+                  type="text"
+                  name="name"
+                  placeholder="Họ và tên"
+                  value={consultationForm.name}
+                  onChange={handleConsultationChange}
+                  className="w-full px-4 py-4 bg-white rounded-lg border border-neutral-300 text-gray-500 placeholder-gray-500 focus:outline-none focus:border-blue-400"
+                />
+                <input 
+                  type="tel"
+                  name="phone"
+                  placeholder="Số điện thoại"
+                  value={consultationForm.phone}
+                  onChange={handleConsultationChange}
+                  className="w-full px-4 py-4 bg-white rounded-lg border border-neutral-300 text-gray-500 placeholder-gray-500 focus:outline-none focus:border-blue-400"
+                />
+                <input 
+                  type="email"
+                  name="email"
+                  placeholder="Email liên hệ"
+                  value={consultationForm.email}
+                  onChange={handleConsultationChange}
+                  className="w-full px-4 py-4 bg-white rounded-lg border border-neutral-300 text-gray-500 placeholder-gray-500 focus:outline-none focus:border-blue-400"
+                />
+                <select 
+                  name="program"
+                  value={consultationForm.program}
+                  onChange={handleConsultationChange}
+                  className="w-full px-4 py-4 bg-white rounded-lg border border-neutral-300 text-slate-900 focus:outline-none focus:border-blue-400 appearance-none"
+                >
+                  <option value="">Chọn khóa học quan tâm</option>
+                  <option value="short-term">Hệ ngắn hạn</option>
+                  <option value="formal">Hệ chính quy</option>
+                  <option value="languages">Ngoại ngữ</option>
+                </select>
+                <textarea 
+                  name="message"
+                  placeholder="Nội dung cần tư vấn"
+                  value={consultationForm.message}
+                  onChange={handleConsultationChange}
+                  rows="4"
+                  className="w-full px-4 py-4 bg-white rounded-lg border border-neutral-300 text-gray-500 placeholder-gray-500 focus:outline-none focus:border-blue-400 resize-none"
+                ></textarea>
+                <button 
+                  type="submit"
+                  className="w-full py-4 bg-amber-500 text-yellow-900 font-semibold rounded-xl hover:bg-amber-600 transition-colors shadow-lg"
+                >
+                  Gửi yêu cầu tư vấn
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* News & Events Section */}
+      <section className="bg-white py-20 px-6 md:px-12 lg:px-20">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold text-sky-950 mb-12 border-l-4 border-amber-500 pl-4">Tin tức & Sự kiện</h2>
+          
+          <div className="grid lg:grid-cols-3 gap-6">
+            {[
+              {
+                image: "https://placehold.co/604x340",
+                category: "Sự kiện",
+                date: "12/11/2024",
+                title: "Lễ ký kết hợp tác đào tạo cùng doanh nghiệp",
+                featured: true
+              },
+              {
+                image: "https://placehold.co/290x290",
+                category: "Hợp tác",
+                date: "",
+                title: "Thông báo tuyển sinh các chương trình đào tạo mới",
+                featured: false
+              },
+              {
+                image: "https://placehold.co/290x290",
+                category: "Tuyển sinh",
+                date: "",
+                title: "Hoạt động trải nghiệm nghề nghiệp cho học viên",
+                featured: false
+              }
+            ].map((news, idx) => (
+              <div key={idx} className={news.featured ? "lg:col-span-1" : ""}>
+                <div className="rounded-xl overflow-hidden border border-neutral-300 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col">
+                  <div className={`relative overflow-hidden ${news.featured ? "h-80" : "h-72"}`}>
+                    <img 
+                      src={news.image}
+                      alt={news.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-4 flex flex-col grow">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-yellow-800 text-sm font-semibold">{news.category}</span>
+                      {news.date && <span className="text-yellow-800 text-sm font-semibold">• {news.date}</span>}
+                    </div>
+                    <h3 className={`text-sky-950 font-semibold leading-relaxed ${news.featured ? "text-2xl" : "text-base"}`}>
+                      {news.title}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
