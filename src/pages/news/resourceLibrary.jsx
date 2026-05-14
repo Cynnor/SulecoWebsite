@@ -1,96 +1,251 @@
-import React from 'react';
+import React from "react";
+import {
+  Search,
+  ArrowRight,
+  Download,
+  Play,
+  FileText,
+  BookOpen,
+  Video,
+  FolderOpen,
+} from "lucide-react";
 
 const ResourceLibrary = () => {
   const resources = [
-    { title: "Cẩm nang Sinh viên 2024", type: "PDF", size: "4.5 MB", icon: "📘" },
-    { title: "Quy trình thực tập quốc tế", type: "PDF", size: "2.1 MB", icon: "📂" },
-    { title: "Video hướng dẫn vận hành máy CNC", type: "MP4", size: "125 MB", icon: "🎥" },
-    { title: "Mẫu hồ sơ xét tuyển học bổng", type: "DOCX", size: "500 KB", icon: "📝" },
-    { title: "Sơ đồ mặt bằng cơ sở vật chất", type: "IMG", size: "12 MB", icon: "🗺️" },
-    { title: "Báo cáo thường niên 2023", type: "PDF", size: "8.2 MB", icon: "📊" }
+    {
+      type: "PDF",
+      title: "Sổ tay Thực tập sinh Nhật Bản 2024",
+      desc: "Kiến thức nền tảng và quy tắc ứng xử khi làm việc tại các nghiệp đoàn Nhật Bản.",
+      info: "Dung lượng: 4.2 MB",
+      action: "Tải về",
+      tagColor: "bg-amber-500 text-yellow-900",
+    },
+    {
+      type: "VIDEO",
+      title: "Video Hướng dẫn Phỏng vấn Đơn tuyển",
+      desc: "Bí quyết tự tin và cách trả lời các câu hỏi thường gặp từ nhà tuyển dụng Nhật Bản.",
+      info: "Thời lượng: 12:45",
+      action: "Xem ngay",
+      tagColor: "bg-sky-950 text-white",
+    },
+    {
+      type: "DOCS",
+      title: "Mẫu Hồ sơ Đăng ký Tham gia",
+      desc: "Trọn bộ các mẫu đơn, sơ yếu lý lịch và hướng dẫn điền thông tin chính xác.",
+      info: "Dung lượng: 1.5 MB",
+      action: "Tải về",
+      tagColor: "bg-amber-500 text-yellow-900",
+    },
   ];
 
   return (
-    <div className="w-full min-h-screen bg-white font-sans text-slate-800 pb-24">
-      {/* Banner */}
-      <section className="relative overflow-hidden bg-slate-900 py-24 px-6 md:px-12 lg:px-20">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-        <div className="absolute top-0 right-0 w-1/4 h-full bg-blue-700/10 skew-x-12 translate-x-10"></div>
-        
-        <div className="relative z-10 max-w-[1400px] mx-auto text-center">
-          <div className="inline-block border-b-2 border-blue-500 pb-2 mb-6">
-             <span className="text-blue-400 font-bold tracking-[0.4em] text-xs uppercase">Knowledge Base</span>
-          </div>
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight uppercase">
-            Thư viện tư liệu
+    <main className="mx-auto flex min-h-screen w-full max-w-[1280px] flex-col gap-20">
+      {/* Hero */}
+      <section className="relative overflow-hidden bg-sky-900 py-20">
+        <img
+          src="https://placehold.co/1280x364"
+          alt="Library"
+          className="absolute inset-0 h-full w-full object-cover opacity-20"
+        />
+
+        <div className="relative mx-auto flex w-full max-w-[1280px] flex-col items-center gap-4 px-6 text-center">
+          <h1 className="text-4xl font-bold text-white md:text-5xl">
+            Thư viện Tư liệu & Học tập
           </h1>
-          <p className="text-slate-400 text-lg md:text-xl font-light max-w-3xl mx-auto uppercase tracking-widest leading-relaxed">
-            Kho lưu trữ tri thức và tài nguyên học thuật trực tuyến.
+
+          <p className="max-w-3xl text-lg leading-8 text-blue-100">
+            Truy cập kho tài liệu số, brochure giới thiệu, quy trình hồ sơ và
+            video hướng dẫn chuyên nghiệp từ Newcitygroup Suleco.
           </p>
+
+          {/* Search */}
+          <div className="mt-6 flex w-full max-w-2xl items-center rounded-full bg-slate-50 p-2 shadow-xl">
+            <div className="px-4 text-zinc-500">
+              <Search className="h-5 w-5" />
+            </div>
+
+            <input
+              type="text"
+              placeholder="Tìm kiếm tài liệu, video, quy trình..."
+              className="flex-1 bg-transparent px-2 py-3 outline-none"
+            />
+
+            <button className="rounded-full bg-amber-500 px-8 py-3 font-medium text-yellow-900 transition hover:bg-amber-400">
+              Tìm kiếm
+            </button>
+          </div>
         </div>
       </section>
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 py-24">
-        
-        {/* Search Bar */}
-        <div className="mb-24 max-w-2xl mx-auto">
-           <div className="relative group">
-              <input 
-                type="text" 
-                placeholder="Tìm kiếm tài liệu, giáo trình, biểu mẫu..."
-                className="w-full bg-slate-50 border border-slate-100 p-6 rounded-2xl outline-none focus:border-blue-700 focus:bg-white transition-all font-bold text-slate-700 shadow-sm"
-              />
-              <button className="absolute right-4 top-1/2 -translate-y-1/2 bg-blue-700 text-white px-6 py-3 rounded-xl font-black uppercase tracking-widest text-[10px] shadow-lg">Tìm kiếm</button>
-           </div>
+      {/* Categories */}
+      <section className="grid gap-6 px-6 md:grid-cols-2 lg:grid-cols-4">
+        {/* Main Card */}
+        <div className="rounded-xl border border-neutral-300 bg-sky-100 p-8 shadow-sm lg:col-span-2">
+          <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-sky-900">
+            <BookOpen className="h-6 w-6 text-white" />
+          </div>
+
+          <h2 className="mt-6 text-3xl font-semibold text-sky-950">
+            Tài liệu Học tập
+          </h2>
+
+          <p className="mt-4 text-base leading-7 text-zinc-700">
+            Giáo trình tiếng Nhật, kỹ năng làm việc và văn hóa công sở dành cho
+            thực tập sinh.
+          </p>
+
+          <div className="mt-10 flex items-center justify-between">
+            <span className="text-sm font-semibold tracking-wide text-sky-950">
+              124 Tài liệu
+            </span>
+
+            <ArrowRight className="h-5 w-5 text-amber-500" />
+          </div>
         </div>
 
-        {/* Resources Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-           {resources.map((res, idx) => (
-             <div key={idx} className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-2xl transition-all group flex flex-col items-center text-center">
-                <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center text-4xl mb-8 group-hover:bg-blue-700 group-hover:text-white transition-all shadow-md">
-                   {res.icon}
-                </div>
-                <h3 className="text-lg font-black text-slate-900 uppercase tracking-tight mb-4 group-hover:text-blue-700 transition-colors">{res.title}</h3>
-                <div className="flex gap-4 items-center mb-10">
-                   <span className="px-3 py-1 bg-slate-50 text-slate-400 rounded text-[10px] font-black uppercase tracking-widest border border-slate-100">{res.type}</span>
-                   <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest">{res.size}</span>
-                </div>
-                <button className="mt-auto w-full border-2 border-slate-900 py-4 rounded-xl font-black uppercase tracking-[0.3em] text-[10px] hover:bg-slate-900 hover:text-white transition-all">
-                   Tải xuống tài liệu
+        {/* Card */}
+        <div className="rounded-xl border border-neutral-300 bg-white p-8 shadow-sm">
+          <Video className="h-7 w-7 text-amber-500" />
+
+          <h3 className="mt-5 text-2xl font-medium text-sky-950">
+            Video Giới thiệu
+          </h3>
+
+          <p className="mt-3 text-base leading-7 text-zinc-700">
+            Phim tư liệu và hướng dẫn quy trình XKLĐ.
+          </p>
+
+          <button className="mt-6 inline-flex items-center gap-2 font-bold text-sky-950">
+            Xem ngay
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* Card */}
+        <div className="rounded-xl border border-neutral-300 bg-white p-8 shadow-sm">
+          <FileText className="h-7 w-7 text-amber-500" />
+
+          <h3 className="mt-5 text-2xl font-medium text-sky-950">
+            Brochures
+          </h3>
+
+          <p className="mt-3 text-base leading-7 text-zinc-700">
+            Cẩm nang chương trình và thông tin đơn tuyển.
+          </p>
+
+          <button className="mt-6 inline-flex items-center gap-2 font-bold text-sky-950">
+            Tải xuống
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* Full Width */}
+        <div className="relative overflow-hidden rounded-xl bg-sky-950 p-8 lg:col-span-4">
+          <div className="absolute inset-0 bg-gradient-to-r from-sky-950 to-sky-900 opacity-70" />
+
+          <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <h2 className="text-3xl font-semibold text-white">
+                Quy trình Hồ sơ
+              </h2>
+
+              <p className="mt-3 text-base leading-7 text-white/80">
+                Hướng dẫn chi tiết từng bước từ đăng ký đến xuất cảnh.
+              </p>
+            </div>
+
+            <FolderOpen className="h-14 w-14 text-white/40" />
+          </div>
+        </div>
+      </section>
+
+      {/* Latest Documents */}
+      <section className="bg-blue-50 py-20">
+        <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-10 px-6">
+          {/* Header */}
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <h2 className="text-4xl font-bold text-sky-950">
+                Tài liệu Mới nhất
+              </h2>
+
+              <p className="mt-3 text-base text-zinc-700">
+                Cập nhật định kỳ các quy định và giáo trình mới.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              {["Tất cả", "PDF", "Video"].map((item, index) => (
+                <button
+                  key={index}
+                  className="rounded-lg border border-neutral-300 bg-slate-50 px-5 py-2 text-sky-950 transition hover:bg-slate-100"
+                >
+                  {item}
                 </button>
-             </div>
-           ))}
-        </div>
+              ))}
+            </div>
+          </div>
 
-        {/* Categories Section */}
-        <section className="mt-32">
-           <div className="bg-slate-900 p-12 md:p-20 rounded-[3rem] text-white relative overflow-hidden shadow-2xl">
-              <div className="absolute top-0 left-0 w-1/3 h-full bg-blue-700/5 -skew-x-12 -translate-x-16"></div>
-              <div className="relative z-10 flex flex-col md:flex-row gap-16 items-center">
-                 <div className="md:w-1/2">
-                    <h2 className="text-3xl font-black uppercase tracking-tight mb-8">Yêu cầu tài liệu đặc biệt?</h2>
-                    <p className="text-slate-400 text-lg font-light leading-relaxed mb-10">
-                       Nếu bạn không tìm thấy tài liệu mình cần trong thư viện số, vui lòng gửi yêu cầu để ban biên tập hỗ trợ bạn trong thời gian sớm nhất.
-                    </p>
-                    <button className="bg-blue-700 text-white px-10 py-5 rounded-xl font-black uppercase tracking-widest text-[10px] shadow-xl hover:bg-blue-800 transition-all">Gửi yêu cầu tài liệu</button>
-                 </div>
-                 <div className="md:w-1/2 grid grid-cols-2 gap-6">
-                    <div className="bg-white/5 border border-white/10 p-10 rounded-3xl text-center">
-                       <p className="text-4xl font-black mb-2">1000+</p>
-                       <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Tài liệu số</p>
-                    </div>
-                    <div className="bg-white/5 border border-white/10 p-10 rounded-3xl text-center">
-                       <p className="text-4xl font-black mb-2">50GB+</p>
-                       <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Dung lượng</p>
-                    </div>
-                 </div>
+          {/* Resource Cards */}
+          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+            {resources.map((item, index) => (
+              <div
+                key={index}
+                className="overflow-hidden rounded-xl border border-neutral-300 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+              >
+                {/* Image */}
+                <div className="relative">
+                  <img
+                    src="https://placehold.co/393x221"
+                    alt="Resource"
+                    className="h-56 w-full object-cover"
+                  />
+
+                  <div
+                    className={`absolute right-3 top-3 rounded-sm px-3 py-1 text-xs font-bold uppercase tracking-wide ${item.tagColor}`}
+                  >
+                    {item.type}
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-5">
+                  <h3 className="text-xl leading-8 text-sky-950">
+                    {item.title}
+                  </h3>
+
+                  <p className="mt-3 text-sm leading-6 text-zinc-700">
+                    {item.desc}
+                  </p>
+                </div>
+
+                {/* Footer */}
+                <div className="flex items-center justify-between border-t border-neutral-300 p-5">
+                  <span className="text-xs text-zinc-500">{item.info}</span>
+
+                  <button className="inline-flex items-center gap-2 font-bold text-sky-950">
+                    {item.type === "VIDEO" ? (
+                      <Play className="h-4 w-4" />
+                    ) : (
+                      <Download className="h-4 w-4" />
+                    )}
+
+                    {item.action}
+                  </button>
+                </div>
               </div>
-           </div>
-        </section>
+            ))}
+          </div>
 
-      </div>
-    </div>
+          {/* Button */}
+          <div className="flex justify-center pt-10">
+            <button className="rounded-full border-2 border-sky-950 px-8 py-3 text-base font-bold text-sky-950 transition hover:bg-sky-950 hover:text-white">
+              Xem thêm tài liệu
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 };
 
