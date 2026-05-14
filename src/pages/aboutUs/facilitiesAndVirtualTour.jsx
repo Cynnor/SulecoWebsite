@@ -1,157 +1,373 @@
-import React from 'react';
+import React from "react";
+import {
+  CalendarDays,
+  CheckCircle2,
+  ChevronRight,
+  GraduationCap,
+  Building2,
+  Utensils,
+  Library,
+  Users,
+  MapPin,
+  Phone,
+  UserRound,
+} from "lucide-react";
 
 const FacilitiesAndVirtualTour = () => {
-  const facilityCategories = [
+  const campusHighlights = [
     {
-      title: "Hệ thống phòng học",
-      desc: "Không gian lý thuyết đạt chuẩn sư phạm, trang bị hệ thống nghe nhìn hiện đại phục vụ giảng dạy.",
-      icon: "🏫"
+      title: "Lớp học Tương tác",
+      tag: "Không gian Học tập",
+      desc: "Được trang bị công nghệ giáo dục mới nhất để đảm bảo trải nghiệm học tập nhập vai.",
+      image:
+        "https://placehold.co/813x288/0f172a/ffffff?text=Lop+hoc+tuong+tac",
+      icon: GraduationCap,
+      large: true,
     },
     {
-      title: "Trung tâm thực hành",
-      desc: "Khu vực đào tạo kỹ năng chuyên sâu với thiết bị công nghiệp chuẩn quốc tế cho mọi ngành nghề.",
-      icon: "⚙️"
+      title: "Căng tin Toàn cầu",
+      tag: "Sinh hoạt",
+      desc: "Các bữa ăn đầy đủ dinh dưỡng và không gian giao lưu cho học viên.",
+      image:
+        "https://placehold.co/395x288/e2e8f0/0f172a?text=Cang+tin",
+      icon: Utensils,
+      large: false,
     },
     {
-      title: "Thư viện & Học liệu",
-      desc: "Hệ thống thư viện số và phòng đọc yên tĩnh, cung cấp nguồn tài liệu học thuật phong phú.",
-      icon: "📚"
+      title: "Đại sảnh Grand Atrium",
+      tag: "Sự kiện",
+      desc: "Trái tim của campus, nơi tổ chức các sự kiện và hoạt động định hướng.",
+      image:
+        "https://placehold.co/395x288/cbd5e1/0f172a?text=Dai+sanh",
+      icon: Building2,
+      large: false,
     },
     {
-      title: "Khu phức hợp nội trú",
-      desc: "Cơ sở lưu trú chuẩn mực, đảm bảo môi trường sinh hoạt an toàn và tiện nghi cho học viên.",
-      icon: "🏠"
-    }
+      title: "Trung tâm Tài nguyên Số",
+      tag: "Tài nguyên",
+      desc: "Kho tài liệu phong phú về các ngành nghề, kỹ năng và công cụ nghiên cứu kỹ thuật số.",
+      image:
+        "https://placehold.co/813x288/1e293b/ffffff?text=Trung+tam+tai+nguyen",
+      icon: Library,
+      large: true,
+    },
   ];
 
-  const galleryImages = [
-    { title: "Lab Nghiên cứu", category: "Kỹ thuật" },
-    { title: "Sân vận động", category: "Thể chất" },
-    { title: "Trung tâm ẩm thực", category: "Dịch vụ" },
-    { title: "Hội trường lớn", category: "Học thuật" },
-    { title: "Phòng Seminar", category: "Thảo luận" },
-    { title: "Không gian xanh", category: "Thư giãn" }
+  const featureList = [
+    "Phòng học hiện đại, hỗ trợ trình chiếu và tương tác",
+    "Khu thực hành gắn với kỹ năng nghề thực tế",
+    "Không gian tư vấn, định hướng học tập và nghề nghiệp",
   ];
 
   return (
-    <div className="w-full min-h-screen bg-white font-sans text-slate-800">
-      {/* Banner Section */}
-      <section className="relative overflow-hidden bg-slate-900 py-24 px-6 md:px-12 lg:px-20">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-        <div className="relative z-10 max-w-[1400px] mx-auto text-center">
-          <div className="inline-block border-b-2 border-blue-500 pb-2 mb-6">
-             <span className="text-blue-400 font-bold tracking-[0.4em] text-sm uppercase">Infrastructure Excellence</span>
-          </div>
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tight uppercase">
-            Cơ sở vật chất học thuật
-          </h1>
-          <p className="text-slate-400 text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto uppercase tracking-wide">
-            Hệ thống hạ tầng hiện đại là nền tảng vững chắc cho quá trình nghiên cứu và phát triển kỹ năng chuyên sâu.
-          </p>
-        </div>
-      </section>
+    <main className="w-full bg-white text-slate-900">
+      {/* Hero */}
+      <section className="relative min-h-[620px] overflow-hidden bg-sky-950 lg:min-h-[720px]">
+        <img
+          src="https://placehold.co/1280x819/0f172a/ffffff?text=Newcitygroup+Suleco+Campus"
+          alt="Newcitygroup Suleco Campus"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-sky-950/90 via-sky-950/65 to-sky-950/10" />
 
-      {/* Virtual Tour 360 Section */}
-      <section className="py-24 px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
-        <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
+        <div className="relative z-10 mx-auto flex min-h-[620px] max-w-7xl items-center px-6 py-20 lg:min-h-[720px]">
           <div className="max-w-2xl">
-            <h2 className="text-3xl font-bold text-slate-900 tracking-tight uppercase mb-4">Trải nghiệm không gian ảo 360°</h2>
-            <p className="text-slate-500 font-medium">Khám phá toàn bộ khuôn viên Suleco City thông qua công nghệ thực tế ảo tiên tiến nhất hiện nay.</p>
-          </div>
-          <div className="flex items-center gap-3 bg-slate-900 text-white px-6 py-3 rounded text-sm font-bold tracking-widest uppercase">
-            <span className="animate-pulse h-2.5 w-2.5 bg-blue-500 rounded-full"></span>
-            Academic Viewport
-          </div>
-        </div>
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.28em] text-amber-400">
+              Cơ sở vật chất & Virtual Tour
+            </p>
 
-        <div className="relative aspect-video w-full bg-slate-100 rounded-3xl overflow-hidden shadow-2xl border border-slate-200 group">
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-slate-800 p-6 text-center z-10">
-            <div className="w-24 h-24 bg-white shadow-2xl rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform cursor-pointer border border-slate-100">
-               <span className="text-4xl text-blue-700">▶</span>
-            </div>
-            <h3 className="text-2xl font-bold mb-4 uppercase tracking-wider">Bắt đầu chuyến tham quan</h3>
-            <p className="text-slate-500 max-w-lg">Tương tác trực quan với mọi không gian học tập và thực hành tại Suleco City.</p>
-          </div>
-          <div className="absolute inset-0 bg-white/40 backdrop-blur-[2px]"></div>
-          
-          <div className="absolute bottom-8 left-8 right-8 flex justify-between items-end z-20">
-            <div className="bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-lg border-l-4 border-blue-700 max-w-xs">
-              <p className="text-slate-900 text-sm font-bold uppercase tracking-widest mb-1">Central Campus</p>
-              <p className="text-slate-500 text-xs font-medium">Hệ thống 15 điểm quan sát chi tiết.</p>
+            <h1 className="text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+              Khám phá trung tâm đào tạo hiện đại
+            </h1>
+
+            <p className="mt-6 max-w-xl text-base leading-8 text-white/90 md:text-lg">
+              Không gian học tập, thực hành và tư vấn được thiết kế nhằm hỗ trợ
+              học viên tiếp cận môi trường đào tạo nghề chuyên nghiệp, gắn với
+              nhu cầu thực tế của doanh nghiệp.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-4">
+              <button className="inline-flex items-center gap-2 rounded-full bg-amber-500 px-8 py-4 text-base font-semibold text-yellow-950 shadow-lg transition hover:bg-amber-400">
+                <CalendarDays className="h-5 w-5" />
+                Đặt lịch tham quan
+              </button>
+
+              <button className="rounded-full border border-white/30 bg-white/10 px-8 py-4 text-base font-medium text-white backdrop-blur-md transition hover:bg-white hover:text-sky-950">
+                Xem chương trình đào tạo
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Facilities Overview */}
-      <section className="py-24 bg-slate-50 border-y border-slate-100">
-        <div className="px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-3xl font-bold text-slate-900 mb-6 uppercase tracking-[0.2em]">Danh mục hạ tầng</h2>
-            <div className="h-1.5 w-24 bg-blue-700 mx-auto"></div>
+      {/* Campus Highlights */}
+      <section className="px-6 py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="mx-auto mb-14 max-w-2xl text-center">
+            <h2 className="text-3xl font-bold text-sky-950 md:text-4xl">
+              Điểm nhấn của Campus
+            </h2>
+            <p className="mt-3 text-base leading-7 text-zinc-700">
+              Môi trường học tập được xây dựng để kết hợp giữa lý thuyết, thực
+              hành và tư vấn định hướng nghề nghiệp cho học viên.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-            {facilityCategories.map((item, idx) => (
-              <div key={idx} className="bg-white p-10 rounded-3xl shadow-sm border border-slate-100 hover:border-blue-500 transition-all flex flex-col items-center text-center group">
-                <div className="text-5xl mb-8 group-hover:scale-110 transition-transform">{item.icon}</div>
-                <h3 className="text-lg font-bold text-slate-900 mb-4 uppercase tracking-wider">{item.title}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
+          <div className="grid gap-6 lg:grid-cols-3">
+            {campusHighlights.map((item, index) => {
+              const Icon = item.icon;
+
+              return (
+                <article
+                  key={index}
+                  className={`group relative h-72 overflow-hidden rounded-xl bg-white shadow-md ${
+                    item.large ? "lg:col-span-2" : ""
+                  }`}
+                >
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-sky-950/95 via-sky-950/50 to-transparent" />
+
+                  <div className="absolute inset-x-0 bottom-0 p-7">
+                    <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-amber-500 px-3 py-1 text-sm font-semibold text-yellow-950">
+                      <Icon className="h-4 w-4" />
+                      {item.tag}
+                    </div>
+
+                    <h3 className="text-2xl font-semibold text-white">
+                      {item.title}
+                    </h3>
+
+                    <p className="mt-2 max-w-md text-base leading-7 text-white/85">
+                      {item.desc}
+                    </p>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Image Gallery Grid */}
-      <section className="py-24 px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-slate-900 tracking-tight uppercase">Thư viện ảnh định chế</h2>
-          <div className="h-1 w-20 bg-blue-700 mt-4"></div>
-        </div>
+      {/* Training Space */}
+      <section className="bg-sky-950 px-6 py-20">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2 lg:items-center">
+          <div>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-amber-400">
+              Không gian thực hành
+            </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-          {galleryImages.map((img, idx) => (
-            <div key={idx} className="relative aspect-[4/3] bg-slate-50 rounded-2xl shadow-md overflow-hidden group cursor-pointer border border-slate-100">
-              <div className="absolute inset-0 flex items-center justify-center text-slate-300 font-bold tracking-widest uppercase text-xs">
-                Asset Archive 0{idx + 1}
-              </div>
-              <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/40 transition-all duration-500"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-white/95 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                <p className="text-slate-900 font-bold uppercase tracking-widest text-sm">{img.title}</p>
-                <p className="text-blue-700 text-[10px] font-black uppercase mt-1 tracking-tighter">{img.category} Category</p>
-              </div>
+            <h2 className="text-3xl font-bold leading-tight text-orange-300 md:text-4xl">
+              Không gian đào tạo thực hành thế hệ mới
+            </h2>
+
+            <p className="mt-6 text-base leading-8 text-white/90 md:text-lg">
+              Cơ sở vật chất được đầu tư nhằm phục vụ quá trình học tập thực tế,
+              giúp học viên rèn luyện kỹ năng nghề, làm quen với môi trường làm
+              việc chuyên nghiệp và chuẩn bị tốt hơn cho cơ hội việc làm sau đào
+              tạo.
+            </p>
+
+            <div className="mt-8 space-y-4">
+              {featureList.map((item, index) => (
+                <div key={index} className="flex items-start gap-4">
+                  <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-amber-500" />
+                  <p className="text-base leading-7 text-white">{item}</p>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <img
+              src="https://placehold.co/292x192/e2e8f0/0f172a?text=Phong+hoc"
+              alt="Phòng học"
+              className="h-48 w-full rounded-xl object-cover shadow-2xl"
+            />
+            <img
+              src="https://placehold.co/292x192/cbd5e1/0f172a?text=Xuong+thuc+hanh"
+              alt="Xưởng thực hành"
+              className="h-48 w-full rounded-xl object-cover shadow-2xl"
+            />
+            <img
+              src="https://placehold.co/292x192/94a3b8/ffffff?text=Tu+van"
+              alt="Không gian tư vấn"
+              className="h-48 w-full rounded-xl object-cover shadow-2xl"
+            />
+            <img
+              src="https://placehold.co/292x192/64748b/ffffff?text=Campus"
+              alt="Campus"
+              className="h-48 w-full rounded-xl object-cover shadow-2xl"
+            />
+          </div>
         </div>
       </section>
 
-      {/* Visit Invitation */}
-      <section className="mb-24 px-6 md:px-12 lg:px-20 max-w-[1400px] mx-auto">
-        <div className="bg-slate-900 p-12 md:p-20 text-white relative overflow-hidden rounded-[3rem] shadow-2xl">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-700/10 skew-x-12 translate-x-32"></div>
-          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-16">
-            <div className="max-w-2xl">
-              <h2 className="text-4xl font-bold mb-8 uppercase tracking-tight">Kế hoạch tham quan học thuật</h2>
-              <p className="text-slate-400 text-lg mb-12 leading-relaxed">
-                Chúng tôi khuyến khích quý phụ huynh và ứng viên thực hiện các chuyến tham quan trực tiếp để đánh giá khách quan về môi trường học tập và các nguồn lực hỗ trợ tại Suleco City.
+      {/* Virtual Tour */}
+      <section className="bg-white px-6 py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid overflow-hidden rounded-3xl bg-slate-50 shadow-xl lg:grid-cols-2">
+            <div className="p-8 md:p-12">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-amber-500">
+                Virtual Tour 360
               </p>
-              <div className="flex flex-wrap gap-6">
-                <button className="bg-blue-700 text-white px-10 py-4 rounded-xl font-bold hover:bg-blue-800 transition-all uppercase tracking-widest text-sm shadow-xl">
-                  Đăng ký tham quan
-                </button>
-                <button className="bg-transparent border border-white/20 text-white px-10 py-4 rounded-xl font-bold hover:bg-white/10 transition-all uppercase tracking-widest text-sm">
-                  Yêu cầu brochure
-                </button>
+
+              <h2 className="text-3xl font-bold leading-tight text-sky-950 md:text-4xl">
+                Trải nghiệm không gian học tập trước khi đến campus
+              </h2>
+
+              <p className="mt-5 text-base leading-8 text-zinc-700">
+                Virtual Tour giúp học viên và phụ huynh hình dung rõ hơn về hệ
+                thống phòng học, khu thực hành, không gian sinh hoạt và khu tư
+                vấn tuyển sinh của Newcitygroup - Suleco.
+              </p>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl bg-white p-5 shadow-sm">
+                  <MapPin className="mb-3 h-7 w-7 text-sky-950" />
+                  <h3 className="font-semibold text-sky-950">
+                    Tham quan linh hoạt
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-zinc-600">
+                    Xem nhanh các khu vực chính của campus ngay trên website.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl bg-white p-5 shadow-sm">
+                  <Users className="mb-3 h-7 w-7 text-sky-950" />
+                  <h3 className="font-semibold text-sky-950">
+                    Hỗ trợ tư vấn
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-zinc-600">
+                    Đội ngũ tuyển sinh sẵn sàng giải đáp lộ trình học phù hợp.
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="w-full lg:w-80 h-80 bg-white/5 border border-white/10 rounded-3xl flex items-center justify-center text-7xl grayscale opacity-30">
-               🏢
+
+            <div className="relative min-h-[360px] bg-sky-950">
+              <img
+                src="https://placehold.co/700x520/0f172a/ffffff?text=Virtual+Tour+360"
+                alt="Virtual Tour 360"
+                className="absolute inset-0 h-full w-full object-cover opacity-70"
+              />
+              <div className="absolute inset-0 bg-sky-950/35" />
+
+              <button className="absolute left-1/2 top-1/2 inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full bg-amber-500 px-7 py-4 font-semibold text-yellow-950 shadow-xl transition hover:bg-amber-400">
+                Bắt đầu tour
+                <ChevronRight className="h-5 w-5" />
+              </button>
             </div>
           </div>
         </div>
       </section>
-    </div>
+
+      {/* Booking Form */}
+      <section className="bg-blue-50 px-6 py-20">
+        <div className="mx-auto grid max-w-7xl gap-12 rounded-3xl border border-white/60 bg-white/75 p-8 shadow-xl backdrop-blur-md md:p-12 lg:grid-cols-2 lg:p-16">
+          <div>
+            <h2 className="text-3xl font-bold leading-tight text-sky-950 md:text-4xl">
+              Đặt lịch tham quan Campus trực tiếp
+            </h2>
+
+            <p className="mt-5 max-w-xl text-base leading-7 text-zinc-700">
+              Hãy để lại thông tin, đội ngũ tư vấn tuyển sinh sẽ liên hệ để xác
+              nhận thời gian tham quan và hỗ trợ bạn tìm hiểu chương trình đào
+              tạo phù hợp.
+            </p>
+
+            <div className="mt-10 flex items-center gap-4">
+              <div className="flex -space-x-3">
+                <img
+                  src="https://placehold.co/48x48/f59e0b/ffffff?text=A"
+                  alt="Tư vấn viên"
+                  className="h-12 w-12 rounded-full border-2 border-white shadow-sm"
+                />
+                <img
+                  src="https://placehold.co/48x48/0f172a/ffffff?text=B"
+                  alt="Tư vấn viên"
+                  className="h-12 w-12 rounded-full border-2 border-white shadow-sm"
+                />
+                <img
+                  src="https://placehold.co/48x48/0284c7/ffffff?text=C"
+                  alt="Tư vấn viên"
+                  className="h-12 w-12 rounded-full border-2 border-white shadow-sm"
+                />
+              </div>
+
+              <p className="text-base leading-7 text-zinc-700">
+                Đội ngũ tư vấn của chúng tôi luôn sẵn sàng hỗ trợ bạn.
+              </p>
+            </div>
+          </div>
+
+          <form className="rounded-2xl bg-white p-8 shadow-md">
+            <div className="space-y-5">
+              <div>
+                <label className="mb-2 block text-sm font-semibold tracking-wide text-zinc-700">
+                  Họ và tên
+                </label>
+                <div className="relative">
+                  <UserRound className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
+                  <input
+                    type="text"
+                    placeholder="Nguyễn Văn A"
+                    className="h-12 w-full rounded-lg bg-sky-100 pl-10 pr-3 text-base outline-none transition placeholder:text-gray-500 focus:ring-2 focus:ring-amber-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="mb-2 block text-sm font-semibold tracking-wide text-zinc-700">
+                  Số điện thoại
+                </label>
+                <div className="relative">
+                  <Phone className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
+                  <input
+                    type="tel"
+                    placeholder="+84 000 000 000"
+                    className="h-12 w-full rounded-lg bg-sky-100 pl-10 pr-3 text-base outline-none transition placeholder:text-gray-500 focus:ring-2 focus:ring-amber-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="mb-2 block text-sm font-semibold tracking-wide text-zinc-700">
+                  Ngày mong muốn
+                </label>
+                <input
+                  type="date"
+                  className="h-12 w-full rounded-lg bg-sky-100 px-3 text-base text-slate-900 outline-none transition focus:ring-2 focus:ring-amber-500"
+                />
+              </div>
+
+              <div>
+                <label className="mb-2 block text-sm font-semibold tracking-wide text-zinc-700">
+                  Đối tượng khách tham quan
+                </label>
+                <select className="h-12 w-full rounded-lg bg-sky-100 px-3 text-base text-slate-900 outline-none transition focus:ring-2 focus:ring-amber-500">
+                  <option>Học sinh tiềm năng</option>
+                  <option>Phụ huynh</option>
+                  <option>Đối tác doanh nghiệp</option>
+                  <option>Khách tham quan khác</option>
+                </select>
+              </div>
+
+              <button
+                type="button"
+                className="mt-2 h-14 w-full rounded-lg bg-amber-500 text-base font-semibold text-yellow-950 shadow-md transition hover:bg-amber-400"
+              >
+                Xác nhận đặt lịch
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
   );
 };
 
