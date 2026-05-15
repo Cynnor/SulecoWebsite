@@ -73,7 +73,7 @@ export default function Header() {
       title: "News & Resources",
       items: [
         { label: "Tin tức & Sự kiện", to: "/news/events" },
-        { label: "Hoạt động sinh viên", to: "/news/student-activities" },
+        { label: "Góc Nhật Bản", to: "/news/student-activities" },
         { label: "Thông báo đào tạo", to: "/news/notifications" },
         { label: "Thư viện tư liệu", to: "/news/library" },
       ]
@@ -102,6 +102,9 @@ export default function Header() {
         </Link>
 
         <nav className="hidden items-center gap-8 lg:flex text-slate-500">
+          <Link to="/" className="py-2 hover:text-blue-700 transition-colors border-b-2 border-transparent hover:border-blue-700 font-bold uppercase tracking-widest text-[11px]">
+            Trang chủ
+          </Link>
           <NavDropdown {...navData.aboutUs} />
           <NavDropdown {...navData.training} />
           <NavDropdown {...navData.admission} />

@@ -1,109 +1,242 @@
-import React from 'react';
+import React from "react";
+import {
+  ArrowRight,
+  Calendar,
+  Clock3,
+  MapPin,
+  Search,
+  Newspaper,
+} from "lucide-react";
 
 const NewsAndEvents = () => {
-  const newsItems = [
+  const newsList = [
     {
-      title: "Suleco City ký kết hợp tác chiến lược với VinFast Service",
-      date: "25/05/2024",
-      category: "Sự kiện",
-      desc: "Mở rộng cơ hội thực tập và làm việc cho sinh viên ngành Công nghệ Ô tô tại hệ thống xưởng dịch vụ VinFast trên toàn quốc.",
-      image: "🚗"
-    },
-    {
-      title: "Lễ tốt nghiệp và trao bằng đợt 1 năm 2024",
-      date: "20/05/2024",
-      category: "Tin tức",
-      desc: "Hơn 500 sinh viên các ngành Kỹ thuật và Dịch vụ đã chính thức nhận bằng và sẵn sàng bước vào thị trường lao động.",
-      image: "🎓"
-    },
-    {
-      title: "Hội thảo: Xu hướng công nghiệp 4.0 trong ngành Cơ khí",
       date: "15/05/2024",
-      category: "Hội thảo",
-      desc: "Các chuyên gia từ tập đoàn ABB chia sẻ về lộ trình chuyển đổi số và ứng dụng robot trong sản xuất công nghiệp.",
-      image: "⚙️"
-    }
+      title: "Khai giảng lớp tiếng Nhật N3 cấp tốc dành cho Kỹ sư",
+      desc: "Chương trình đào tạo đặc biệt giúp học viên nhanh chóng làm chủ ngôn ngữ và văn hóa doanh nghiệp Nhật Bản...",
+    },
+    {
+      date: "12/05/2024",
+      title: "Hội thảo: Định hướng nghề nghiệp tại các tập đoàn đa quốc gia",
+      desc: "Các chuyên gia nhân sự hàng đầu chia sẻ lộ trình thăng tiến và các kỹ năng cần thiết trong môi trường làm việc quốc tế.",
+    },
+    {
+      date: "10/05/2024",
+      title: "Suleco đón đoàn đối tác từ Hiệp hội Doanh nghiệp Kyushu",
+      desc: "Chuyến thăm nhằm thắt chặt mối quan hệ hợp tác lâu dài và khảo sát chất lượng đào tạo học viên tại trung tâm.",
+    },
+    {
+      date: "08/05/2024",
+      title: "Hành trình 40 năm kiến tạo tương lai cho lao động Việt",
+      desc: "Nhìn lại những cột mốc đáng nhớ trong chặng đường phát triển và đóng góp cho cộng đồng của Suleco.",
+    },
+  ];
+
+  const upcomingEvents = [
+    {
+      month: "THÁNG 6",
+      day: "20",
+      title: "Ngày hội Tuyển dụng Trực tiếp với DN Nhật",
+      info: "08:30 - 11:30",
+      dark: true,
+    },
+    {
+      month: "THÁNG 6",
+      day: "25",
+      title: "Livestream: Bí quyết chinh phục nhà tuyển dụng",
+      info: "Facebook Live",
+      dark: false,
+    },
+    {
+      month: "THÁNG 7",
+      day: "05",
+      title: "Hội thảo Du học Nhật Bản 2024",
+      info: "Hội trường A1, Suleco",
+      dark: true,
+    },
   ];
 
   return (
-    <div className="w-full min-h-screen bg-white font-sans text-slate-800">
-      {/* Banner */}
-      <section className="relative overflow-hidden bg-slate-900 py-24 px-6 md:px-12 lg:px-20">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-        <div className="absolute top-0 right-0 w-1/4 h-full bg-blue-700/10 skew-x-12 translate-x-10"></div>
-        
-        <div className="relative z-10 max-w-[1400px] mx-auto">
-          <div className="inline-block border-l-2 border-blue-500 pl-4 mb-4">
-             <span className="text-blue-400 font-bold tracking-[0.3em] text-sm uppercase">Campus Life</span>
+    <main className="mx-auto flex w-full max-w-[1280px] flex-col gap-8 px-6 pt-8 pb-28">
+      {/* Hero */}
+      <section className="relative overflow-hidden rounded-2xl shadow-2xl">
+        <img
+          src="https://placehold.co/1232x528"
+          alt="News Banner"
+          className="h-[528px] w-full object-cover"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-r from-sky-950/90 via-sky-950/40 to-transparent" />
+
+        <div className="absolute left-0 top-0 flex h-full max-w-3xl flex-col justify-center p-12">
+          <div className="mb-5 inline-flex w-fit rounded-full bg-amber-500 px-4 py-1">
+            <span className="text-sm font-semibold uppercase tracking-wide text-yellow-900">
+              Sự kiện nổi bật
+            </span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight uppercase">
-            Tin tức & Sự kiện
+
+          <h1 className="text-4xl font-bold leading-tight text-white md:text-5xl">
+            Lễ Ký Kết Hợp Tác Chiến Lược Cung Ứng Nhân Lực Chất Lượng Cao Sang Nhật Bản 2024
           </h1>
-          <p className="text-slate-400 text-lg md:text-xl font-light max-w-3xl uppercase tracking-widest leading-relaxed">
-            Cập nhật những chuyển động mới nhất tại Suleco City.
+
+          <p className="mt-6 text-base leading-8 text-blue-100">
+            Suleco chính thức bắt tay cùng các tập đoàn hàng đầu Nhật Bản mở ra
+            hàng ngàn cơ hội việc làm và phát triển sự nghiệp cho thanh niên
+            Việt Nam trong năm tới.
           </p>
+
+          <button className="mt-8 inline-flex w-fit items-center gap-2 rounded-lg bg-amber-500 px-6 py-3 text-base font-medium text-yellow-900 transition hover:bg-amber-400">
+            Xem chi tiết
+            <ArrowRight className="h-4 w-4" />
+          </button>
         </div>
       </section>
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 py-24">
-        
-        {/* Featured News */}
-        <section className="mb-32">
-           <div className="grid lg:grid-cols-2 gap-12 items-center bg-slate-50 rounded-[3rem] overflow-hidden border border-slate-100 p-8 md:p-12 shadow-sm hover:shadow-xl transition-all group">
-              <div className="aspect-video bg-white rounded-3xl flex items-center justify-center text-9xl shadow-inner group-hover:scale-105 transition-transform duration-500">
-                 📰
-              </div>
-              <div>
-                 <span className="px-4 py-1 bg-blue-700 text-white rounded-full font-black text-[10px] uppercase tracking-widest mb-6 inline-block">Tiêu điểm</span>
-                 <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tight mb-6 leading-tight">
-                    Khai giảng khóa đào tạo tiếng Nhật cấp tốc cho tu nghiệp sinh khóa 2024
-                 </h2>
-                 <p className="text-slate-500 text-lg leading-relaxed mb-8">
-                    Chương trình được thiết kế riêng biệt nhằm đáp ứng yêu cầu khắt khe từ các đối tác Nhật Bản, giúp học viên đạt trình độ N4 chỉ sau 6 tháng học tập trung.
-                 </p>
-                 <div className="flex items-center gap-4 text-xs font-bold text-slate-400 uppercase tracking-widest">
-                    <span>Admin</span>
-                    <span className="w-1.5 h-1.5 bg-blue-700 rounded-full"></span>
-                    <span>30/05/2024</span>
-                 </div>
-              </div>
-           </div>
-        </section>
-
-        {/* News Grid */}
-        <section className="grid md:grid-cols-3 gap-12">
-           {newsItems.map((item, idx) => (
-             <div key={idx} className="flex flex-col bg-white group cursor-pointer">
-                <div className="aspect-[16/10] bg-slate-50 rounded-3xl mb-8 flex items-center justify-center text-6xl group-hover:bg-blue-50 transition-colors shadow-sm overflow-hidden border border-slate-100">
-                   <div className="group-hover:scale-125 transition-transform duration-500">
-                      {item.image}
-                   </div>
-                </div>
-                <span className="text-blue-700 font-black text-[10px] uppercase tracking-widest mb-4">{item.category} | {item.date}</span>
-                <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight mb-4 group-hover:text-blue-700 transition-colors leading-tight">
-                   {item.title}
-                </h3>
-                <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-2">
-                   {item.desc}
-                </p>
-                <div className="mt-auto pt-4 border-t border-slate-50">
-                   <span className="text-slate-900 font-black text-xs uppercase tracking-[0.2em] group-hover:tracking-[0.3em] transition-all">Đọc tiếp →</span>
-                </div>
-             </div>
-           ))}
-        </section>
-
-        {/* Pagination placeholder */}
-        <div className="mt-24 flex justify-center gap-4">
-           {[1, 2, 3, "..."].map((n, i) => (
-             <button key={i} className={`w-12 h-12 rounded-xl font-black text-xs uppercase transition-all ${i === 0 ? 'bg-blue-700 text-white shadow-lg' : 'bg-slate-50 text-slate-400 hover:bg-slate-100'}`}>
-                {n}
-             </button>
-           ))}
+      {/* Filter */}
+      <section className="flex flex-col gap-5 pt-10 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex flex-wrap gap-3">
+          {["Tất cả", "Sự kiện", "Tin nội bộ", "Tin giáo dục"].map(
+            (item, index) => (
+              <button
+                key={index}
+                className={`rounded-full px-6 py-2 text-base transition ${
+                  index === 0
+                    ? "bg-sky-950 text-white"
+                    : "bg-blue-100 text-zinc-700 hover:bg-blue-200"
+                }`}
+              >
+                {item}
+              </button>
+            )
+          )}
         </div>
 
-      </div>
-    </div>
+        <div className="relative w-full lg:w-80">
+          <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500" />
+
+          <input
+            type="text"
+            placeholder="Tìm kiếm tin tức..."
+            className="h-12 w-full rounded-full border border-neutral-300 bg-white pl-11 pr-4 outline-none focus:ring-2 focus:ring-amber-500"
+          />
+        </div>
+      </section>
+
+      {/* Content */}
+      <section className="grid gap-8 lg:grid-cols-[1fr_360px]">
+        {/* News */}
+        <div className="grid gap-6 md:grid-cols-2">
+          {newsList.map((item, index) => (
+            <article
+              key={index}
+              className="overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+            >
+              <img
+                src="https://placehold.co/393x221"
+                alt="News"
+                className="h-56 w-full object-cover"
+              />
+
+              <div className="p-5">
+                <div className="mb-3 flex items-center gap-2 text-zinc-500">
+                  <Calendar className="h-4 w-4" />
+                  <span className="text-sm">{item.date}</span>
+                </div>
+
+                <h3 className="text-lg font-bold leading-7 text-sky-950">
+                  {item.title}
+                </h3>
+
+                <p className="mt-3 text-base leading-7 text-zinc-700">
+                  {item.desc}
+                </p>
+
+                <button className="mt-5 inline-flex items-center gap-2 font-bold text-yellow-800">
+                  Đọc tiếp
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* Sidebar */}
+        <aside className="space-y-6">
+          {/* Upcoming */}
+          <div className="rounded-xl border border-neutral-300 bg-blue-50 p-5">
+            <div className="mb-5 flex items-center gap-2">
+              <Newspaper className="h-5 w-5 text-yellow-800" />
+
+              <h2 className="text-lg font-bold text-sky-950">
+                Sự kiện sắp tới
+              </h2>
+            </div>
+
+            <div className="space-y-4">
+              {upcomingEvents.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex gap-4 rounded-lg border border-neutral-200 bg-white p-3"
+                >
+                  <div
+                    className={`flex h-16 w-16 flex-col items-center justify-center rounded-sm ${
+                      item.dark
+                        ? "bg-sky-950 text-white"
+                        : "bg-amber-500 text-yellow-900"
+                    }`}
+                  >
+                    <span className="text-xs font-bold uppercase">
+                      {item.month}
+                    </span>
+
+                    <span className="text-2xl font-bold">{item.day}</span>
+                  </div>
+
+                  <div className="flex-1">
+                    <h3 className="text-sm font-bold leading-5 text-sky-950">
+                      {item.title}
+                    </h3>
+
+                    <div className="mt-2 flex items-center gap-1 text-xs text-zinc-500">
+                      {index === 0 ? (
+                        <Clock3 className="h-3 w-3" />
+                      ) : (
+                        <MapPin className="h-3 w-3" />
+                      )}
+
+                      <span>{item.info}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Subscribe */}
+            <div className="mt-6 rounded-lg bg-sky-900 p-5">
+              <h3 className="text-lg font-bold text-white">
+                Đăng ký nhận tin tức
+              </h3>
+
+              <p className="mt-2 text-sm leading-6 text-blue-100">
+                Đừng bỏ lỡ các cơ hội việc làm và sự kiện hấp dẫn nhất.
+              </p>
+
+              <div className="mt-5 space-y-3">
+                <input
+                  type="email"
+                  placeholder="Email của bạn"
+                  className="h-11 w-full rounded-md border-none bg-white px-4 outline-none"
+                />
+
+                <button className="h-11 w-full rounded-md bg-amber-500 text-sm font-semibold text-yellow-900 transition hover:bg-amber-400">
+                  ĐĂNG KÝ NGAY
+                </button>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
   );
 };
 

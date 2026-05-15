@@ -1,95 +1,228 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
+/* ─── SMALL CARD DATA ──────────────────────────────── */
+const smallCards = [
+  {
+    id: 'sau-dai-hoc',
+    iconClass: 'w-5 h-4',
+    title: 'Đào tạo sau đại học',
+    desc: 'Liên kết thạc sĩ và các chứng chỉ chuyên gia quốc tế trong lĩnh vực quản trị và kỹ thuật.',
+  },
+  {
+    id: 'dia-phuong',
+    iconClass: 'w-5 h-4',
+    title: 'Đối tác Địa phương',
+    desc: 'Mạng lưới 100+ trường Cao đẳng và Đại học trên toàn lãnh thổ Việt Nam hợp tác tuyển sinh.',
+  },
+  {
+    id: 'internship',
+    iconClass: 'w-5 h-5',
+    title: 'Global Internship',
+    desc: 'Chương trình thực tập hưởng lương tại các doanh nghiệp đa quốc gia tại Singapore và Đức.',
+  },
+];
+
+/* ─── COMPONENT ────────────────────────────────────── */
 const TrainingPartnerships = () => {
-  const partners = [
-    {
-      country: "Nhật Bản",
-      institution: "Học viện Ngôn ngữ Tokyo",
-      program: "Chương trình chuyển tiếp Đại học",
-      desc: "Học viên học 1-2 năm tại Việt Nam và chuyển tiếp học tập tại Nhật Bản để lấy bằng cử nhân quốc tế.",
-      icon: "🏯"
-    },
-    {
-      country: "Australia",
-      institution: "Swinburne University (Hợp tác)",
-      program: "Thực tập sinh kỹ năng cao",
-      desc: "Chương trình đào tạo và đưa kỹ thuật viên sang làm việc tại các tập đoàn công nghệ lớn tại Australia.",
-      icon: "🦘"
-    },
-    {
-      country: "Đức",
-      institution: "Tập đoàn Y tế Berlin",
-      program: "Đào tạo điều dưỡng quốc tế",
-      desc: "Liên kết đào tạo chuyên môn điều dưỡng theo tiêu chuẩn Châu Âu và cam kết làm việc tại CHLB Đức.",
-      icon: "🇩🇪"
-    }
-  ];
-
   return (
     <div className="w-full min-h-screen bg-white font-sans text-slate-800">
-      <section className="relative overflow-hidden bg-slate-900 py-24 px-6 md:px-12 lg:px-20">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-700/10 skew-x-12 translate-x-32"></div>
-        
-        <div className="relative z-10 max-w-[1400px] mx-auto">
-          <span className="text-blue-400 font-bold tracking-[0.3em] text-xs uppercase mb-4 block">Strategic Alliance</span>
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-6 uppercase tracking-tight">Liên Kết Đào Tạo</h1>
-          <p className="text-slate-400 text-lg md:text-xl font-light max-w-2xl leading-relaxed italic">
-            "Hợp tác xuyên biên giới - Kiến tạo cơ hội nghề nghiệp toàn cầu."
-          </p>
+
+      {/* ══════════════════════════════════════════════
+          SECTION 1 — HERO  (h-500, bg-indigo-800)
+      ══════════════════════════════════════════════ */}
+      <section className="relative w-full h-[500px] bg-indigo-800 overflow-hidden flex justify-center items-center">
+        {/* Sky-900/50 overlay */}
+        <div className="absolute left-0 top-0 w-full h-full bg-sky-900/50" />
+
+        {/* Content */}
+        <div className="relative z-10 flex-1 max-w-[1280px] px-6">
+          <div className="w-[672px] max-w-full flex flex-col justify-start items-start gap-3.5">
+            {/* Headline */}
+            <h1 className="self-stretch text-white text-5xl font-bold font-['Montserrat'] leading-[57.60px]">
+              Liên kết đào tạo chiến lược
+            </h1>
+
+            {/* Subtitle */}
+            <div className="self-stretch opacity-90">
+              <p className="self-stretch text-white text-lg font-normal font-['Inter'] leading-7">
+                Kiến tạo tương lai thông qua mạng lưới đối tác giáo dục và doanh nghiệp hàng đầu thế giới.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 py-24">
-        <div className="grid lg:grid-cols-5 gap-16 mb-32 items-center">
-           <div className="lg:col-span-3">
-              <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tight mb-8">Tầm nhìn quốc tế</h2>
-              <p className="text-slate-500 text-lg leading-relaxed mb-8 text-justify">
-                 Suleco City không ngừng mở rộng mạng lưới đối tác với các trường đại học, học viện và tập đoàn kinh tế uy tín trên toàn thế giới. Mục tiêu của chúng tôi là tạo ra những lộ trình đào tạo linh hoạt, giúp học viên tiếp cận với tinh hoa tri thức nhân loại và mở ra cơ hội làm việc tại các quốc gia phát triển.
-              </p>
-              <div className="grid grid-cols-2 gap-8">
-                 <div className="border-l-4 border-blue-700 pl-6">
-                    <p className="text-3xl font-black text-slate-900">50+</p>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Đối tác quốc tế</p>
-                 </div>
-                 <div className="border-l-4 border-blue-700 pl-6">
-                    <p className="text-3xl font-black text-slate-900">12</p>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Quốc gia liên kết</p>
-                 </div>
-              </div>
-           </div>
-           <div className="lg:col-span-2">
-              <div className="bg-slate-50 p-12 rounded-[3rem] border border-slate-100 flex items-center justify-center text-8xl grayscale opacity-30 shadow-inner">
-                 🌍
-              </div>
-           </div>
-        </div>
+      {/* ══════════════════════════════════════════════
+          SECTION 2 — PARTNERS  (py-20, px-6, gap-20)
+      ══════════════════════════════════════════════ */}
+      <section className="w-full py-20 px-6">
+        <div className="w-full max-w-[1280px] mx-auto flex flex-col justify-start items-start gap-20">
 
-        <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tight mb-16 text-center">Các chương trình tiêu biểu</h2>
-        <div className="space-y-8">
-           {partners.map((p, idx) => (
-             <div key={idx} className="bg-white border border-slate-100 p-10 md:p-16 rounded-[3rem] shadow-sm hover:shadow-2xl transition-all flex flex-col md:flex-row gap-12 items-center group relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-700/5 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform"></div>
-                <div className="w-32 h-32 bg-slate-50 rounded-3xl flex items-center justify-center text-6xl group-hover:bg-blue-700 group-hover:text-white transition-all shrink-0">
-                   {p.icon}
+          {/* Section header */}
+          <div className="self-stretch flex flex-col justify-start items-center gap-2">
+            <h2 className="text-center text-sky-950 text-3xl font-bold font-['Montserrat'] leading-10">
+              Đối tác chiến lược quốc tế
+            </h2>
+            <div className="w-20 h-1 bg-amber-500 rounded-full" />
+          </div>
+
+          {/* Card grid */}
+          <div className="self-stretch grid grid-cols-3 gap-6">
+
+            {/* ── Row 1: Japan featured (col-span-2) + Exchange (col-span-1) ── */}
+
+            {/* Card 1: Japan Partners — bg-blue-50, h-full, col-span-2 */}
+            <div className="col-span-2 p-8 bg-blue-50 rounded-xl outline outline-1 outline-offset-[-1px] outline-neutral-300 flex flex-row justify-center items-start gap-8 min-h-96">
+              {/* Left text */}
+              <div className="flex-1 flex flex-col justify-start items-start gap-2">
+                {/* Tag */}
+                <div className="self-stretch flex flex-col justify-start items-start">
+                  <p className="text-yellow-800 text-base font-normal font-['Inter'] uppercase leading-6 tracking-widest">
+                    DOANH NGHIỆP HÀNG ĐẦU
+                  </p>
                 </div>
-                <div className="flex-1">
-                   <div className="flex items-center gap-4 mb-4">
-                      <span className="px-4 py-1 bg-blue-50 text-blue-700 rounded-full font-black text-[10px] uppercase tracking-widest">{p.country}</span>
-                      <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight">{p.institution}</h3>
-                   </div>
-                   <h4 className="text-lg font-bold text-blue-700 mb-6 uppercase tracking-wider">{p.program}</h4>
-                   <p className="text-slate-500 leading-relaxed text-justify">{p.desc}</p>
+
+                {/* Title */}
+                <div className="self-stretch flex flex-col justify-start items-start">
+                  <h3 className="self-stretch text-sky-950 text-2xl font-semibold font-['Montserrat'] leading-8">
+                    Hợp tác Nhật Bản (Toyota,<br />Hitachi, Panasonic)
+                  </h3>
                 </div>
-                <div className="shrink-0">
-                   <button className="bg-slate-900 text-white px-8 py-4 rounded-xl font-black uppercase tracking-widest text-[10px] group-hover:bg-blue-700 transition-colors shadow-lg">
-                      Tìm hiểu lộ trình
-                   </button>
+
+                {/* Desc */}
+                <div className="self-stretch pt-2 flex flex-col justify-start items-start">
+                  <p className="self-stretch text-zinc-700 text-base font-normal font-['Inter'] leading-6">
+                    Suleco tự hào là đối tác đào tạo nguồn nhân lực chất lượng cao cho các tập đoàn công nghệ và sản xuất hàng đầu Nhật Bản, đảm bảo đầu ra sự nghiệp vững chắc cho học viên.
+                  </p>
                 </div>
-             </div>
-           ))}
+
+                {/* Feature list */}
+                <div className="self-stretch pt-6 flex flex-col justify-start items-start gap-2">
+                  {[
+                    'Đào tạo kỹ năng chuyên sâu theo tiêu chuẩn 5S',
+                    'Cam kết cơ hội làm việc trực tiếp tại Nhật',
+                    'Học bổng toàn phần từ các nghiệp đoàn lớn',
+                  ].map((item, i) => (
+                    <div key={i} className="self-stretch inline-flex justify-start items-start gap-2">
+                      <div className="shrink-0 w-5 h-5 bg-amber-500 rounded-sm mt-0.5" />
+                      <p className="text-slate-900 text-base font-normal font-['Inter'] leading-6">{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right image */}
+              <div className="flex-1 self-stretch min-h-72 rounded-lg overflow-hidden">
+                <img
+                  src="https://placehold.co/358x379"
+                  alt="Đối tác Nhật Bản"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Card 2: Exchange Program — bg-sky-950, col-span-1 */}
+            <div className="col-span-1 px-8 py-8 bg-sky-950 rounded-xl flex flex-col justify-between items-start">
+              <div className="self-stretch flex flex-col justify-start items-start gap-4">
+                {/* Title */}
+                <h3 className="self-stretch text-white text-2xl font-semibold font-['Montserrat'] leading-8">
+                  Chương trình trao đổi sinh viên
+                </h3>
+                {/* Desc */}
+                <div className="self-stretch opacity-80">
+                  <p className="self-stretch text-white text-base font-normal font-['Inter'] leading-6">
+                    Mở rộng tầm nhìn quốc tế thông qua các chương trình liên kết với hơn 50 trường đại học danh tiếng tại Châu Á và Châu Âu.
+                  </p>
+                </div>
+              </div>
+
+              {/* Button */}
+              <div className="self-stretch pt-8">
+                <Link
+                  to="/contact/consultation"
+                  id="exchange-network-btn"
+                  className="self-stretch py-4 bg-amber-500 hover:bg-amber-400 rounded-lg flex justify-center items-center transition-all duration-200"
+                >
+                  <span className="text-yellow-900 text-base font-normal font-['Inter'] leading-6">
+                    Xem mạng lưới trường học
+                  </span>
+                </Link>
+              </div>
+            </div>
+
+            {/* ── Row 2: 3 small white cards ── */}
+            {smallCards.map((card) => (
+              <div
+                key={card.id}
+                id={`partner-card-${card.id}`}
+                className="col-span-1 p-8 bg-white/70 rounded-xl shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-neutral-300 backdrop-blur-[5px] flex flex-col justify-start items-start gap-2"
+              >
+                {/* Icon */}
+                <div className="w-12 h-12 bg-blue-100 rounded-lg flex justify-center items-center">
+                  <div className={`${card.iconClass} bg-sky-950`} />
+                </div>
+
+                {/* Title */}
+                <div className="self-stretch pt-2">
+                  <h4 className="self-stretch text-sky-950 text-lg font-semibold font-['Montserrat'] leading-7">
+                    {card.title}
+                  </h4>
+                </div>
+
+                {/* Desc */}
+                <p className="self-stretch text-zinc-700 text-sm font-normal font-['Inter'] leading-5">
+                  {card.desc}
+                </p>
+              </div>
+            ))}
+
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════
+          SECTION 3 — CTA BANNER  (bg-blue-50, px-64, py-20)
+      ══════════════════════════════════════════════ */}
+      <section className="w-full bg-blue-50 px-6 py-20">
+        <div className="w-full max-w-[768px] mx-auto flex flex-col justify-start items-start gap-3.5">
+          {/* Headline */}
+          <div className="self-stretch flex flex-col justify-start items-center">
+            <h2 className="text-center text-sky-950 text-3xl font-bold font-['Montserrat'] leading-10">
+              Trở thành đối tác chiến lược của Suleco
+            </h2>
+          </div>
+
+          {/* Subtitle */}
+          <div className="self-stretch flex flex-col justify-start items-center">
+            <p className="text-center text-zinc-700 text-lg font-normal font-['Inter'] leading-7">
+              Cùng chúng tôi xây dựng hệ sinh thái giáo dục và cung ứng lao động bền vững, chuyên nghiệp theo tiêu chuẩn toàn cầu.
+            </p>
+          </div>
+
+          {/* CTA buttons */}
+          <div className="self-stretch pt-4 inline-flex justify-center items-start gap-4 flex-wrap">
+            <Link
+              to="/contact/consultation"
+              id="cta-partner-apply"
+              className="px-8 py-4 bg-amber-500 hover:bg-amber-400 rounded-full inline-flex justify-center items-center shadow-md transition-all duration-200"
+            >
+              <span className="text-yellow-900 text-base font-normal font-['Inter'] leading-6">
+                Gửi hồ sơ hợp tác
+              </span>
+            </Link>
+            <button
+              id="cta-partner-brochure"
+              className="px-8 py-4 rounded-full outline outline-2 outline-offset-[-2px] outline-sky-950 hover:bg-sky-950/5 inline-flex justify-center items-center transition-all duration-200"
+            >
+              <span className="text-sky-950 text-base font-normal font-['Inter'] leading-6">
+                Tải Brochure giới thiệu
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 };

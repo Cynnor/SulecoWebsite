@@ -1,167 +1,387 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
+/* ─── DATA ─────────────────────────────────────────── */
+const regionCards = [
+  {
+    id: 'south-asia',
+    title: 'South Asia',
+    desc: 'Dành cho sinh viên từ Afghanistan, India, Pakistan, Bangladesh, Sri Lanka, Nepal, Bhutan, Maldives.',
+  },
+  {
+    id: 'southeast-asia',
+    title: 'Southeast Asia',
+    desc: 'Dành cho sinh viên từ Vietnam, Thailand, Singapore, Malaysia, Indonesia, Philippines, Cambodia, Laos.',
+  },
+  {
+    id: 'north-asia',
+    title: 'North Asia',
+    desc: 'Dành cho sinh viên từ China, Hong Kong, Japan, South Korea, Taiwan, Mongolia.',
+  },
+  {
+    id: 'europe',
+    title: 'Europe',
+    desc: 'Các chương trình hỗ trợ đặc biệt dành cho sinh viên đến từ các quốc gia khu vực Châu Âu.',
+  },
+];
+
+const tuitionRows = [
+  { program: 'Cử nhân (Bachelor Degrees)',    duration: '3 - 4 Năm',    fee: '32,000 - 45,000 NZD/năm' },
+  { program: 'Thạc sĩ (Master Degrees)',       duration: '1.5 - 2 Năm',  fee: '38,000 - 52,000 NZD/năm' },
+  { program: 'Tiến sĩ (PhD)',                  duration: '3 - 4 Năm',    fee: '7,000 - 9,500 NZD/năm*' },
+  { program: 'Chứng chỉ nghề (Diplomas)',      duration: '1 Năm',         fee: '18,000 - 28,000 NZD/năm' },
+];
+
+const govScholarships = [
+  'Vietnam (Chương trình học bổng Chính phủ)',
+  'China',
+  'Germany (DAAD)',
+  'Thailand',
+];
+
+/* ─── COMPONENT ────────────────────────────────────── */
 const ScholarshipsAndTuition = () => {
-  const scholarships = [
-    {
-      name: "Học bổng Suleco City Diamond",
-      value: "100% Học phí toàn khóa",
-      condition: "Dành cho thủ khoa đầu vào hoặc học viên đạt giải Nhất các kỳ thi kỹ năng tay nghề cấp Quốc gia.",
-      icon: "💎",
-      color: "bg-blue-50 text-blue-700"
-    },
-    {
-      name: "Học bổng Khuyến học Tài năng",
-      value: "50% Học phí",
-      condition: "Học viên có GPA > 8.5 hoặc đạt trình độ ngoại ngữ JLPT N3/IELTS 6.5 trở lên.",
-      icon: "🌟",
-      color: "bg-amber-50 text-amber-600"
-    },
-    {
-      name: "Học bổng Thủ lĩnh trẻ",
-      value: "30% Học phí",
-      condition: "Dành cho học viên có thành tích xuất sắc trong các hoạt động Đoàn, Hội và phong trào sinh viên.",
-      icon: "👑",
-      color: "bg-emerald-50 text-emerald-600"
-    },
-    {
-      name: "Hỗ trợ Vượt khó Học giỏi",
-      value: "Hỗ trợ 10-20 Triệu/năm",
-      condition: "Học viên có hoàn cảnh khó khăn, gia đình chính sách nhưng có ý chí vươn lên trong học tập.",
-      icon: "🤝",
-      color: "bg-purple-50 text-purple-600"
-    }
-  ];
-
-  const tuitionDetails = [
-    { category: "Hệ Cao đẳng chính quy", fee: "12.500.000 VNĐ", unit: "Học kỳ", duration: "2.5 - 3 Năm" },
-    { category: "Hệ Trung cấp chính quy", fee: "9.500.000 VNĐ", unit: "Học kỳ", duration: "1.5 - 2 Năm" },
-    { category: "Khóa đào tạo Kỹ thuật ngắn hạn", fee: "6.000.000 - 8.000.000 VNĐ", unit: "Khóa học", duration: "3 - 6 Tháng" },
-    { category: "Chương trình Ngoại ngữ cấp tốc", fee: "4.500.000 VNĐ", unit: "Khóa học", duration: "4 Tháng" }
-  ];
-
-  const faqs = [
-    { q: "Học phí có tăng trong suốt khóa học không?", a: "Suleco City cam kết không tăng học phí quá 5% mỗi năm và được thông báo lộ trình rõ ràng ngay từ khi nhập học." },
-    { q: "Có hỗ trợ trả góp học phí không?", a: "Nhà trường liên kết với các ngân hàng đối tác hỗ trợ trả góp học phí với lãi suất 0% cho phụ huynh và học viên." },
-    { q: "Làm sao để duy trì học bổng?", a: "Học viên cần duy trì điểm GPA tối thiểu từ 7.5 và không vi phạm quy chế đào tạo để tiếp tục nhận học bổng cho học kỳ kế tiếp." }
-  ];
-
   return (
-    <div className="w-full min-h-screen bg-white font-sans text-slate-800 pb-24">
-      {/* Banner */}
-      <section className="relative overflow-hidden bg-slate-900 py-24 px-6 md:px-12 lg:px-20">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-        <div className="absolute top-0 right-0 w-1/4 h-full bg-blue-700/10 skew-x-12 translate-x-10"></div>
-        
-        <div className="relative z-10 max-w-[1400px] mx-auto text-center">
-          <div className="inline-block border-b-2 border-blue-500 pb-2 mb-6">
-             <span className="text-blue-400 font-bold tracking-[0.4em] text-xs uppercase">Financial Investment</span>
+    <div className="w-full min-h-screen bg-white font-sans text-slate-800">
+
+      {/* ══════════════════════════════════════════════
+          SECTION 1 — HERO BANNER (full-width bg image)
+          h-535, gradient from-sky-950/90 to-sky-950/40
+      ══════════════════════════════════════════════ */}
+      <section className="relative w-full h-[535px] overflow-hidden flex justify-center items-center">
+        {/* BG image + gradient */}
+        <img
+          src="https://placehold.co/1280x535"
+          alt="Học bổng Suleco"
+          className="absolute left-0 top-0 w-full h-full object-cover"
+        />
+        <div className="absolute left-0 top-0 w-full h-full bg-gradient-to-r from-sky-950/90 to-sky-950/40" />
+
+        {/* Content */}
+        <div className="relative z-10 w-full max-w-[1280px] px-6">
+          <div className="w-[768px] max-w-full flex flex-col justify-start items-start gap-6">
+            <h1 className="self-stretch text-white text-5xl font-bold font-['Montserrat'] leading-[57.60px]">
+              Học bổng &amp; Học phí
+            </h1>
+            <p className="self-stretch text-white/90 text-lg font-normal font-['Inter'] leading-7">
+              SULECO đồng hành cùng ước mơ vươn ra biển lớn. Chúng tôi cung cấp các gói học bổng hấp dẫn và giải pháp tài chính minh bạch cho lộ trình học tập quốc tế tại các đối tác hàng đầu thế giới.
+            </p>
+            <div className="self-stretch pt-2 inline-flex justify-start items-start gap-4 flex-wrap">
+              <Link
+                to="#scholarships"
+                id="hero-scholarship-btn"
+                className="px-8 py-4 bg-amber-500 hover:bg-amber-400 rounded-lg flex justify-center items-center gap-2 shadow-lg transition-all duration-200"
+              >
+                <span className="text-white text-base font-normal font-['Inter'] leading-6">Tìm hiểu học bổng</span>
+              </Link>
+              <Link
+                to="/contact/consultation"
+                id="hero-consult-btn"
+                className="px-8 py-4 bg-white/10 hover:bg-white/20 rounded-lg outline outline-1 outline-offset-[-1px] outline-white/20 backdrop-blur-[6px] flex justify-center items-center transition-all duration-200"
+              >
+                <span className="text-white text-base font-normal font-['Inter'] leading-6">Tư vấn miễn phí</span>
+              </Link>
+            </div>
           </div>
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight uppercase">
-            Học bổng & Học phí
-          </h1>
-          <p className="text-slate-400 text-lg md:text-xl font-light max-w-3xl mx-auto uppercase tracking-widest leading-relaxed">
-            Đầu tư cho tri thức - Kiến tạo tương lai bền vững.
-          </p>
         </div>
       </section>
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 py-24">
-        
-        {/* Scholarships Section */}
-        <section className="mb-32">
-           <div className="text-center mb-20 space-y-4">
-              <h2 className="text-3xl md:text-4xl font-black text-slate-900 uppercase tracking-tight">Chính sách Học bổng Tài năng</h2>
-              <p className="text-slate-500 max-w-2xl mx-auto text-sm uppercase tracking-widest">Khuyến khích nỗ lực học tập và tôn vinh những cá nhân xuất sắc.</p>
-              <div className="h-1.5 w-24 bg-blue-700 mx-auto rounded-full"></div>
-           </div>
+      {/* ══════════════════════════════════════════════
+          SECTION 2 — SCHOLARSHIPS (2-col: cards + sidebar)
+      ══════════════════════════════════════════════ */}
+      <section id="scholarships" className="w-full py-20 px-6">
+        <div className="w-full max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {scholarships.map((s, idx) => (
-                <div key={idx} className="bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-2xl transition-all relative group h-full flex flex-col">
-                   <div className={`w-16 h-16 ${s.color} rounded-2xl flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform shadow-md`}>
-                      {s.icon}
-                   </div>
-                   <h3 className="text-xl font-black text-slate-900 uppercase tracking-tight mb-4 leading-tight">{s.name}</h3>
-                   <p className="text-blue-700 font-black text-sm mb-6">{s.value}</p>
-                   <p className="text-slate-500 text-xs leading-relaxed italic border-t border-slate-50 pt-4 mt-auto">
-                      {s.condition}
-                   </p>
+          {/* Left — scholarship list (col-span-2) */}
+          <div className="lg:col-span-2 flex flex-col justify-start items-start gap-8">
+            {/* Badge + header */}
+            <div className="flex flex-col justify-start items-start gap-3">
+              <div className="px-4 py-1 bg-sky-100 rounded-full inline-flex justify-start items-start">
+                <span className="text-sky-950 text-base font-normal font-['Inter'] uppercase leading-6 tracking-wide">OPPORTUNITIES</span>
+              </div>
+              <h2 className="text-sky-900 text-3xl font-bold font-['Montserrat'] leading-10">
+                Chương trình học bổng quốc tế tiêu biểu
+              </h2>
+              <p className="text-zinc-700 text-base font-normal font-['Inter'] leading-6 max-w-[672px]">
+                Khám phá hàng loạt cơ hội hỗ trợ tài chính dành cho sinh viên quốc tế xuất sắc, từ các suất học bổng chỗ ở đến hỗ trợ học phí toàn phần từ các khoa chuyên biệt.
+              </p>
+            </div>
+
+            {/* Scholarship cards */}
+            <div className="self-stretch flex flex-col justify-start items-start gap-4">
+
+              {/* Card 1 */}
+              <div className="self-stretch p-6 bg-white rounded-xl shadow-[0px_4px_20px_0px_rgba(0,51,102,0.08)] outline outline-1 outline-offset-[-1px] outline-neutral-300/30 flex flex-row justify-start items-start gap-6">
+                <div className="w-12 h-12 bg-amber-500/10 rounded-lg flex justify-center items-center shrink-0">
+                  <div className="w-5 h-3.5 bg-yellow-800 rounded-sm" />
+                </div>
+                <div className="flex-1 flex flex-col justify-start items-start gap-2">
+                  <h3 className="self-stretch text-sky-950 text-2xl font-semibold font-['Montserrat'] leading-8">
+                    AUT International Student Accommodation Scholarship
+                  </h3>
+                  <p className="self-stretch text-zinc-700 text-base font-normal font-['Inter'] leading-6">
+                    Hỗ trợ một phần chi phí lưu trú tại Te Āhuru Mayoral Drive Student Accommodation – không gian sống hiện đại ngay giữa lòng Auckland City.
+                  </p>
+                  <div className="pt-2 inline-flex justify-start items-center gap-2">
+                    <span className="text-yellow-800 text-base font-normal font-['Inter'] leading-6 hover:underline cursor-pointer">
+                      More information [PDF, 232.6 KB]
+                    </span>
+                    <svg viewBox="0 0 14 14" className="w-3.5 h-3.5"><path d="M2 7h10M7 2l5 5-5 5" stroke="#92400e" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 2 */}
+              <div className="self-stretch p-6 bg-white rounded-xl shadow-[0px_4px_20px_0px_rgba(0,51,102,0.08)] outline outline-1 outline-offset-[-1px] outline-neutral-300/30 flex flex-row justify-start items-start gap-6">
+                <div className="w-12 h-12 bg-amber-500/10 rounded-lg flex justify-center items-center shrink-0">
+                  <div className="w-5 h-4 bg-yellow-800 rounded-sm" />
+                </div>
+                <div className="flex-1 flex flex-col justify-start items-start gap-2">
+                  <h3 className="self-stretch text-sky-950 text-2xl font-semibold font-['Montserrat'] leading-8">
+                    International Scholarships by Faculty
+                  </h3>
+                  <p className="self-stretch text-zinc-700 text-base font-normal font-['Inter'] leading-6">
+                    Các suất học bổng chuyên biệt dành cho sinh viên xuất sắc đăng ký vào các khoa: Kinh tế &amp; Luật, Thiết kế &amp; Công nghệ sáng tạo, Y tế &amp; Khoa học môi trường.
+                  </p>
+                  <div className="pt-2 inline-flex justify-start items-start gap-3 flex-wrap">
+                    {['Business & Law', 'Design & Creative', 'Health Sciences'].map((tag) => (
+                      <span key={tag} className="px-3 py-1 bg-slate-50 rounded-sm outline outline-1 outline-offset-[-1px] outline-neutral-300 text-slate-900 text-sm font-semibold font-['Inter'] leading-4 tracking-wide">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          {/* Right sidebar (col-span-1) */}
+          <div className="flex flex-col justify-start items-start gap-6">
+
+            {/* Why AUT card */}
+            <div className="self-stretch p-6 bg-blue-100 rounded-xl flex flex-col justify-start items-start gap-3.5">
+              <img
+                src="https://placehold.co/347x192"
+                alt="Why study at AUT"
+                className="self-stretch h-48 object-cover rounded-lg shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)]"
+              />
+              <div className="self-stretch pt-2.5">
+                <h3 className="text-sky-950 text-2xl font-semibold font-['Montserrat'] leading-8">Why study at AUT?</h3>
+              </div>
+              <p className="self-stretch pb-2.5 text-zinc-700 text-base font-normal font-['Inter'] leading-6">
+                AUT là một trong những trường đại học hiện đại nhất thế giới với hơn 250 chương trình đào tạo và mạng lưới 150.000 cựu sinh viên toàn cầu.
+              </p>
+              <button
+                id="sidebar-view-more-btn"
+                className="self-stretch py-3 bg-sky-950 hover:bg-sky-800 rounded-lg inline-flex justify-center items-center gap-2 transition-all duration-200"
+              >
+                <span className="text-white text-base font-normal font-['Inter'] leading-6">View More</span>
+                <div className="w-3 h-3 bg-white rounded-sm" />
+              </button>
+            </div>
+
+            {/* Apply Online card */}
+            <div className="self-stretch p-6 bg-blue-50 rounded-xl outline outline-1 outline-offset-[-1px] outline-neutral-300/20 flex flex-col justify-start items-start gap-4">
+              <h3 className="self-stretch text-sky-950 text-2xl font-semibold font-['Montserrat'] leading-8">Apply Online</h3>
+              <p className="self-stretch pb-2.5 text-zinc-700 text-base font-normal font-['Inter'] leading-6">
+                Bắt đầu hành trình của bạn ngay hôm nay với quy trình nộp đơn trực tuyến đơn giản và nhanh chóng.
+              </p>
+              <Link
+                to="/admission/apply"
+                id="sidebar-apply-btn"
+                className="self-stretch py-3 bg-amber-500 hover:bg-amber-400 rounded-lg inline-flex justify-center items-center gap-2 transition-all duration-200"
+              >
+                <span className="text-white text-base font-normal font-['Inter'] leading-6">Apply Now</span>
+                <div className="w-3.5 h-3 bg-white rounded-sm" />
+              </Link>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════
+          SECTION 3 — HỌC BỔNG THEO KHU VỰC (4-col grid)
+      ══════════════════════════════════════════════ */}
+      <section className="w-full py-20 px-6 bg-white">
+        <div className="w-full max-w-[1280px] mx-auto flex flex-col justify-start items-start gap-12">
+
+          {/* Header */}
+          <div className="self-stretch flex flex-col justify-start items-center">
+            <h2 className="text-center text-sky-950 text-3xl font-bold font-['Montserrat'] leading-10">
+              Học bổng theo khu vực
+            </h2>
+          </div>
+
+          {/* 4-column region cards */}
+          <div className="self-stretch grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {regionCards.map((region) => (
+              <div
+                key={region.id}
+                id={`region-${region.id}`}
+                className="p-8 bg-white rounded-xl outline outline-1 outline-offset-[-1px] outline-neutral-300 flex flex-col justify-start items-start"
+              >
+                {/* Amber top bar */}
+                <div className="self-stretch pb-4">
+                  <div className="self-stretch h-8 bg-yellow-800 rounded-sm" />
+                </div>
+
+                {/* Title */}
+                <div className="self-stretch pb-4">
+                  <h3 className="text-sky-950 text-2xl font-semibold font-['Montserrat'] leading-8">{region.title}</h3>
+                </div>
+
+                {/* Desc */}
+                <p className="self-stretch flex-1 text-zinc-700 text-base font-normal font-['Inter'] leading-6 min-h-24">
+                  {region.desc}
+                </p>
+
+                {/* Divider */}
+                <div className="self-stretch py-6">
+                  <div className="self-stretch h-px border-t border-neutral-300/30" />
+                </div>
+
+                {/* Link */}
+                <div className="self-stretch inline-flex justify-start items-center gap-2">
+                  <span className="text-yellow-800 text-base font-normal font-['Inter'] leading-6 hover:underline cursor-pointer">View details</span>
+                  <svg viewBox="0 0 8 12" className="w-2 h-3"><path d="M1 1l6 5-6 5" stroke="#92400e" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════
+          SECTION 4 — HỌC PHÍ (table)
+      ══════════════════════════════════════════════ */}
+      <section className="w-full px-6 py-20">
+        <div className="w-full max-w-[1280px] mx-auto flex flex-col justify-start items-start gap-4">
+
+          {/* Header */}
+          <div className="self-stretch flex flex-col justify-start items-center gap-4">
+            <h2 className="text-center text-sky-950 text-3xl font-bold font-['Montserrat'] leading-10">
+              Học phí (Ước tính)
+            </h2>
+            <p className="text-center text-zinc-700 text-base font-normal font-['Inter'] leading-6">
+              Thông tin học phí mang tính chất tham khảo, có thể thay đổi tùy theo thời điểm và lộ trình học cụ thể.
+            </p>
+          </div>
+
+          {/* Table */}
+          <div className="self-stretch pt-4 bg-white rounded-xl shadow-lg outline outline-1 outline-offset-[-1px] outline-neutral-300 flex flex-col justify-start items-start overflow-hidden">
+            {/* Header row */}
+            <div className="self-stretch bg-sky-950 flex flex-row justify-center items-start">
+              <div className="flex-1 p-6"><span className="text-white text-base font-bold font-['Montserrat']">Chương Trình Đào Tạo</span></div>
+              <div className="w-44 p-6"><span className="text-white text-base font-bold font-['Montserrat']">Thời Gian</span></div>
+              <div className="flex-1 p-6"><span className="text-white text-base font-bold font-['Montserrat']">Học Phí (Ước Tính)</span></div>
+              <div className="w-36 p-6 text-right"><span className="text-white text-base font-bold font-['Montserrat']">Chi tiết</span></div>
+            </div>
+
+            {/* Data rows */}
+            <div className="self-stretch flex flex-col justify-start items-start">
+              {tuitionRows.map((row, i) => (
+                <div
+                  key={i}
+                  className={`self-stretch flex flex-row justify-center items-center ${i > 0 ? 'border-t border-neutral-300/30' : ''}`}
+                >
+                  <div className="flex-1 px-6 py-7">
+                    <span className="text-slate-900 text-base font-medium font-['Inter']">{row.program}</span>
+                  </div>
+                  <div className="w-44 px-6 py-7">
+                    <span className="text-slate-900 text-base font-normal font-['Inter']">{row.duration}</span>
+                  </div>
+                  <div className="flex-1 px-6 py-7">
+                    <span className="text-sky-950 text-base font-bold font-['Inter']">{row.fee}</span>
+                  </div>
+                  <div className="w-36 px-6 py-6 flex justify-end">
+                    <svg viewBox="0 0 16 20" className="w-4 h-5 text-zinc-400"><path d="M8 2v16M2 8l6-6 6 6" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                  </div>
                 </div>
               ))}
-           </div>
-        </section>
+            </div>
+          </div>
 
-        {/* Tuition Table Section */}
-        <section className="mb-32">
-           <div className="bg-slate-900 rounded-[3.5rem] p-12 md:p-20 text-white relative overflow-hidden shadow-2xl">
-              <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
-              <div className="relative z-10">
-                 <h2 className="text-3xl font-black uppercase tracking-tight mb-12 border-b border-white/10 pb-6">Biểu phí Đào tạo Chi tiết</h2>
-                 <div className="overflow-x-auto">
-                    <table className="w-full text-left">
-                       <thead>
-                          <tr className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400 border-b border-white/10">
-                             <th className="py-6">Hệ đào tạo</th>
-                             <th className="py-6">Học phí định kỳ</th>
-                             <th className="py-6">Đơn vị tính</th>
-                             <th className="py-6">Thời gian đào tạo</th>
-                          </tr>
-                       </thead>
-                       <tbody className="divide-y divide-white/5">
-                          {tuitionDetails.map((item, i) => (
-                            <tr key={i} className="hover:bg-white/5 transition-colors group">
-                               <td className="py-6 font-black uppercase tracking-tight text-sm group-hover:text-blue-400">{item.category}</td>
-                               <td className="py-6 text-sm font-bold">{item.fee}</td>
-                               <td className="py-6 text-xs text-slate-400 uppercase tracking-widest">{item.unit}</td>
-                               <td className="py-6 text-xs text-slate-400 uppercase tracking-widest">{item.duration}</td>
-                            </tr>
-                          ))}
-                       </tbody>
-                    </table>
-                 </div>
+          {/* Footnote */}
+          <p className="self-stretch text-zinc-700 text-sm font-semibold font-['Inter'] leading-4 tracking-wide">
+            * Học phí tiến sĩ dành cho sinh viên quốc tế tại NZ thường tương đương sinh viên bản xứ.
+          </p>
+
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════
+          SECTION 5 — HỌC BỔNG CHÍNH PHỦ (accordion list)
+      ══════════════════════════════════════════════ */}
+      <section className="w-full px-6 py-20">
+        <div className="w-full max-w-[1280px] mx-auto flex flex-col justify-start items-start gap-8">
+
+          {/* Header */}
+          <h2 className="self-stretch text-sky-950 text-3xl font-bold font-['Montserrat'] leading-10">
+            Học bổng từ Chính phủ nước ngoài
+          </h2>
+
+          {/* Accordion rows */}
+          <div className="self-stretch flex flex-col justify-start items-start gap-3">
+            {govScholarships.map((name, i) => (
+              <div
+                key={i}
+                id={`gov-scholarship-${i}`}
+                className="self-stretch h-16 px-6 bg-sky-950 rounded-lg flex justify-between items-center shadow-md cursor-pointer hover:bg-sky-800 transition-all duration-200"
+              >
+                <div className="inline-flex justify-start items-center gap-4">
+                  <div className="w-3.5 h-4 bg-white rounded-sm" />
+                  <span className="text-white text-base font-normal font-['Montserrat'] leading-6">{name}</span>
+                </div>
+                <svg viewBox="0 0 12 8" className="w-3 h-2"><path d="M1 1l5 5 5-5" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </div>
-           </div>
-        </section>
+            ))}
+          </div>
 
-        {/* Financial Aid & FAQ */}
-        <section className="grid lg:grid-cols-2 gap-20">
-           <div>
-              <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tight mb-8">Chính sách hỗ trợ tài chính</h3>
-              <div className="space-y-6">
-                 {[
-                   { title: "Gói vay ưu đãi giáo dục", desc: "Liên kết với HD Bank và Vietcombank hỗ trợ vay vốn với thủ tục nhanh chóng." },
-                   { title: "Giảm học phí khi nộp trọn gói", desc: "Giảm ngay 5-10% tổng học phí khi học viên hoàn thành học phí theo năm hoặc theo khóa." },
-                   { title: "Gói học bổng gia đình", desc: "Giảm thêm 15% học phí cho anh/chị/em ruột cùng theo học tại hệ thống Suleco City." }
-                 ].map((item, i) => (
-                   <div key={i} className="flex gap-6 items-start bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:border-blue-200 transition-all">
-                      <div className="w-10 h-10 bg-blue-700 text-white rounded-xl flex items-center justify-center font-black shrink-0">✓</div>
-                      <div>
-                         <h4 className="font-black text-slate-900 uppercase tracking-tight mb-2 text-sm">{item.title}</h4>
-                         <p className="text-slate-500 text-xs leading-relaxed">{item.desc}</p>
-                      </div>
-                   </div>
-                 ))}
-              </div>
-           </div>
+        </div>
+      </section>
 
-           <div>
-              <h3 className="text-2xl font-black text-slate-900 uppercase tracking-tight mb-8">Câu hỏi thường gặp (FAQ)</h3>
-              <div className="space-y-8">
-                 {faqs.map((f, i) => (
-                   <div key={i} className="border-b border-slate-100 pb-8 last:border-0">
-                      <h4 className="font-black text-slate-900 uppercase tracking-tight mb-4 text-sm flex gap-4">
-                         <span className="text-blue-700 italic">Q:</span> {f.q}
-                      </h4>
-                      <p className="text-slate-500 text-xs leading-relaxed pl-8">
-                         <span className="text-slate-300 font-bold mr-2 uppercase tracking-widest italic">Ans:</span> {f.a}
-                      </p>
-                   </div>
-                 ))}
-              </div>
-           </div>
-        </section>
+      {/* ══════════════════════════════════════════════
+          SECTION 6 — FINAL CTA (bg-sky-900, radial amber)
+      ══════════════════════════════════════════════ */}
+      <section className="w-full px-6 py-20 relative bg-sky-900 overflow-hidden">
+        {/* Radial amber glow */}
+        <div className="absolute left-0 top-0 w-full h-96 opacity-10 bg-[radial-gradient(ellipse_at_top_left,_#f59e0b,_transparent_60%)]" />
 
-      </div>
+        <div className="relative z-10 w-full max-w-[896px] mx-auto flex flex-col justify-start items-center gap-6">
+          {/* Headline */}
+          <h2 className="self-stretch text-center text-white text-5xl font-bold font-['Montserrat'] leading-[57.60px]">
+            Sẵn sàng bắt đầu hành trình của bạn?
+          </h2>
+
+          {/* Subtitle */}
+          <p className="self-stretch text-center text-white/80 text-base font-normal font-['Inter'] leading-6">
+            Hãy liên hệ với đội ngũ tư vấn chuyên nghiệp của SULECO để được hỗ trợ lập kế hoạch học tập và săn học bổng hiệu quả nhất.
+          </p>
+
+          {/* Buttons */}
+          <div className="self-stretch pt-2 inline-flex justify-center items-start gap-6 flex-wrap">
+            <Link
+              to="/admission/apply"
+              id="cta-apply-btn"
+              className="px-12 py-4 bg-amber-500 hover:bg-amber-400 rounded-lg flex justify-center items-center gap-2 shadow-xl transition-all duration-200"
+            >
+              <span className="text-white text-base font-normal font-['Inter'] leading-6">Nộp đơn ngay</span>
+              <div className="w-4 h-4 bg-white rounded-sm" />
+            </Link>
+            <Link
+              to="/contact/consultation"
+              id="cta-schedule-btn"
+              className="px-12 py-4 rounded-lg outline outline-2 outline-offset-[-2px] outline-white/30 hover:bg-white/10 flex justify-center items-center transition-all duration-200"
+            >
+              <span className="text-white text-base font-normal font-['Inter'] leading-6">Đặt lịch tư vấn</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 };

@@ -1,117 +1,284 @@
-import React from 'react';
+import React from "react";
+import {
+  HeartHandshake,
+  Wrench,
+  Network,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 const GeneralIntroduction = () => {
+  const coreValues = [
+    {
+      title: "Tận Tâm",
+      subtitle: "Dedication",
+      icon: HeartHandshake,
+      desc: "Luôn đặt lợi ích và tương lai của học viên, người lao động lên hàng đầu. Chúng tôi đồng hành sát sao từ khâu đào tạo đến khi học viên ổn định với công việc mới.",
+    },
+    {
+      title: "Thực tiễn",
+      subtitle: "Practice",
+      icon: Wrench,
+      desc: "Chương trình đào tạo chú trọng kỹ năng nghề, môi trường thực hành và nhu cầu thực tế của doanh nghiệp.",
+    },
+    {
+      title: "Kết nối",
+      subtitle: "Connection",
+      icon: Network,
+      desc: "Xây dựng mạng lưới đối tác doanh nghiệp, gara và đơn vị giáo dục để mở rộng cơ hội nghề nghiệp cho học viên.",
+    },
+  ];
+
   const milestones = [
-    { year: "2002", event: "Tiền thân là Trung tâm Đào tạo nghề Suleco, cung cấp lao động cho thị trường Nhật Bản." },
-    { year: "2010", event: "Mở rộng quan hệ hợp tác với hơn 100 doanh nghiệp FDI tại Việt Nam." },
-    { year: "2018", event: "Bắt đầu dự án Suleco City - Hệ sinh thái giáo dục và nghề nghiệp hiện đại." },
-    { year: "2024", event: "Chính thức vận hành mô hình Đào tạo học thuật kết hợp trải nghiệm doanh nghiệp toàn diện." }
+    {
+      year: "1981",
+      title: "Thành lập Suleco",
+      desc: "Tiền thân là Trung tâm Xuất khẩu Lao động TP.HCM, đặt nền móng cho ngành phái cử lao động.",
+      color: "border-sky-950",
+    },
+    {
+      year: "1990s",
+      title: "Mở rộng thị trường Nhật Bản",
+      desc: "Trở thành đơn vị tiên phong đưa thực tập sinh Việt Nam sang làm việc tại các nghiệp đoàn lớn ở Nhật Bản.",
+      color: "border-amber-500",
+    },
+    {
+      year: "2010",
+      title: "Gia nhập Newcity Group",
+      desc: "Tái cấu trúc mạnh mẽ, kết hợp sức mạnh tài chính của tập đoàn với kinh nghiệm chuyên môn của Suleco.",
+      color: "border-sky-950",
+    },
+    {
+      year: "Hiện tại",
+      title: "Dẫn đầu thị trường",
+      desc: "Phát triển hệ sinh thái giáo dục - đào tạo - phái cử toàn diện, cung ứng hàng chục nghìn lao động chất lượng cao.",
+      color: "border-amber-500",
+    },
+  ];
+
+  const stats = [
+    {
+      number: "40+",
+      label: "Năm Kinh Nghiệm",
+    },
+    {
+      number: "50k+",
+      label: "Lao Động Phái Cử",
+    },
+    {
+      number: "200+",
+      label: "Đối Tác Quốc Tế",
+    },
+    {
+      number: "98%",
+      label: "Hài Lòng Từ Đối Tác",
+    },
   ];
 
   return (
-    <div className="w-full min-h-screen bg-white font-sans text-slate-800">
-      {/* Banner */}
-      <section className="relative overflow-hidden bg-slate-900 py-24 px-6 md:px-12 lg:px-20">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-        <div className="absolute top-0 right-0 w-1/4 h-full bg-blue-700/10 skew-x-12 translate-x-10"></div>
-        
-        <div className="relative z-10 max-w-[1400px] mx-auto">
-          <div className="inline-block border-l-2 border-blue-500 pl-4 mb-4">
-             <span className="text-blue-400 font-bold tracking-[0.3em] text-sm uppercase">About Our Institution</span>
+    <main className="w-full bg-white text-slate-900">
+      {/* Hero Section */}
+      <section className="relative min-h-[520px] overflow-hidden bg-sky-950">
+        <img
+          src="https://placehold.co/1280x600/0f172a/ffffff?text=Newcitygroup+Suleco"
+          alt="Newcitygroup Suleco"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-sky-950/95 via-sky-950/75 to-sky-950/35" />
+
+        <div className="relative z-10 mx-auto flex min-h-[520px] max-w-7xl items-center px-6 py-20">
+          <div className="max-w-2xl">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.28em] text-amber-400">
+              Vươn tầm quốc tế
+            </p>
+
+            <h1 className="mb-6 text-4xl font-bold leading-tight text-white md:text-5xl lg:text-6xl">
+              Hơn 40 năm đồng hành cùng đào tạo nghề Việt
+            </h1>
+
+            <p className="max-w-xl text-base leading-8 text-blue-100 md:text-lg">
+              Newcitygroup - Suleco định hướng xây dựng môi trường đào tạo nghề
+              gắn liền với thực tiễn doanh nghiệp. Chúng tôi giúp học viên phát
+              triển kỹ năng chuyên môn, lựa chọn lộ trình học phù hợp và mở
+              rộng tối đa cơ hội nghề nghiệp trong và ngoài nước.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-4">
+              <button className="rounded-xl bg-amber-500 px-8 py-4 text-base font-medium text-white shadow-lg transition hover:bg-amber-600">
+                Tìm hiểu thêm
+              </button>
+
+              <button className="rounded-xl border-2 border-white px-8 py-4 text-base font-medium text-white transition hover:bg-white hover:text-sky-950">
+                Xem hành trình
+              </button>
+            </div>
           </div>
-          <h1 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight uppercase">
-            Giới thiệu chung
-          </h1>
-          <p className="text-slate-400 text-lg md:text-xl font-light max-w-3xl uppercase tracking-widest leading-relaxed">
-            Hành trình 20 năm kiến tạo giá trị và nâng tầm lao động Việt.
-          </p>
         </div>
       </section>
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 py-24">
-        
-        {/* Story Section */}
-        <section className="mb-32 grid lg:grid-cols-2 gap-20 items-center">
-           <div className="space-y-8">
-              <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tight border-l-4 border-blue-700 pl-6">Câu chuyện của chúng tôi</h2>
-              <p className="text-slate-500 text-lg leading-relaxed text-justify">
-                 Suleco City không chỉ là một cơ sở đào tạo, mà là hiện thực hóa của khát vọng nâng tầm vị thế lao động Việt Nam trên bản đồ quốc tế. Với bề dày lịch sử hơn hai thập kỷ, chúng tôi thấu hiểu rằng: Giáo dục thực chất phải đi đôi với cơ hội nghề nghiệp bền vững.
-              </p>
-              <p className="text-slate-500 text-lg leading-relaxed text-justify">
-                 Chúng tôi xây dựng một "thành phố tri thức" thu nhỏ, nơi học viên được đắm mình trong môi trường công nghệ hiện đại, rèn luyện kỷ luật như một chuyên gia thực thụ trước khi bước chân ra thị trường toàn cầu.
-              </p>
-              <div className="bg-slate-50 p-10 rounded-[2.5rem] border border-slate-100 italic text-blue-700 font-medium">
-                 "Mục tiêu của chúng tôi là tạo ra những thế hệ kỹ thuật viên không chỉ giỏi tay nghề mà còn giàu tâm thế và trí tuệ."
-              </div>
-           </div>
-           <div className="relative group">
-              <div className="aspect-[4/3] bg-slate-100 rounded-[3.5rem] shadow-2xl overflow-hidden">
-                 <div className="absolute inset-0 bg-blue-700/10 mix-blend-multiply"></div>
-                 <div className="absolute inset-0 flex items-center justify-center text-9xl opacity-20 grayscale group-hover:scale-110 transition-transform duration-700">🏢</div>
-              </div>
-              <div className="absolute -bottom-10 -right-10 bg-white p-8 rounded-[2.5rem] shadow-2xl border border-blue-50">
-                 <p className="text-4xl font-black text-blue-700 mb-1">20+</p>
-                 <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Năm hình thành</p>
-              </div>
-           </div>
-        </section>
+      {/* Message Section */}
+      <section className="bg-white px-6 py-20">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2 lg:items-center">
+          <div className="relative overflow-hidden rounded-2xl bg-white shadow-2xl">
+            <img
+              src="https://placehold.co/600x520/e2e8f0/0f172a?text=Suleco"
+              alt="Đại diện Newcitygroup Suleco"
+              className="h-[420px] w-full object-cover md:h-[500px]"
+            />
 
-        {/* Vision & Mission Cards */}
-        <section className="mb-32 grid md:grid-cols-2 gap-12">
-           <div className="bg-slate-900 p-16 rounded-[4rem] text-white shadow-2xl relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-blue-700/20 rounded-full -mr-12 -mt-12 group-hover:scale-150 transition-transform"></div>
-              <h3 className="text-3xl font-black uppercase tracking-tight mb-8 text-blue-400">Tầm nhìn</h3>
-              <p className="text-slate-400 text-lg leading-relaxed italic text-justify">
-                 Trở thành hệ sinh thái giáo dục nghề nghiệp hàng đầu khu vực, là biểu tượng cho chất lượng đào tạo nhân lực kỹ thuật cao của Việt Nam tại các thị trường phát triển như Nhật Bản, Đức, và Australia.
+            <div className="absolute bottom-0 left-0 right-0 bg-sky-950/85 p-5 backdrop-blur-md">
+              <h3 className="text-xl font-semibold text-white md:text-2xl">
+                Đại diện Newcitygroup - Suleco
+              </h3>
+              <p className="mt-1 text-base text-orange-300">
+                Ban điều hành hệ thống đào tạo
               </p>
-           </div>
-           <div className="bg-blue-700 p-16 rounded-[4rem] text-white shadow-2xl relative overflow-hidden group">
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12 group-hover:scale-150 transition-transform"></div>
-              <h3 className="text-3xl font-black uppercase tracking-tight mb-8">Sứ mệnh</h3>
-              <p className="text-blue-100 text-lg leading-relaxed italic text-justify">
-                 Đào tạo và cung ứng nguồn nhân lực chất lượng cao, có đầy đủ Kỹ năng - Ngoại ngữ - Đạo đức, góp phần nâng cao năng lực cạnh tranh toàn cầu của lực lượng lao động trẻ Việt Nam.
-              </p>
-           </div>
-        </section>
+            </div>
+          </div>
 
-        {/* Timeline Section */}
-        <section className="mb-32">
-           <div className="text-center mb-20 space-y-4">
-              <h2 className="text-3xl font-black text-slate-900 uppercase tracking-tight">Cột mốc phát triển</h2>
-              <div className="h-1.5 w-24 bg-blue-700 mx-auto rounded-full"></div>
-           </div>
-           
-           <div className="grid md:grid-cols-4 gap-8">
-              {milestones.map((m, i) => (
-                <div key={i} className="relative pt-12 border-t-2 border-slate-100 hover:border-blue-700 transition-all group">
-                   <div className="absolute -top-4 left-0 w-8 h-8 bg-white border-4 border-blue-700 rounded-full group-hover:bg-blue-700 transition-all"></div>
-                   <h4 className="text-2xl font-black text-blue-700 mb-4">{m.year}</h4>
-                   <p className="text-slate-500 text-sm leading-relaxed">{m.event}</p>
+          <div>
+            <div className="mb-5 h-2 w-10 rounded-full bg-amber-500" />
+
+            <h2 className="mb-6 text-3xl font-bold leading-tight text-sky-950 md:text-4xl">
+              Thông điệp từ Suleco
+            </h2>
+
+            <div className="space-y-5 text-base leading-8 text-zinc-700 md:text-lg">
+              <p>
+                Tại Newcitygroup - Suleco, chúng tôi tin rằng đào tạo nghề không
+                chỉ là truyền đạt kiến thức, mà còn là quá trình đồng hành cùng
+                học viên trong việc xây dựng kỹ năng, thái độ làm việc và định
+                hướng tương lai.
+              </p>
+
+              <p>
+                Với hệ thống chương trình đào tạo gắn kết cùng doanh nghiệp,
+                Suleco hướng đến việc tạo ra môi trường học tập thực tiễn, giúp
+                học viên dễ dàng tiếp cận cơ hội thực tập, việc làm và phát
+                triển nghề nghiệp sau khi hoàn thành khóa học.
+              </p>
+            </div>
+
+            <div className="mt-8 border-l-4 border-amber-500 pl-5">
+              <p className="text-lg font-semibold text-sky-950">
+                Học nghề vững vàng – Khởi nghiệp thành công.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Core Values */}
+      <section className="bg-slate-50 px-6 py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="mx-auto mb-12 max-w-2xl text-center">
+            <h2 className="text-3xl font-bold text-sky-950 md:text-4xl">
+              Giá Trị Cốt Lõi
+            </h2>
+            <p className="mt-3 text-base leading-7 text-zinc-700">
+              Những giá trị định hướng hoạt động đào tạo, tuyển sinh và kết nối
+              doanh nghiệp của Suleco.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {coreValues.map((item, index) => {
+              const Icon = item.icon;
+
+              return (
+                <div
+                  key={index}
+                  className="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+                >
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-xl bg-sky-900/10">
+                    <Icon className="h-8 w-8 text-sky-950" />
+                  </div>
+
+                  <h3 className="text-2xl font-semibold text-sky-950">
+                    {item.title}
+                    {item.subtitle && (
+                      <span className="ml-2 text-base font-medium text-zinc-500">
+                        ({item.subtitle})
+                      </span>
+                    )}
+                  </h3>
+
+                  <p className="mt-4 text-base leading-7 text-zinc-700">
+                    {item.desc}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section className="bg-blue-50 px-6 py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <h2 className="text-3xl font-bold text-sky-950 md:text-4xl">
+                Hành Trình Lịch Sử
+              </h2>
+              <p className="mt-3 text-base text-zinc-700">
+                Từ những bước đi đầu tiên đến vị thế tập đoàn đa ngành dẫn đầu.
+              </p>
+            </div>
+
+            <div className="flex gap-2">
+              <button className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-400 bg-white text-slate-900">
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button className="flex h-10 w-10 items-center justify-center rounded-full border border-sky-950 bg-sky-950 text-white">
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="absolute left-0 top-1/2 hidden h-1 w-full -translate-y-1/2 bg-neutral-300 lg:block" />
+
+            <div className="relative grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {milestones.map((item, index) => (
+                <div
+                  key={index}
+                  className={`rounded-xl border-t-4 ${item.color} bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg ${
+                    index % 2 === 1 ? "lg:mt-16" : ""
+                  }`}
+                >
+                  <h3 className="text-3xl font-bold text-sky-900">
+                    {item.year}
+                  </h3>
+
+                  <h4 className="mt-3 text-base font-bold text-slate-900">
+                    {item.title}
+                  </h4>
+
+                  <p className="mt-3 text-sm font-medium leading-6 text-zinc-700">
+                    {item.desc}
+                  </p>
                 </div>
               ))}
-           </div>
-        </section>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        {/* Core Pillars */}
-        <section className="bg-slate-50 p-12 md:p-24 rounded-[4rem] text-center shadow-inner">
-           <h3 className="text-3xl font-black text-slate-900 uppercase tracking-tight mb-16">3 Trụ cột Giáo dục</h3>
-           <div className="grid md:grid-cols-3 gap-16">
-              {[
-                { title: "Thực hành thực tế", icon: "🛠️", desc: "70% thời lượng học tập tại xưởng với thiết bị chuẩn công nghiệp." },
-                { title: "Ngoại ngữ chuyên ngành", icon: "🗣️", desc: "Đào tạo tiếng Nhật/Anh/Đức bám sát thực tế làm việc." },
-                { title: "Kỷ luật doanh nghiệp", icon: "⚖️", desc: "Rèn luyện tác phong 5S và đạo đức nghề nghiệp khắt khe." }
-              ].map((p, i) => (
-                <div key={i} className="space-y-6">
-                   <div className="text-6xl">{p.icon}</div>
-                   <h4 className="text-xl font-black uppercase tracking-tight text-slate-900">{p.title}</h4>
-                   <p className="text-slate-500 text-sm leading-relaxed">{p.desc}</p>
-                </div>
-              ))}
-           </div>
-        </section>
-
-      </div>
-    </div>
+      {/* Stats */}
+      <section className="bg-sky-950 px-6 py-10">
+        <div className="mx-auto grid max-w-7xl gap-8 text-center sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((item, index) => (
+            <div key={index}>
+              <p className="text-5xl font-bold text-orange-300">
+                {item.number}
+              </p>
+              <p className="mt-2 text-base text-white">{item.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
   );
 };
 

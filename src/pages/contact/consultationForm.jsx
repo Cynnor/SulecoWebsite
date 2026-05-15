@@ -1,147 +1,293 @@
-import React, { useState } from 'react';
-
-const ConsultationForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    email: '',
-    interest: '',
-    message: ''
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Yêu cầu của bạn đã được gửi đi! Ban tư vấn sẽ liên hệ lại trong vòng 24 giờ làm việc.");
-  };
-
+export default function ConsultationForm() {
   return (
-    <div className="w-full min-h-screen bg-slate-50 font-sans text-slate-800 pb-24">
-      {/* Banner */}
-      <section className="relative overflow-hidden bg-slate-900 py-20 px-6 md:px-12 lg:px-20">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-        <div className="absolute top-0 right-0 w-1/4 h-full bg-blue-700/10 skew-x-12 translate-x-10"></div>
-        
-        <div className="relative z-10 max-w-[1400px] mx-auto text-center">
-          <div className="inline-block border-b-2 border-blue-500 pb-2 mb-6">
-             <span className="text-blue-400 font-bold tracking-[0.3em] text-xs uppercase">Consultation Service</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight uppercase">
-            Đăng ký tư vấn chuyên sâu
-          </h1>
-          <p className="text-slate-400 text-sm md:text-base font-light max-w-2xl mx-auto uppercase tracking-[0.2em] leading-relaxed">
-            Để lại thông tin để nhận lộ trình đào tạo và định hướng nghề nghiệp miễn phí.
-          </p>
-        </div>
-      </section>
+    <section className="w-full bg-white">
+      <div className="mx-auto flex w-full max-w-[1280px] flex-col items-center gap-20 pb-24">
+        {/* Hero Section */}
+        <div className="relative flex h-[500px] w-full flex-col justify-center overflow-hidden rounded-b-3xl">
+          <img
+            className="absolute inset-0 h-full w-full object-cover"
+            src="https://placehold.co/1280x500"
+            alt="Course Banner"
+          />
 
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 mt-16">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          
-          {/* Content Column */}
-          <div>
-             <h2 className="text-4xl font-black text-slate-900 uppercase tracking-tight mb-8 border-l-4 border-blue-700 pl-6">Chúng tôi lắng nghe ước mơ của bạn</h2>
-             <p className="text-slate-500 text-lg leading-relaxed mb-12 text-justify">
-                Đội ngũ tư vấn tại Suleco City không chỉ cung cấp thông tin khóa học, chúng tôi giúp bạn khám phá thế mạnh bản thân và lựa chọn con đường sự nghiệp phù hợp nhất với xu thế thị trường toàn cầu.
-             </p>
-             
-             <div className="space-y-8 mb-12">
+          <div className="absolute inset-0 bg-gradient-to-r from-sky-950/90 to-sky-950/20" />
+
+          <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6">
+            <div className="max-w-[672px] rounded-2xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
+              <h1 className="font-montserrat text-3xl font-bold leading-tight text-white md:text-5xl">
+                CHC33021 CERTIFICATE III IN
+                <br />
+                INDIVIDUAL SUPPORT
+              </h1>
+
+              <p className="mt-4 text-lg leading-7 text-white/90">
+                Khởi đầu sự nghiệp chuyên nghiệp trong ngành chăm sóc sức khỏe tại Úc với chứng chỉ tiêu chuẩn quốc tế.
+              </p>
+
+              <div className="mt-8 flex flex-wrap gap-4">
+                <button className="rounded-lg bg-amber-500 px-8 py-4 text-base font-medium text-white transition hover:bg-amber-600">
+                  APPLY ONLINE
+                </button>
+
+                <button className="rounded-lg border border-white bg-white/10 px-8 py-4 text-base font-medium text-white backdrop-blur-sm transition hover:bg-white/20">
+                  DOWNLOAD BROCHURE
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="grid w-full max-w-[1232px] grid-cols-1 gap-10 px-6 lg:grid-cols-[1fr_380px]">
+          {/* Left Content */}
+          <div className="flex flex-col gap-8">
+            {/* Course Details */}
+            <div className="rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm">
+              <h2 className="mb-6 font-montserrat text-3xl font-bold text-sky-950">
+                Chi Tiết Khóa Học
+              </h2>
+
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 {[
-                  { title: "Tư vấn 1:1 chuyên sâu", desc: "Trực tiếp cùng chuyên gia định hướng nghề nghiệp." },
-                  { title: "Tham quan cơ sở vật chất", desc: "Trải nghiệm thực tế xưởng thực hành và môi trường học tập." },
-                  { title: "Thiết kế lộ trình học phí", desc: "Hỗ trợ các giải pháp tài chính linh hoạt cho gia đình." }
-                ].map((item, i) => (
-                  <div key={i} className="flex gap-6 items-start">
-                     <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-md shrink-0 text-blue-700 font-black">0{i+1}</div>
-                     <div>
-                        <h4 className="text-lg font-black text-slate-900 uppercase tracking-tight mb-2">{item.title}</h4>
-                        <p className="text-slate-500 text-sm">{item.desc}</p>
-                     </div>
+                  ["MÃ KHÓA HỌC", "CHC33021"],
+                  ["THỜI LƯỢNG", "52 Tuần (Bao gồm kỳ nghỉ)"],
+                  ["KỲ NHẬP HỌC", "Tháng 1, 4, 7, 10"],
+                  ["CƠ SỞ ĐÀO TẠO", "Suleco City Campus"],
+                  ["HÌNH THỨC HỌC", "Trực tiếp (Face-to-face)"],
+                  ["THỰC TẬP THỰC TẾ", "120 Giờ bắt buộc"],
+                ].map(([title, value], index) => (
+                  <div
+                    key={index}
+                    className="rounded-xl bg-blue-50 p-5"
+                  >
+<p className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
+                      {title}
+                    </p>
+                    <p className="mt-2 text-base font-bold text-sky-950">
+                      {value}
+                    </p>
                   </div>
                 ))}
-             </div>
+              </div>
+            </div>
 
-             <div className="p-8 bg-blue-700 rounded-3xl text-white shadow-xl shadow-blue-900/20">
-                <p className="text-xs font-black uppercase tracking-widest mb-2 opacity-70">Hotline Tư vấn 24/7</p>
-                <p className="text-3xl font-black">1900 1234</p>
-             </div>
+            {/* Course Overview */}
+            <div>
+              <h2 className="font-montserrat text-3xl font-bold text-sky-950">
+                Tổng Quan Khóa Học
+              </h2>
+
+              <div className="mt-5 space-y-5 text-base leading-7 text-zinc-700">
+                <p>
+                  Chứng chỉ III về Hỗ trợ Cá nhân (CHC33021) phản ánh vai trò của những người làm việc trong môi trường cộng đồng hoặc khu dân cư.
+                </p>
+
+                <p>
+                  Công việc bao gồm việc sử dụng sự thận trọng và phán đoán liên quan đến hỗ trợ cá nhân cũng như chịu trách nhiệm về các kết quả đầu ra của chính mình.
+                </p>
+
+                <div className="space-y-4">
+                  {[
+                    "Đào tạo kỹ năng chăm sóc sức khỏe và vệ sinh cá nhân chuyên sâu.",
+                    "Hỗ trợ người cao tuổi trong sinh hoạt hàng ngày và các hoạt động cộng đồng.",
+                    "Phát triển kỹ năng giao tiếp và làm việc trong môi trường đa văn hóa.",
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <div className="mt-2 h-3 w-3 rounded-full bg-amber-500" />
+                      <p>{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Requirements */}
+            <div className="rounded-2xl border-l-8 border-amber-500 bg-sky-900 p-8 text-white">
+              <h2 className="font-montserrat text-3xl font-bold">
+                Yêu Cầu Đầu Vào
+              </h2>
+
+              <p className="mt-4 text-base leading-7 text-white/90">
+                Học sinh phải từ 18 tuổi trở lên tại thời điểm nhập học và hoàn thành lớp 12 hoặc tương đương.
+              </p>
+            </div>
+
+            {/* English Requirement */}
+            <div className="rounded-2xl bg-blue-50 p-8">
+              <h2 className="font-montserrat text-3xl font-bold text-sky-950">
+                Điều kiện Tiếng Anh
+              </h2>
+
+              <p className="mt-4 text-base leading-7 text-zinc-700">
+                Để tham gia chương trình, sinh viên quốc tế cần đáp ứng một trong các tiêu chuẩn sau:
+              </p>
+
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                {[
+                  ["IELTS Academic", "5.5", "Không kỹ năng nào dưới 5.0"],
+                  ["PTE Academic", "42", "Hoặc bài kiểm tra tương đương"],
+].map(([title, score, desc], index) => (
+                  <div
+                    key={index}
+                    className="rounded-xl border border-neutral-200 bg-white p-5 shadow-sm"
+                  >
+                    <p className="text-base font-bold text-yellow-700">
+                      {title}
+                    </p>
+
+                    <h3 className="mt-2 text-4xl font-bold text-slate-900">
+                      {score}
+                    </h3>
+
+                    <p className="mt-2 text-sm font-medium text-zinc-500">
+                      ({desc})
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Accordion */}
+            <div className="space-y-4">
+              {[
+                "Cấu Trúc Khóa Học",
+                "Các Đơn Vị Học Tập (Course Units)",
+                "Lộ Trình Nghề Nghiệp",
+                "Phương Pháp Đào Tạo",
+                "Câu Hỏi Thường Gặp (FAQs)",
+              ].map((item, index) => (
+                <div
+                  key={index}
+                  className="overflow-hidden rounded-2xl border border-neutral-200 bg-white"
+                >
+                  <button className="flex w-full items-center justify-between p-6 text-left">
+                    <span className="font-montserrat text-lg font-semibold text-sky-950">
+                      {item}
+                    </span>
+
+                    <span className="text-amber-600">+</span>
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Form Column */}
+          {/* Right Form */}
           <div>
-            <form onSubmit={handleSubmit} className="bg-white p-12 md:p-16 rounded-[3rem] border border-slate-200 shadow-2xl space-y-10">
-               <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Họ và tên của bạn *</label>
-                  <input 
-                    type="text" name="name" required 
-                    placeholder="VD: Nguyễn Văn A"
-                    className="w-full bg-slate-50 border border-slate-100 p-5 rounded-2xl focus:border-blue-700 outline-none transition-all font-bold text-slate-800"
-                    onChange={handleChange}
+            <div className="sticky top-10 rounded-2xl border border-neutral-200 bg-white p-8 shadow-xl">
+              <h2 className="font-montserrat text-3xl font-bold text-sky-950">
+                Đăng Ký Tư Vấn
+              </h2>
+
+              <p className="mt-3 text-base leading-7 text-zinc-700">
+                Vui lòng điền thông tin, chúng tôi sẽ liên hệ lại ngay trong 24h.
+              </p>
+
+              <form className="mt-8 space-y-5">
+                <div>
+                  <label className="mb-2 block text-sm font-semibold uppercase tracking-wide text-zinc-500">
+                    Họ và Tên *
+                  </label>
+
+                  <input
+                    type="text"
+                    placeholder="Nhập họ tên của bạn"
+                    className="w-full rounded-xl border border-neutral-300 bg-blue-50 px-4 py-4 outline-none transition focus:border-sky-950"
                   />
-               </div>
+                </div>
 
-               <div className="grid md:grid-cols-2 gap-8">
-                  <div className="space-y-2">
-                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Số điện thoại *</label>
-                     <input 
-                        type="tel" name="phone" required 
-                        placeholder="09xx xxx xxx"
-                        className="w-full bg-slate-50 border border-slate-100 p-5 rounded-2xl focus:border-blue-700 outline-none transition-all font-bold text-slate-800"
-                        onChange={handleChange}
-                     />
-                  </div>
-                  <div className="space-y-2">
-                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Email liên hệ</label>
-                     <input 
-                        type="email" name="email"
-                        placeholder="example@gmail.com"
-                        className="w-full bg-slate-50 border border-slate-100 p-5 rounded-2xl focus:border-blue-700 outline-none transition-all font-bold text-slate-800"
-                        onChange={handleChange}
-                     />
-                  </div>
-               </div>
+                <div>
+                  <label className="mb-2 block text-sm font-semibold uppercase tracking-wide text-zinc-500">
+                    Số Điện Thoại *
+                  </label>
 
-               <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Bạn quan tâm đến chương trình nào? *</label>
-                  <select 
-                    name="interest" required
-                    className="w-full bg-slate-50 border border-slate-100 p-5 rounded-2xl focus:border-blue-700 outline-none transition-all font-bold text-slate-800 appearance-none"
-                    onChange={handleChange}
-                  >
-                    <option value="">Chọn chương trình</option>
-                    <option value="chinh-quy">Hệ chính quy (Công nghệ ô tô, Cơ khí...)</option>
-                    <option value="ngan-han">Hệ ngắn hạn (Hàn, CNC...)</option>
-                    <option value="ngoai-ngu">Ngoại ngữ (Nhật, Anh, Trung)</option>
-                    <option value="tuyen-sinh">Thông tin tuyển sinh 2024</option>
-                  </select>
-               </div>
+                  <input
+                    type="text"
+                    placeholder="Ví dụ: 0912 345 678"
+className="w-full rounded-xl border border-neutral-300 bg-blue-50 px-4 py-4 outline-none transition focus:border-sky-950"
+                  />
+                </div>
 
-               <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Lời nhắn / Câu hỏi của bạn</label>
-                  <textarea 
-                    name="message" rows="4"
-                    placeholder="Hãy cho chúng tôi biết nguyện vọng của bạn..."
-                    className="w-full bg-slate-50 border border-slate-100 p-5 rounded-2xl focus:border-blue-700 outline-none transition-all font-bold text-slate-800 resize-none"
-                    onChange={handleChange}
-                  ></textarea>
-               </div>
+                <div>
+                  <label className="mb-2 block text-sm font-semibold uppercase tracking-wide text-zinc-500">
+                    Email
+                  </label>
 
-               <button 
+                  <input
+                    type="email"
+                    placeholder="email@vi-du.com"
+                    className="w-full rounded-xl border border-neutral-300 bg-blue-50 px-4 py-4 outline-none transition focus:border-sky-950"
+                  />
+                </div>
+
+                <div>
+                  <label className="mb-2 block text-sm font-semibold uppercase tracking-wide text-zinc-500">
+                    Lời Nhắn
+                  </label>
+
+                  <textarea
+                    rows={5}
+                    placeholder="Bạn cần tư vấn thêm điều gì?"
+                    className="w-full rounded-xl border border-neutral-300 bg-blue-50 px-4 py-4 outline-none transition focus:border-sky-950"
+                  />
+                </div>
+
+                <button
                   type="submit"
-                  className="w-full bg-slate-900 text-white py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-sm hover:bg-blue-700 transition-all shadow-xl shadow-blue-900/10"
-               >
-                  Gửi yêu cầu tư vấn
-               </button>
-            </form>
+                  className="w-full rounded-xl bg-amber-500 py-4 text-base font-semibold text-white transition hover:bg-amber-600"
+                >
+                  GỬI YÊU CẦU NGAY
+                </button>
+              </form>
+
+              <div className="mt-8 border-t border-neutral-200 pt-8 space-y-5">
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
+                    Hotline tư vấn 24/7
+                  </p>
+
+                  <p className="mt-1 text-3xl font-bold text-sky-950">
+                    1900 63 64 65
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
+                    Email tuyển sinh
+                  </p>
+
+                  <p className="mt-1 text-lg font-bold text-sky-950">
+                    info@suleco.vn
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="relative w-full overflow-hidden bg-sky-950 py-24">
+          <img
+            className="absolute inset-0 h-full w-full object-cover opacity-10"
+            src="https://placehold.co/1280x397"
+            alt="Background"
+          />
+
+          <div className="relative z-10 mx-auto flex max-w-[1280px] flex-col items-center px-6 text-center">
+            <h2 className="font-montserrat text-4xl font-bold leading-tight text-white md:text-6xl">
+              Your Dreams, Your Success!
+            </h2>
+
+            <p className="mt-5 max-w-[700px] text-lg leading-8 text-white/90">
+Hãy để Suleco đồng hành cùng bạn trên con đường kiến tạo tương lai tại quốc tế. Đăng ký ngay hôm nay để nhận ưu đãi học bổng lên đến 20%.
+            </p>
+
+            <button className="mt-10 rounded-full bg-amber-500 px-12 py-5 text-xl font-semibold text-white transition hover:bg-amber-600">
+              APPLY ONLINE NOW
+            </button>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
-};
-
-export default ConsultationForm;
+}
