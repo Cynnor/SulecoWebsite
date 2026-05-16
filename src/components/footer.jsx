@@ -22,10 +22,7 @@ export default function Footer() {
     {
       title: "Đào tạo",
       links: [
-        { label: "Hệ chính quy", to: "/training/formal-education" },
-        { label: "Hệ ngắn hạn", to: "/training/short-term" },
-        { label: "Ngoại ngữ", to: "/training/languages" },
-        { label: "Liên kết đào tạo", to: "/training/partnerships" },
+        { label: "Liên kết Ngoại ngữ", to: "/training/languages-connection" },
       ]
     },
     {
