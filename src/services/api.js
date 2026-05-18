@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://api.newcitygroupsuleco.com.vn/api/v1',
+  baseURL: import.meta.env.DEV ? '/api/v1' : 'https://api.newcitygroupsuleco.com.vn/api/v1',
   headers: { 'Content-Type': 'application/json' },
   timeout: 15000,
 });

@@ -79,7 +79,6 @@ export default function Header() {
       title: "News & Resources",
       items: [
         { label: "Tin tức & Sự kiện", to: "/news/events" },
-        { label: "Góc Nhật Bản", to: "/news/student-activities" },
         { label: "Thông báo đào tạo", to: "/news/notifications" },
         { label: "Thư viện tư liệu", to: "/news/library" },
       ]
