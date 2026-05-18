@@ -52,10 +52,7 @@ export default function Header() {
       label: "Đào tạo",
       title: "Training Programs",
       items: [
-        { label: "Hệ chính quy", to: "/training/formal-education" },
-        { label: "Hệ ngắn hạn", to: "/training/short-term" },
-        { label: "Đào tạo Ngoại ngữ", to: "/training/languages" },
-        { label: "Liên kết đào tạo", to: "/training/partnerships" },
+        { label: "Liên kết Ngoại ngữ", to: "/training/languages-connection" },
       ]
     },
     admission: {

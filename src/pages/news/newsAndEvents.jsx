@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   ArrowRight,
   Calendar,
@@ -7,34 +7,26 @@ import {
   Search,
   Newspaper,
 } from "lucide-react";
+import { getPosts } from "../../services/postService";
 
 /**
  * Component: NewsAndEvents
  * Trang tin tức và các sự kiện nổi bật của Suleco
  */
 const NewsAndEvents = () => {
-  const newsList = [
-    {
-      date: "15/05/2024",
-      title: "Khai giảng lớp tiếng Nhật N3 cấp tốc dành cho Kỹ sư",
-      desc: "Chương trình đào tạo đặc biệt giúp học viên nhanh chóng làm chủ ngôn ngữ và văn hóa doanh nghiệp Nhật Bản...",
-    },
-    {
-      date: "12/05/2024",
-      title: "Hội thảo: Định hướng nghề nghiệp tại các tập đoàn đa quốc gia",
-      desc: "Các chuyên gia nhân sự hàng đầu chia sẻ lộ trình thăng tiến và các kỹ năng cần thiết trong môi trường làm việc quốc tế.",
-    },
-    {
-      date: "10/05/2024",
-      title: "Suleco đón đoàn đối tác từ Hiệp hội Doanh nghiệp Kyushu",
-      desc: "Chuyến thăm nhằm thắt chặt mối quan hệ hợp tác lâu dài và khảo sát chất lượng đào tạo học viên tại trung tâm.",
-    },
-    {
-      date: "08/05/2024",
-      title: "Hành trình 40 năm kiến tạo tương lai cho lao động Việt",
-      desc: "Nhìn lại những cột mốc đáng nhớ trong chặng đường phát triển và đóng góp cho cộng đồng của Suleco.",
-    },
-  ];
+  const [newsList, setNewsList] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const res = await getPosts({ limit: 20 });
+        if (res?.data) setNewsList(res.data);
+      } catch (e) {
+        /* fallback */
+      }
+    };
+    fetchPosts();
+  }, []);
 
   const upcomingEvents = [
     {
@@ -130,38 +122,41 @@ const NewsAndEvents = () => {
       <section className="grid gap-8 lg:grid-cols-[1fr_360px]">
         {/* News */}
         <div className="grid gap-6 md:grid-cols-2">
-          {newsList.map((item, index) => (
-            <article
-              key={index}
-              className="overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
-            >
-              <img
-                src="https://placehold.co/393x221"
-                alt="News"
-                className="h-56 w-full object-cover"
-              />
+          {(newsList.length > 0 ? newsList : []).map((item, index) => {
+            const date = item.publishedAt ? new Date(item.publishedAt).toLocaleDateString('vi-VN') : '';
+            return (
+              <article
+                key={item._id || index}
+                className="overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+              >
+                <img
+                  src={item.coverImageUrl || 'https://placehold.co/393x221'}
+                  alt={item.title}
+                  className="h-56 w-full object-cover"
+                />
 
-              <div className="p-5">
-                <div className="mb-3 flex items-center gap-2 text-zinc-500">
-                  <Calendar className="h-4 w-4" />
-                  <span className="text-sm">{item.date}</span>
+                <div className="p-5">
+                  <div className="mb-3 flex items-center gap-2 text-zinc-500">
+                    <Calendar className="h-4 w-4" />
+                    <span className="text-sm">{date}</span>
+                  </div>
+
+                  <h3 className="text-lg font-bold leading-7 text-sky-950">
+                    {item.title}
+                  </h3>
+
+                  <p className="mt-3 text-base leading-7 text-zinc-700">
+                    {item.excerpt || ''}
+                  </p>
+
+                  <button className="mt-5 inline-flex items-center gap-2 font-bold text-yellow-800">
+                    Đọc tiếp
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
                 </div>
-
-                <h3 className="text-lg font-bold leading-7 text-sky-950">
-                  {item.title}
-                </h3>
-
-                <p className="mt-3 text-base leading-7 text-zinc-700">
-                  {item.desc}
-                </p>
-
-                <button className="mt-5 inline-flex items-center gap-2 font-bold text-yellow-800">
-                  Đọc tiếp
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
 
         {/* Sidebar */}

@@ -9,10 +9,7 @@ import ExpertAdvisors from "./pages/aboutUs/expertAdvisors";
 import FacilitiesAndVirtualTour from "./pages/aboutUs/facilitiesAndVirtualTour";
 
 // Training Pages
-import FormalEducation from "./pages/training/formalEducation";
-import ShortTermCourses from "./pages/training/shortTermCourses";
-import LanguageTraining from "./pages/training/languageTraining";
-import TrainingPartnerships from "./pages/training/trainingPartnerships";
+import LanguagesConnection from "./pages/training/languagesConnection";
 
 // Admission Pages
 import AdmissionGuide from "./pages/admission/admissionGuide";
@@ -68,10 +65,7 @@ function App() {
         {
           path: "training",
           children: [
-            { path: "formal-education", element: <FormalEducation /> },
-            { path: "short-term", element: <ShortTermCourses /> },
-            { path: "languages", element: <LanguageTraining /> },
-            { path: "partnerships", element: <TrainingPartnerships /> },
+            { path: "languages-connection", element: <LanguagesConnection /> },
           ],
         },
         {
