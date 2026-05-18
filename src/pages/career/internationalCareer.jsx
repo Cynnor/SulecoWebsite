@@ -5,33 +5,33 @@ import React from 'react';
  * Component: InternationalCareer
  * Trang giới thiệu lộ trình liên kết và tu nghiệp quốc tế
  */
-const InternationalCareer = () => {
-  const internationalPrograms = [
-    {
-      country: "Nhật Bản (Japan)",
-      title: "Kỹ sư Thực tập sinh (Ginou Jisshuu)",
-      duration: "3 - 5 Năm",
-      desc: "Làm việc tại các nhà máy ô tô, cơ khí hàng đầu Nhật Bản. Cơ hội tích lũy vốn và kinh nghiệm chuẩn quốc tế.",
-      benefits: ["Lương từ 30-45 Triệu/tháng", "Hỗ trợ nhà ở, bảo hiểm", "Cấp chứng chỉ tay nghề Nhật"],
-      icon: "🇯🇵"
-    },
-    {
-      country: "Australia",
-      title: "Tu nghiệp sinh kỹ thuật cao",
-      duration: "2 - 4 Năm",
-      desc: "Chương trình dành cho kỹ thuật viên tay nghề cao (Hàn, CNC). Làm việc trong môi trường đa quốc gia hiện đại.",
-      benefits: ["Lương tiêu chuẩn Úc", "Hỗ trợ định cư lâu dài", "Môi trường tiếng Anh 100%"],
-      icon: "🦘"
-    },
-    {
-      country: "Đức (Germany)",
-      title: "Chương trình Đào tạo kép",
-      duration: "3 Năm",
-      desc: "Vừa học vừa làm tại các bệnh viện, trung tâm y tế CHLB Đức. Miễn học phí và hỗ trợ lương học nghề.",
-      benefits: ["Lương thực tập 25-35 Triệu", "Bằng cấp CHLB Đức", "Cam kết việc làm tại Đức"],
-      icon: "🇩🇪"
-    }
-  ];
+
+const internationalPrograms = [
+  {
+    country: "Nhật Bản (Japan)",
+    title: "Kỹ sư Thực tập sinh (Ginou Jisshuu)",
+    duration: "3 - 5 Năm",
+    desc: "Làm việc tại các nhà máy ô tô, cơ khí hàng đầu Nhật Bản. Cơ hội tích lũy vốn và kinh nghiệm chuẩn quốc tế.",
+    benefits: ["Lương từ 30-45 Triệu/tháng", "Hỗ trợ nhà ở, bảo hiểm", "Cấp chứng chỉ tay nghề Nhật"],
+    icon: "🇯🇵"
+  },
+  {
+    country: "Australia",
+    title: "Tu nghiệp sinh kỹ thuật cao",
+    duration: "2 - 4 Năm",
+    desc: "Chương trình dành cho kỹ thuật viên tay nghề cao (Hàn, CNC). Làm việc trong môi trường đa quốc gia hiện đại.",
+    benefits: ["Lương tiêu chuẩn Úc", "Hỗ trợ định cư lâu dài", "Môi trường tiếng Anh 100%"],
+    icon: "🦘"
+  },
+  {
+    country: "Đức (Germany)",
+    title: "Chương trình Đào tạo kép",
+    duration: "3 Năm",
+    desc: "Vừa học vừa làm tại các bệnh viện, trung tâm y tế CHLB Đức. Miễn học phí và hỗ trợ lương học nghề.",
+    benefits: ["Lương thực tập 25-35 Triệu", "Bằng cấp CHLB Đức", "Cam kết việc làm tại Đức"],
+    icon: "🇩🇪"
+  }
+];
 
 const programs = [
   {
@@ -108,7 +108,7 @@ const steps = [
   },
 ];
 
-export default function InternationalCareer() {
+const InternationalCareer = () => {
   return (
     <div className="w-full overflow-hidden bg-white">
       {/* HERO */}
@@ -323,13 +323,12 @@ export default function InternationalCareer() {
             {steps.map((step, index) => (
               <div key={index} className="relative text-center">
                 <div
-                  className={`mx-auto flex h-20 w-20 items-center justify-center rounded-full border-4 text-xl font-bold ${
-                    step.active
-                      ? "border-sky-900 text-sky-900"
-                      : step.completed
+                  className={`mx-auto flex h-20 w-20 items-center justify-center rounded-full border-4 text-xl font-bold ${step.active
+                    ? "border-sky-900 text-sky-900"
+                    : step.completed
                       ? "border-amber-500 bg-amber-500 text-white"
                       : "border-neutral-300 text-zinc-500"
-                  }`}
+                    }`}
                 >
                   {step.completed ? "✓" : step.number}
                 </div>
@@ -420,3 +419,5 @@ export default function InternationalCareer() {
     </div>
   );
 }
+
+export default InternationalCareer;
