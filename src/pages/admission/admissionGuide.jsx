@@ -3,12 +3,26 @@ import { Link } from 'react-router-dom';
 
 /* ─── DATA ──────────────────────────────────────────── */
 const steps = [
-  { num: '01', title: 'Tư vấn',    desc: 'Tiếp nhận yêu cầu, định hướng nghề nghiệp và quốc gia phù hợp.' },
-  { num: '02', title: 'Hồ sơ',     desc: 'Hướng dẫn chuẩn bị và hoàn thiện danh mục giấy tờ cần thiết.' },
-  { num: '03', title: 'Phỏng vấn', desc: 'Sơ tuyển và phỏng vấn trực tiếp với đối tác nước ngoài.' },
-  { num: '04', title: 'Đào tạo',   desc: 'Đào tạo ngoại ngữ, tay nghề và định hướng văn hóa.' },
-  { num: '05', title: 'Visa',      desc: 'Xử lý hồ sơ xin thị thực và các thủ tục pháp lý liên quan.' },
-  { num: '06', title: 'Xuất cảnh', desc: 'Hỗ trợ đưa đón sân bay và ổn định cuộc sống tại nước sở tại.' },
+  {
+    num: '1',
+    title: 'Tư vấn',
+    desc: 'Tiếp nhận yêu cầu, định hướng nghề nghiệp và quốc gia phù hợp.',
+  },
+  {
+    num: '2',
+    title: 'Hồ sơ',
+    desc: 'Hướng dẫn chuẩn bị và hoàn thiện danh mục giấy tờ cần thiết.',
+  },
+  {
+    num: '3',
+    title: 'Phỏng vấn',
+    desc: 'Sơ tuyển và phỏng vấn trực tiếp với đối tác nước ngoài.',
+  },
+  {
+    num: '4',
+    title: 'Đào tạo',
+    desc: 'Đào tạo ngoại ngữ, tay nghề và định hướng văn hóa.',
+  },
 ];
 
 const docGroups = [
@@ -86,49 +100,71 @@ const AdmissionGuide = () => {
       ══════════════════════════════════════════════ */}
       <div className="w-full max-w-[1280px] mx-auto px-6 py-20 flex flex-col justify-start items-start gap-20">
 
-        {/* ── SECTION 1: QUY TRÌNH 6 BƯỚC ── */}
-        <div className="self-stretch flex flex-col justify-start items-start gap-8">
-          {/* Header */}
-          <div className="self-stretch flex flex-col justify-start items-center gap-2">
-            <h2 className="text-center text-sky-950 text-3xl font-bold font-['Montserrat'] leading-10">
-              Quy Trình 6 Bước Đăng Ký
-            </h2>
-            <div className="w-24 h-1 bg-amber-500 rounded-full" />
+        {/* Cards */}
+<div className="self-stretch flex justify-center">
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    {steps.map((step) => (
+      <div
+        key={step.num}
+        id={`step-card-${step.num}`}
+        className="group relative w-[260px] p-6 rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+      >
+        {/* Top Accent */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-500" />
+
+        {/* Header */}
+        <div className="flex items-center justify-between mb-6">
+          {/* Icon */}
+          <div className="w-14 h-14 rounded-2xl bg-sky-950 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
           </div>
 
-          {/* 6 step cards — single row, 6 columns */}
-          <div className="self-stretch grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {steps.map((step) => (
-              <div
-                key={step.num}
-                id={`step-card-${step.num}`}
-                className="p-4 bg-white rounded-xl shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-neutral-300 flex flex-col justify-start items-start gap-1.5"
-              >
-                {/* Icon circle */}
-                <div className="w-10 h-10 bg-sky-950 rounded-full flex justify-center items-center shrink-0">
-                  <div className="w-4 h-3.5 bg-white rounded-sm" />
-                </div>
-
-                {/* Step label */}
-                <div className="self-stretch pt-2">
-                  <p className="text-yellow-800 text-xs font-semibold font-['Inter'] uppercase leading-4 tracking-wider">
-                    BƯỚC {step.num}
-                  </p>
-                </div>
-
-                {/* Title */}
-                <h3 className="self-stretch text-sky-950 text-xl font-semibold font-['Montserrat'] leading-7">
-                  {step.title}
-                </h3>
-
-                {/* Desc */}
-                <p className="self-stretch text-zinc-700 text-sm font-normal font-['Inter'] leading-5">
-                  {step.desc}
-                </p>
-              </div>
-            ))}
+          {/* Step Number */}
+          <div className="text-right">
+            <p className="text-xs font-semibold tracking-[0.25em] text-amber-600 uppercase font-['Inter']">
+              BƯỚC
+            </p>
+            <span className="text-3xl font-bold text-slate-200 leading-none">
+              0{step.num}
+            </span>
           </div>
         </div>
+
+        {/* Content */}
+        <div className="flex flex-col gap-3">
+          <h3 className="text-sky-950 text-2xl font-bold font-['Montserrat'] leading-8">
+            {step.title}
+          </h3>
+
+          <p className="text-zinc-600 text-sm md:text-base leading-6 font-['Inter']">
+            {step.desc}
+          </p>
+        </div>
+
+        {/* Bottom line */}
+        <div className="mt-8">
+          <div className="w-12 h-1 bg-amber-500 rounded-full group-hover:w-24 transition-all duration-300" />
+        </div>
+
+        {/* Background Glow */}
+        <div className="absolute -right-10 -top-10 w-32 h-32 bg-amber-100 opacity-0 group-hover:opacity-30 rounded-full blur-3xl transition-all duration-500" />
+      </div>
+    ))}
+  </div>
+</div>
 
         {/* ── SECTION 2: DANH MỤC GIẤY TỜ ── */}
         <div className="self-stretch flex flex-col justify-start items-start gap-8">
