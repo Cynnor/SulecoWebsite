@@ -75,10 +75,19 @@ const news = [
  * Form tư vấn thu nhỏ hiển thị trên trang chủ
  */
 const MiniConsultForm = () => {
-  const [form, setForm] = useState({ fullName: '', phone: '', email: '', dateOfBirth: '', address: '', message: '' });
+  const [form, setForm] = useState({ fullName: '', phone: '', email: '', dateOfBirth: '', address: '', intendedCourse: '', message: '' });
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [courses, setCourses] = useState([]);
+  const [coursesLoading, setCoursesLoading] = useState(true);
+
+  useEffect(() => {
+    getCourses({ limit: 100 })
+      .then(setCourses)
+      .catch(() => {})
+      .finally(() => setCoursesLoading(false));
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -94,13 +103,14 @@ const MiniConsultForm = () => {
         fullName: form.fullName,
         phone: form.phone,
         email: form.email || undefined,
-        dateOfBirth: form.dateOfBirth || undefined,
+        dateOfBirth: form.dateOfBirth ? form.dateOfBirth.split('-').reverse().join('/') : undefined,
         address: form.address || undefined,
+        intendedCourse: form.intendedCourse || undefined,
         message: form.message || undefined,
       });
       setSent(true);
       setTimeout(() => setSent(false), 4000);
-      setForm({ fullName: '', phone: '', email: '', dateOfBirth: '', address: '', message: '' });
+      setForm({ fullName: '', phone: '', email: '', dateOfBirth: '', address: '', intendedCourse: '', message: '' });
     } catch (err) {
       setError(err.response?.data?.message || 'Gửi yêu cầu thất bại, vui lòng thử lại.');
     } finally {
@@ -136,11 +146,14 @@ const MiniConsultForm = () => {
 
       <input type="text" name="address" placeholder="Địa chỉ liên hệ" value={form.address} onChange={handleChange} className={inputClass} />
 
-      <p className="text-amber-200/50 text-[10px] font-semibold uppercase tracking-wider ml-1">
-        * Chọn chương trình bạn quan tâm, ghi rõ trong nội dung — chúng tôi sẽ tư vấn lộ trình phù hợp nhất
-      </p>
+      <select name="intendedCourse" value={form.intendedCourse} onChange={handleChange} className="w-full px-4 py-3.5 bg-white/15 border border-amber-300/30 rounded-xl text-white focus:outline-none focus:border-amber-400 focus:bg-white/20 transition-all backdrop-blur-sm" style={{ color: form.intendedCourse ? 'white' : 'rgba(255,255,255,0.6)' }}>
+        <option value="" className="text-gray-800">{coursesLoading ? 'Đang tải...' : 'Chương trình quan tâm'}</option>
+        {!coursesLoading && courses.map((c) => (
+          <option key={c._id} value={c._id} className="text-gray-800">{c.title}</option>
+        ))}
+      </select>
 
-      <textarea name="message" placeholder="Nội dung cần tư vấn (VD: Công nghệ Ô tô, Tu nghiệp quốc tế...)" value={form.message} onChange={handleChange} rows="3" className={`${inputClass} resize-none`} />
+      <textarea name="message" placeholder="Nội dung cần tư vấn (tuỳ chọn)" value={form.message} onChange={handleChange} rows="3" className={`${inputClass} resize-none`} />
 
       <button type="submit" disabled={loading} className="w-full py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-amber-950 font-bold rounded-xl transition-all duration-200 shadow-lg shadow-amber-500/40 hover:shadow-amber-400/50 hover:-translate-y-0.5 active:translate-y-0 text-sm tracking-wide disabled:opacity-60">
         {loading ? 'Đang gửi...' : 'Gửi yêu cầu tư vấn →'}

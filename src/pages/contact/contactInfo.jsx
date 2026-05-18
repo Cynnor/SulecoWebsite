@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { submitContact } from '../../services/contactService';
+import { getCourses } from '../../services/courseService';
 
 /**
  * Component: ContactInfo
@@ -6,11 +8,22 @@ import React, { useState } from 'react';
  */
 const ContactInfo = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    fullName: '',
+    dateOfBirth: '',
     phone: '',
     email: '',
+    address: '',
+    intendedCourse: '',
     message: ''
   });
+  const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    getCourses({ limit: 100 }).then(setCourses).catch(() => {});
+  }, []);
 
   const offices = [
     {
@@ -57,10 +70,27 @@ const ContactInfo = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
+    setLoading(true);
+    setError('');
+    try {
+      await submitContact({
+        fullName: formData.fullName,
+        dateOfBirth: formData.dateOfBirth ? formData.dateOfBirth.split('-').reverse().join('/') : undefined,
+        phone: formData.phone,
+        email: formData.email || undefined,
+        address: formData.address || undefined,
+        intendedCourse: formData.intendedCourse || undefined,
+        message: formData.message || undefined,
+      });
+      setSent(true);
+      setFormData({ fullName: '', dateOfBirth: '', phone: '', email: '', address: '', intendedCourse: '', message: '' });
+    } catch (err) {
+      setError(err.response?.data?.message || 'Gửi yêu cầu thất bại, vui lòng thử lại.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -133,61 +163,88 @@ const ContactInfo = () => {
             <h3 className="text-2xl font-semibold text-sky-950 mb-8">Gửi yêu cầu tư vấn</h3>
             
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-zinc-700 text-base font-normal mb-2">Họ và tên</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    placeholder="Nhập họ tên..."
-                    className="w-full px-3 py-3.5 bg-slate-50 rounded-lg border border-neutral-300 text-gray-500 placeholder-gray-500 focus:outline-none focus:border-blue-400"
-                  />
+              {sent && (
+                <div className="p-4 bg-emerald-50 border border-emerald-300 rounded-xl text-emerald-700 text-sm font-semibold text-center">
+                  Yêu cầu tư vấn đã được gửi thành công! Chúng tôi sẽ liên hệ bạn sớm.
                 </div>
-                <div>
-                  <label className="block text-zinc-700 text-base font-normal mb-2">Số điện thoại</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    placeholder="Nhập số điện thoại..."
-                    className="w-full px-3 py-3.5 bg-slate-50 rounded-lg border border-neutral-300 text-gray-500 placeholder-gray-500 focus:outline-none focus:border-blue-400"
-                  />
+              )}
+              {error && (
+                <div className="p-4 bg-red-50 border border-red-300 rounded-xl text-red-700 text-sm">
+                  {error}
                 </div>
-              </div>
+              )}
 
-              <div>
-                <label className="block text-zinc-700 text-base font-normal mb-2">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  placeholder="Địa chỉ email..."
-                  className="w-full px-3 py-3.5 bg-slate-50 rounded-lg border border-neutral-300 text-gray-500 placeholder-gray-500 focus:outline-none focus:border-blue-400"
-                />
-              </div>
+              {!sent && (
+                <>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-zinc-700 text-base font-normal mb-2">Họ và tên *</label>
+                      <input type="text" name="fullName" required value={formData.fullName} onChange={handleInputChange}
+                        placeholder="Nhập họ tên..."
+                        className="w-full px-3 py-3.5 bg-slate-50 rounded-lg border border-neutral-300 text-gray-500 placeholder-gray-500 focus:outline-none focus:border-blue-400"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-zinc-700 text-base font-normal mb-2">Ngày sinh</label>
+                      <input type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleInputChange}
+                        className="w-full px-3 py-3.5 bg-slate-50 rounded-lg border border-neutral-300 text-gray-500 focus:outline-none focus:border-blue-400"
+                      />
+                    </div>
+                  </div>
 
-              <div>
-                <label className="block text-zinc-700 text-base font-normal mb-2">Nội dung cần hỗ trợ</label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  placeholder="Bạn quan tâm đến chương trình nào?"
-                  rows="5"
-                  className="w-full px-3 py-3 bg-slate-50 rounded-lg border border-neutral-300 text-gray-500 placeholder-gray-500 focus:outline-none focus:border-blue-400"
-                ></textarea>
-              </div>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-zinc-700 text-base font-normal mb-2">Số điện thoại *</label>
+                      <input type="tel" name="phone" required value={formData.phone} onChange={handleInputChange}
+                        placeholder="Nhập số điện thoại..."
+                        className="w-full px-3 py-3.5 bg-slate-50 rounded-lg border border-neutral-300 text-gray-500 placeholder-gray-500 focus:outline-none focus:border-blue-400"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-zinc-700 text-base font-normal mb-2">Email</label>
+                      <input type="email" name="email" value={formData.email} onChange={handleInputChange}
+                        placeholder="Địa chỉ email..."
+                        className="w-full px-3 py-3.5 bg-slate-50 rounded-lg border border-neutral-300 text-gray-500 placeholder-gray-500 focus:outline-none focus:border-blue-400"
+                      />
+                    </div>
+                  </div>
 
-              <button
-                type="submit"
-                className="w-full py-4 bg-amber-500 rounded-xl text-yellow-900 text-base font-normal hover:bg-amber-600 transition-colors shadow-md"
-              >
-                Gửi thông tin ngay
-              </button>
+                  <div>
+                    <label className="block text-zinc-700 text-base font-normal mb-2">Địa chỉ</label>
+                    <input type="text" name="address" value={formData.address} onChange={handleInputChange}
+                      placeholder="Số nhà, đường, phường, quận..."
+                      className="w-full px-3 py-3.5 bg-slate-50 rounded-lg border border-neutral-300 text-gray-500 placeholder-gray-500 focus:outline-none focus:border-blue-400"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-zinc-700 text-base font-normal mb-2">Chương trình quan tâm</label>
+                    <select name="intendedCourse" value={formData.intendedCourse} onChange={handleInputChange}
+                      className="w-full px-3 py-3.5 bg-slate-50 rounded-lg border border-neutral-300 text-gray-500 focus:outline-none focus:border-blue-400"
+                    >
+                      <option value="">Chọn chương trình</option>
+                      {courses.map((c) => (
+                        <option key={c._id} value={c._id}>{c.title}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-zinc-700 text-base font-normal mb-2">Nội dung cần hỗ trợ</label>
+                    <textarea name="message" value={formData.message} onChange={handleInputChange}
+                      placeholder="Bạn quan tâm đến chương trình nào?"
+                      rows="5"
+                      className="w-full px-3 py-3 bg-slate-50 rounded-lg border border-neutral-300 text-gray-500 placeholder-gray-500 focus:outline-none focus:border-blue-400"
+                    ></textarea>
+                  </div>
+
+                  <button type="submit" disabled={loading}
+                    className="w-full py-4 bg-amber-500 rounded-xl text-yellow-900 text-base font-normal hover:bg-amber-600 transition-colors shadow-md disabled:opacity-60"
+                  >
+                    {loading ? 'Đang gửi...' : 'Gửi thông tin ngay'}
+                  </button>
+                </>
+              )}
             </form>
           </div>
         </div>

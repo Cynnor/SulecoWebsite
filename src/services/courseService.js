@@ -2,7 +2,7 @@ import api from './api';
 
 export const getCourses = async (params = {}) => {
   const res = await api.get('/courses', { params });
-  return res.data;
+  return res.data.data?.courses || [];
 };
 
 export const getCourseById = async (id) => {

@@ -2,14 +2,20 @@
  * Component: ConsultationForm
  * Trang form đăng ký tư vấn và thông tin khóa học cụ thể
  */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { submitContact } from '../../services/contactService';
+import { getCourses } from '../../services/courseService';
 
 export default function ConsultationForm() {
-  const [form, setForm] = useState({ fullName: '', phone: '', email: '', message: '' });
+  const [form, setForm] = useState({ fullName: '', dateOfBirth: '', phone: '', email: '', address: '', intendedCourse: '', message: '' });
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    getCourses({ limit: 100 }).then(setCourses).catch(() => {});
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,9 +27,17 @@ export default function ConsultationForm() {
     setLoading(true);
     setError('');
     try {
-      await submitContact({ fullName: form.fullName, phone: form.phone, email: form.email || undefined, message: form.message || undefined });
+      await submitContact({
+        fullName: form.fullName,
+        dateOfBirth: form.dateOfBirth ? form.dateOfBirth.split('-').reverse().join('/') : undefined,
+        phone: form.phone,
+        email: form.email || undefined,
+        address: form.address || undefined,
+        intendedCourse: form.intendedCourse || undefined,
+        message: form.message || undefined,
+      });
       setSent(true);
-      setForm({ fullName: '', phone: '', email: '', message: '' });
+      setForm({ fullName: '', dateOfBirth: '', phone: '', email: '', address: '', intendedCourse: '', message: '' });
     } catch (err) {
       setError(err.response?.data?.message || 'Gửi yêu cầu thất bại, vui lòng thử lại.');
     } finally {
@@ -241,6 +255,15 @@ export default function ConsultationForm() {
 
                     <div>
                       <label className="mb-2 block text-sm font-semibold uppercase tracking-wide text-zinc-500">
+                        Ngày sinh
+                      </label>
+                      <input type="date" name="dateOfBirth" value={form.dateOfBirth} onChange={handleChange}
+                        className="w-full rounded-xl border border-neutral-300 bg-blue-50 px-4 py-4 outline-none transition focus:border-sky-950"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="mb-2 block text-sm font-semibold uppercase tracking-wide text-zinc-500">
                         Số Điện Thoại *
                       </label>
                       <input type="tel" name="phone" required value={form.phone} onChange={handleChange}
@@ -257,6 +280,30 @@ export default function ConsultationForm() {
                         placeholder="email@vi-du.com"
                         className="w-full rounded-xl border border-neutral-300 bg-blue-50 px-4 py-4 outline-none transition focus:border-sky-950"
                       />
+                    </div>
+
+                    <div>
+                      <label className="mb-2 block text-sm font-semibold uppercase tracking-wide text-zinc-500">
+                        Địa chỉ
+                      </label>
+                      <input type="text" name="address" value={form.address} onChange={handleChange}
+                        placeholder="Số nhà, đường, phường, quận..."
+                        className="w-full rounded-xl border border-neutral-300 bg-blue-50 px-4 py-4 outline-none transition focus:border-sky-950"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="mb-2 block text-sm font-semibold uppercase tracking-wide text-zinc-500">
+                        Chương trình quan tâm
+                      </label>
+                      <select name="intendedCourse" value={form.intendedCourse} onChange={handleChange}
+                        className="w-full rounded-xl border border-neutral-300 bg-blue-50 px-4 py-4 outline-none transition focus:border-sky-950"
+                      >
+                        <option value="">Chọn chương trình</option>
+                        {courses.map((c) => (
+                          <option key={c._id} value={c._id}>{c.title}</option>
+                        ))}
+                      </select>
                     </div>
 
                     <div>
