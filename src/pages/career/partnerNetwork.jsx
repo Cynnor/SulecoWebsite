@@ -1,32 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getPartners } from '../../services/partnerService';
 
 const PartnerNetwork = () => {
-  const partnerTypes = [
-    {
-      title: "Hệ thống Gara Ô tô",
-      desc: "Hợp tác chiến lược với hơn 50 Gara quy mô lớn, trung tâm bảo dưỡng chính hãng trên toàn quốc.",
-      partners: ["Toyota Service", "Honda Auto", "VinFast Service", "Mercedes-Benz VN"],
-      icon: "🚗"
-    },
-    {
-      title: "Tập đoàn Công nghiệp",
-      desc: "Các doanh nghiệp trong lĩnh vực cơ khí, chế tạo máy và tự động hóa hàng đầu.",
-      partners: ["THACO Group", "Hòa Phát", "Tập đoàn Gelex", "ABB Vietnam"],
-      icon: "⚙️"
-    },
-    {
-      title: "Khách sạn & Du lịch",
-      desc: "Chuỗi khách sạn 4-5 sao và các đơn vị lữ hành quốc tế.",
-      partners: ["Vinpearl", "Muong Thanh", "InterContinental", "Saigontourist"],
-      icon: "🏨"
-    },
-    {
-      title: "Đơn vị Công nghệ",
-      desc: "Các công ty phần mềm và trung tâm giải pháp chuyển đổi số.",
-      partners: ["FPT Software", "VNG Corporation", "Viettel Solutions", "CMC Global"],
-      icon: "💻"
-    }
-  ];
+  const [partnerTypes, setPartnerTypes] = useState([]);
+
+  useEffect(() => {
+    const fetchPartners = async () => {
+      try {
+        const res = await getPartners({ limit: 50 });
+        if (res?.data) {
+          const grouped = {};
+          const categoryMap = {
+            garage: { title: 'Hệ thống Gara Ô tô', desc: 'Hợp tác chiến lược với các Gara quy mô lớn, trung tâm bảo dưỡng chính hãng.', icon: '🚗' },
+            enterprise: { title: 'Tập đoàn Công nghiệp', desc: 'Doanh nghiệp trong lĩnh vực cơ khí, chế tạo máy và tự động hóa.', icon: '⚙️' },
+            school: { title: 'Trường học liên kết', desc: 'Đơn vị giáo dục hợp tác đào tạo và định hướng nghề nghiệp.', icon: '🏫' },
+            other: { title: 'Đối tác khác', desc: 'Các đơn vị đối tác chiến lược khác.', icon: '🤝' },
+          };
+          res.data.forEach((p) => {
+            const cat = p.category || 'other';
+            if (!grouped[cat]) {
+              grouped[cat] = { ...categoryMap[cat] || categoryMap.other, partners: [] };
+            }
+            grouped[cat].partners.push(p.name);
+          });
+          setPartnerTypes(Object.values(grouped));
+        }
+      } catch (e) {
+        /* fallback */
+      }
+    };
+    fetchPartners();
+  }, []);
 
   return (
     <div className="w-full min-h-screen bg-white font-sans text-slate-800">

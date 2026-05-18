@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { submitAdmission } from '../../services/admissionService';
 
 /* ─── COMPONENT ─────────────────────────────────────── */
 const OnlineApplication = () => {
@@ -14,15 +15,34 @@ const OnlineApplication = () => {
     note: '',
     agree: false,
   });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert('Hồ sơ đã được nộp thành công!');
+    if (!form.agree) return;
+    setLoading(true);
+    setError('');
+    try {
+      await submitAdmission({
+        fullName: form.fullName,
+        dateOfBirth: form.dob ? form.dob.split('-').reverse().join('/') : undefined,
+        phone: form.phone,
+        email: form.email || undefined,
+        address: form.address || undefined,
+      });
+      setSubmitted(true);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Gửi hồ sơ thất bại, vui lòng thử lại.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -294,41 +314,51 @@ const OnlineApplication = () => {
               </div>
             </div>
 
-            {/* ── FOOTER: checkbox + buttons ── */}
-            <div className="self-stretch pt-6 border-t border-neutral-300 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
-              {/* Checkbox */}
-              <label className="flex justify-start items-start gap-3 cursor-pointer max-w-sm">
-                <input
-                  id="agree-checkbox"
-                  type="checkbox"
-                  name="agree"
-                  checked={form.agree}
-                  onChange={handleChange}
-                  className="w-4 h-4 mt-1 accent-sky-950 shrink-0"
-                />
-                <span className="text-zinc-700 text-sm font-normal font-['Inter'] leading-6">
-                  Tôi cam đoan những thông tin đã cung cấp là hoàn toàn chính xác và chịu trách nhiệm trước pháp luật.
-                </span>
-              </label>
-
-              {/* Action buttons */}
-              <div className="inline-flex justify-start items-start gap-4 shrink-0">
-                <button
-                  type="button"
-                  id="save-draft-btn"
-                  className="px-8 py-4 rounded-xl outline outline-2 outline-offset-[-2px] outline-sky-950 text-sky-950 text-base font-normal font-['Inter'] leading-6 hover:bg-sky-950/5 transition-all duration-200"
-                >
-                  Lưu nháp
-                </button>
-                <button
-                  type="submit"
-                  id="submit-application-btn"
-                  className="px-8 py-4 bg-amber-500 hover:bg-amber-400 rounded-xl text-white text-base font-normal font-['Inter'] leading-6 shadow-lg transition-all duration-200 whitespace-nowrap"
-                >
-                  Nộp hồ sơ ngay
-                </button>
+            {submitted ? (
+              <div className="self-stretch p-8 bg-emerald-50 rounded-xl border border-emerald-300 text-center">
+                <span className="text-4xl block mb-4">✅</span>
+                <h3 className="text-xl font-bold text-emerald-800 mb-2">Hồ sơ đã được nộp thành công!</h3>
+                <p className="text-emerald-600">Suleco sẽ liên hệ lại trong vòng 24h để xác nhận.</p>
               </div>
-            </div>
+            ) : (
+              <>
+                {error && (
+                  <div className="self-stretch p-4 bg-red-50 rounded-xl border border-red-300 text-red-700 text-sm">
+                    {error}
+                  </div>
+                )}
+
+                {/* ── FOOTER: checkbox + buttons ── */}
+                <div className="self-stretch pt-6 border-t border-neutral-300 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+                  {/* Checkbox */}
+                  <label className="flex justify-start items-start gap-3 cursor-pointer max-w-sm">
+                    <input
+                      id="agree-checkbox"
+                      type="checkbox"
+                      name="agree"
+                      checked={form.agree}
+                      onChange={handleChange}
+                      className="w-4 h-4 mt-1 accent-sky-950 shrink-0"
+                    />
+                    <span className="text-zinc-700 text-sm font-normal font-['Inter'] leading-6">
+                      Tôi cam đoan những thông tin đã cung cấp là hoàn toàn chính xác và chịu trách nhiệm trước pháp luật.
+                    </span>
+                  </label>
+
+                  {/* Action buttons */}
+                  <div className="inline-flex justify-start items-start gap-4 shrink-0">
+                    <button
+                      type="submit"
+                      id="submit-application-btn"
+                      disabled={loading || !form.agree}
+                      className="px-8 py-4 bg-amber-500 hover:bg-amber-400 rounded-xl text-white text-base font-normal font-['Inter'] leading-6 shadow-lg transition-all duration-200 whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
+                    >
+                      {loading ? 'Đang gửi...' : 'Nộp hồ sơ ngay'}
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
 
           </form>
         </div>
