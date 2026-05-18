@@ -10,6 +10,11 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
+      '/uploads': {
+        target: 'https://api.newcitygroupsuleco.com.vn',
+        changeOrigin: true,
+        secure: false,
+      },
     },
   },
 })

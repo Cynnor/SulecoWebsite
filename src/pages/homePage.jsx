@@ -6,67 +6,11 @@ import { getPosts } from '../services/postService';
 import { getSettings } from '../services/settingService';
 import { submitContact } from '../services/contactService';
 
-const stats = [
-  { number: "2.500+", label: "Học viên tốt nghiệp", icon: "🎓" },
-  { number: "120+",   label: "Doanh nghiệp đối tác", icon: "🤝" },
-  { number: "90%",    label: "Có việc làm sau tốt nghiệp", icon: "📈" },
-  { number: "25+",    label: "Chương trình đào tạo", icon: "📚" },
-];
-
-const programs = [
-  {
-    tag: "Hệ chính quy",
-    title: "Công nghệ Ô tô",
-    desc: "Chương trình đào tạo toàn diện từ nền tảng đến chuyên sâu về kỹ thuật ô tô. Học viên thực hành trực tiếp các quy trình bảo dưỡng, chẩn đoán và sửa chữa theo tiêu chuẩn xưởng dịch vụ hiện đại.",
-    link: "/training/formal-education",
-    duration: "2 – 3 năm",
-    icon: "🚗",
-  },
-];
-
-const partners = [
-  {
-    title: "Doanh nghiệp liên kết",
-    desc: "Mạng lưới công ty, đơn vị tuyển dụng và đối tác hợp tác trong đào tạo — việc làm.",
-    icon: "🏢",
-    color: "from-sky-900 to-sky-700",
-  },
-  {
-    title: "Gara & Xưởng thực hành",
-    desc: "Kết nối các gara, xưởng dịch vụ và môi trường thực tế để học viên rèn luyện tay nghề.",
-    icon: "🔩",
-    color: "from-amber-700 to-amber-500",
-  },
-  {
-    title: "Trường học liên kết",
-    desc: "Hợp tác với các đơn vị giáo dục nhằm mở rộng chương trình đào tạo và định hướng nghề nghiệp.",
-    icon: "🏫",
-    color: "from-teal-700 to-teal-500",
-  },
-];
-
-const news = [
-  {
-    category: "Sự kiện",
-    date: "15/05/2026",
-    title: "Lễ ký kết hợp tác chiến lược cùng tập đoàn ô tô Nhật Bản",
-    desc: "Mở ra cơ hội thực tập và việc làm cho học viên ngành Công nghệ Ô tô tại thị trường Nhật Bản.",
-    emoji: "🏆",
-  },
-  {
-    category: "Tuyển sinh",
-    date: "10/05/2026",
-    title: "Thông báo tuyển sinh đợt 2 năm 2026 - Hệ chính quy Công nghệ Ô tô",
-    desc: "Nhận hồ sơ xét tuyển từ ngày 15/05. Hạn cuối 30/06. Ưu đãi học bổng 20% cho 50 hồ sơ đầu tiên.",
-    emoji: "📢",
-  },
-  {
-    category: "Hợp tác quốc tế",
-    date: "05/05/2026",
-    title: "Chương trình tu nghiệp tại Australia năm 2026",
-    desc: "Dành cho kỹ thuật viên tay nghề cao ngành Hàn, CNC. Hỗ trợ định cư lâu dài.",
-    emoji: "🌏",
-  },
+const defaultStats = [
+  { number: "--", label: "Học viên tốt nghiệp", icon: "🎓" },
+  { number: "--", label: "Doanh nghiệp đối tác", icon: "🤝" },
+  { number: "--", label: "Có việc làm sau tốt nghiệp", icon: "📈" },
+  { number: "--", label: "Chương trình đào tạo", icon: "📚" },
 ];
 
 /* ─────────────── CONSULTATION FORM (inline mini-form) ─────────────── */
@@ -173,6 +117,7 @@ const HomePage = () => {
   const [partners, setPartners] = useState([]);
   const [posts, setPosts] = useState([]);
   const [hotline, setHotline] = useState('1900 1234');
+  const [stats, setStats] = useState(defaultStats);
 
   useEffect(() => {
     const t = setTimeout(() => setHeroLoaded(true), 100);
@@ -184,7 +129,7 @@ const HomePage = () => {
       try {
         const [coursesRes, partnersRes, postsRes, settingsRes] = await Promise.allSettled([
           getCourses({ limit: 4 }),
-          getPartners({ limit: 6 }),
+          getPartners({ limit: 100 }),
           getPosts({ limit: 3 }),
           getSettings(),
         ]);
@@ -195,6 +140,15 @@ const HomePage = () => {
           const s = settingsRes.value.data;
           if (s.hotline) setHotline(s.hotline);
         }
+        const courseLen = Array.isArray(coursesRes.value) ? coursesRes.value.length : (coursesRes.value?.data?.courses?.length || coursesRes.value?.data?.length || 0);
+        const partnerTotal = partnersRes.value?.data?.total || partnersRes.value?.total || (Array.isArray(partnersRes.value?.data?.partners) ? partnersRes.value.data.partners.length : 0);
+        const postTotal = postsRes.value?.data?.total || postsRes.value?.total || (Array.isArray(postsRes.value?.data?.posts) ? postsRes.value.data.posts.length : 0);
+        setStats([
+          { number: `${courseLen || 0}+`, label: "Chương trình đào tạo", icon: "📚" },
+          { number: `${partnerTotal || 0}+`, label: "Doanh nghiệp đối tác", icon: "🤝" },
+          { number: "90%", label: "Có việc làm sau tốt nghiệp", icon: "📈" },
+          { number: `${postTotal || 0}+`, label: "Bài viết & tin tức", icon: "🎓" },
+        ]);
       } catch (e) {
         /* fallback to static data */
       }

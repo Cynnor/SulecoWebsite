@@ -1,71 +1,69 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Users, 
-  Clock, 
-  BookOpen, 
-  FileText, 
-  ChevronRight, 
-  Calendar, 
-  Download,
-  MoreHorizontal,
-  TrendingUp,
-  Activity,
-  Globe,
-  UserCheck
-} from 'lucide-react';
-import AdminLayout from '../../components/admin/AdminLayout';
+import { Users, Clock, BookOpen, FileText, ChevronRight, Calendar, Download, TrendingUp, Activity, Globe, UserCheck } from 'lucide-react';
+import { getAdmissions } from '../../services/admissionService';
+import { getCourses } from '../../services/courseService';
+import { getPartners } from '../../services/partnerService';
+import { getPosts } from '../../services/postService';
+import { getUsers } from '../../services/userService';
 
 const AdminDashboard = () => {
+  const [data, setData] = useState({ admissions: 0, pendingAdmissions: 0, courses: 0, posts: 0, partners: 0, users: 0 });
+  const [activities, setActivities] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [admRes, courses, partnersRes, postsRes, usersRes] = await Promise.allSettled([
+          getAdmissions({ limit: 1 }),
+          getCourses({ limit: 100 }),
+          getPartners({ limit: 1 }),
+          getPosts({ limit: 1 }),
+          getUsers({ limit: 1 }),
+        ]);
+
+        const totalAdmissions = admRes.status === 'fulfilled' ? Number(admRes.value?.data?.total || admRes.value?.total || admRes.value?.data?.admissions?.length || 0) : 0;
+        const pendingAdm = admRes.status === 'fulfilled' ? Number(admRes.value?.data?.pending || admRes.value?.pending || 0) : 0;
+        const totalCourses = Array.isArray(courses) ? courses.length : (courses.value ? (Array.isArray(courses.value) ? courses.value.length : 0) : 0);
+        const totalPartners = partnersRes.status === 'fulfilled' ? Number(partnersRes.value?.data?.total || partnersRes.value?.total || 0) : 0;
+        const totalPosts = postsRes.status === 'fulfilled' ? Number(postsRes.value?.data?.total || postsRes.value?.total || 0) : 0;
+        const totalUsers = usersRes.status === 'fulfilled' ? Number(usersRes.value?.data?.total || usersRes.value?.total || 0) : 0;
+
+        setData({
+          admissions: totalAdmissions || 0,
+          pendingAdmissions: pendingAdm || 0,
+          courses: totalCourses || 0,
+          posts: totalPosts || 0,
+          partners: totalPartners || 0,
+          users: totalUsers || 0,
+        });
+      } catch (err) {
+        console.error('Dashboard fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
   const stats = [
-    {
-      label: 'Tổng hồ sơ',
-      value: '1,482',
-      change: '+12%',
-      icon: <Users className="text-blue-600" />,
-      bg: 'bg-blue-50',
-      trend: 'up'
-    },
-    {
-      label: 'Yêu cầu chờ xử lý',
-      value: '84',
-      change: '+8%',
-      icon: <Clock className="text-orange-600" />,
-      bg: 'bg-orange-50',
-      trend: 'up'
-    },
-    {
-      label: 'Khóa học',
-      value: '42',
-      icon: <BookOpen className="text-purple-600" />,
-      bg: 'bg-purple-50',
-      extra: 'Nội dung trực tuyến'
-    },
-    {
-      label: 'Bài viết',
-      value: '128',
-      icon: <FileText className="text-emerald-600" />,
-      bg: 'bg-emerald-50',
-      extra: 'Nội dung trực tuyến'
-    }
+    { label: 'Tổng hồ sơ', value: data.admissions.toLocaleString(), change: '', icon: <Users className="text-blue-600" />, bg: 'bg-blue-50', trend: 'up' },
+    { label: 'Yêu cầu chờ xử lý', value: data.pendingAdmissions.toLocaleString(), change: '', icon: <Clock className="text-orange-600" />, bg: 'bg-orange-50', trend: 'up' },
+    { label: 'Khóa học', value: data.courses.toLocaleString(), icon: <BookOpen className="text-purple-600" />, bg: 'bg-purple-50', extra: 'Đang hoạt động' },
+    { label: 'Bài viết', value: data.posts.toLocaleString(), icon: <FileText className="text-emerald-600" />, bg: 'bg-emerald-50', extra: 'Đã xuất bản' },
   ];
 
-  const activities = [
-    { user: 'Jane Doe', action: 'đã tạo bản ghi', type: 'TUYỂN SINH', time: '2 phút trước', status: 'Thành công', color: 'text-emerald-600' },
-    { user: 'Admin Sam', action: 'đã chỉnh sửa nội dung', type: 'KHÓA HỌC_CMS', time: '14 phút trước', status: 'Thành công', color: 'text-emerald-600' },
-    { user: 'HS Thắng', action: 'tự động lưu trữ', type: 'BÀI VIẾT_LOG', time: '1 giờ trước', status: 'Thành công', color: 'text-emerald-600' },
-    { user: 'Robert King', action: 'đã xóa đối tác', type: 'ĐỐI TÁC_REF', time: '3 giờ trước', status: 'Cảnh báo', color: 'text-amber-600' },
-  ];
-
-  const onlineStaff = [
-    { name: 'Staff 1', img: 'https://i.pravatar.cc/150?u=1' },
-    { name: 'Staff 2', img: 'https://i.pravatar.cc/150?u=2' },
-    { name: 'Staff 3', img: 'https://i.pravatar.cc/150?u=3' },
-  ];
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-96">
+        <div className="animate-spin w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8 p-8 max-w-[1600px] mx-auto">
-      {/* Header Section */}
       <div className="flex items-end justify-between">
         <div>
           <h2 className="text-3xl font-bold text-gray-900">Tổng quan hệ thống</h2>
@@ -83,14 +81,9 @@ const AdminDashboard = () => {
         </div>
       </div>
 
-      {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat, index) => (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            key={index}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} key={index}
             className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all group"
           >
             <div className="flex justify-between items-start mb-4">
@@ -107,70 +100,36 @@ const AdminDashboard = () => {
             <div>
               <p className="text-sm font-medium text-gray-500">{stat.label}</p>
               <h3 className="text-3xl font-bold text-gray-900 mt-1">{stat.value}</h3>
-              {stat.extra && (
-                <p className="text-xs text-gray-400 mt-2 flex items-center gap-1">
-                  <Activity size={12} /> {stat.extra}
-                </p>
-              )}
+              {stat.extra && <p className="text-xs text-gray-400 mt-2 flex items-center gap-1"><Activity size={12} /> {stat.extra}</p>}
             </div>
           </motion.div>
         ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Main Content: Activity Log */}
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
             <div className="p-6 border-b border-gray-50 flex items-center justify-between">
-              <h3 className="font-bold text-lg text-gray-900">Nhật ký hoạt động</h3>
-              <button className="text-sm font-semibold text-orange-600 hover:text-orange-700 flex items-center gap-1 group">
-                Xem tất cả <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </button>
+              <h3 className="font-bold text-lg text-gray-900">Tổng quan dữ liệu</h3>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left">
-                <thead>
-                  <tr className="text-xs uppercase tracking-wider text-gray-400 bg-gray-50/50">
-                    <th className="px-6 py-4 font-semibold">Người thực hiện</th>
-                    <th className="px-6 py-4 font-semibold">Hành động</th>
-                    <th className="px-6 py-4 font-semibold">Loại thực thể</th>
-                    <th className="px-6 py-4 font-semibold">Thời gian</th>
-                    <th className="px-6 py-4 font-semibold">Trạng thái</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-50">
-                  {activities.map((item, idx) => (
-                    <tr key={idx} className="hover:bg-gray-50/50 transition-colors">
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-bold text-blue-600">
-                            {item.user.split(' ').map(n => n[0]).join('')}
-                          </div>
-                          <span className="text-sm font-semibold text-gray-700">{item.user}</span>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-500">{item.action}</td>
-                      <td className="px-6 py-4">
-                        <span className="px-2 py-1 bg-gray-100 text-[10px] font-bold rounded text-gray-500">{item.type}</span>
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-400">{item.time}</td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-1.5">
-                          <div className={`w-1.5 h-1.5 rounded-full ${item.color.replace('text', 'bg')}`}></div>
-                          <span className={`text-sm font-medium ${item.color}`}>{item.status}</span>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="p-6 grid grid-cols-2 gap-6">
+              {[
+                { label: 'Đối tác', value: data.partners, color: 'bg-blue-500' },
+                { label: 'Người dùng', value: data.users, color: 'bg-emerald-500' },
+              ].map((item) => (
+                <div key={item.label} className="bg-gray-50/50 rounded-2xl p-6 border border-gray-100">
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{item.label}</p>
+                  <p className="text-3xl font-bold text-gray-900 mt-2">{item.value.toLocaleString()}</p>
+                  <div className="w-full h-1.5 bg-gray-100 rounded-full mt-4 overflow-hidden">
+                    <motion.div initial={{ width: 0 }} animate={{ width: '100%' }} className={`h-full ${item.color}`} />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Sidebar Widgets */}
         <div className="space-y-6">
-          {/* Chart Widget Placeholder */}
           <div className="bg-gradient-to-br from-[#001529] to-[#1e293b] rounded-2xl p-6 text-white shadow-xl shadow-slate-900/20 relative overflow-hidden group">
             <div className="relative z-10">
               <div className="flex items-center gap-2 text-orange-400 mb-4">
@@ -178,42 +137,25 @@ const AdminDashboard = () => {
                 <h4 className="font-bold">Di động toàn cầu</h4>
               </div>
               <p className="text-sm text-gray-400 leading-relaxed mb-6">Trạng thái phê duyệt visa sinh viên theo thời gian thực tại các tổ chức đối tác.</p>
-              
-              {/* Mock Chart */}
               <div className="flex items-end gap-2 h-32 mb-4">
                 {[40, 70, 45, 90, 65, 80].map((h, i) => (
-                  <motion.div 
-                    initial={{ height: 0 }}
-                    animate={{ height: `${h}%` }}
-                    transition={{ duration: 1, delay: i * 0.1 }}
-                    key={i} 
+                  <motion.div initial={{ height: 0 }} animate={{ height: `${h}%` }} transition={{ duration: 1, delay: i * 0.1 }} key={i}
                     className={`flex-1 rounded-t-lg ${i === 3 ? 'bg-orange-500' : 'bg-white/10 group-hover:bg-white/20'} transition-colors`}
                   />
                 ))}
               </div>
             </div>
-            {/* Background Decoration */}
             <div className="absolute -right-12 -bottom-12 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl group-hover:bg-orange-500/20 transition-all duration-700"></div>
           </div>
 
-          {/* Online Staff */}
           <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-            <h4 className="font-bold text-gray-900 mb-4 uppercase text-xs tracking-wider">Nhân viên trực tuyến</h4>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="flex -space-x-3">
-                {onlineStaff.map((staff, i) => (
-                  <img key={i} src={staff.img} className="w-10 h-10 rounded-full border-2 border-white object-cover" alt="Staff" />
-                ))}
-                <div className="w-10 h-10 rounded-full border-2 border-white bg-gray-50 flex items-center justify-center text-xs font-bold text-gray-400">+12</div>
-              </div>
-            </div>
+            <h4 className="font-bold text-gray-900 mb-4 uppercase text-xs tracking-wider">Tài khoản người dùng</h4>
             <p className="text-sm text-gray-500 flex items-center gap-2">
               <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-              15 nhân viên hiện đang quản lý cổng thông tin.
+              {data.users} người dùng trong hệ thống.
             </p>
           </div>
 
-          {/* Help Widget */}
           <div className="bg-orange-50 rounded-2xl p-6 border border-orange-100 flex items-center justify-between group cursor-pointer hover:bg-orange-100 transition-colors">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-orange-500 text-white flex items-center justify-center shadow-lg shadow-orange-500/30 group-hover:rotate-12 transition-transform">

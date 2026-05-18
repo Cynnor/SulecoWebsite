@@ -28,29 +28,17 @@ const NewsAndEvents = () => {
     fetchPosts();
   }, []);
 
-  const upcomingEvents = [
-    {
-      month: "THÁNG 6",
-      day: "20",
-      title: "Ngày hội Tuyển dụng Trực tiếp với DN Nhật",
-      info: "08:30 - 11:30",
-      dark: true,
-    },
-    {
-      month: "THÁNG 6",
-      day: "25",
-      title: "Livestream: Bí quyết chinh phục nhà tuyển dụng",
-      info: "Facebook Live",
-      dark: false,
-    },
-    {
-      month: "THÁNG 7",
-      day: "05",
-      title: "Hội thảo Du học Nhật Bản 2024",
-      info: "Hội trường A1, Suleco",
-      dark: true,
-    },
-  ];
+  const upcomingEvents = (newsList.length > 0 ? newsList.slice(0, 3) : []).map((p) => {
+    const d = p.createdAt ? new Date(p.createdAt) : new Date();
+    const months = ['THÁNG 1','THÁNG 2','THÁNG 3','THÁNG 4','THÁNG 5','THÁNG 6','THÁNG 7','THÁNG 8','THÁNG 9','THÁNG 10','THÁNG 11','THÁNG 12'];
+    return {
+      month: months[d.getMonth()],
+      day: String(d.getDate()).padStart(2, '0'),
+      title: p.title || p.name || 'Bài viết mới',
+      info: p.category || p.excerpt?.slice(0, 40) || p.description?.slice(0, 40) || 'Xem chi tiết',
+      dark: Math.random() > 0.5,
+    };
+  });
 
   return (
     <main className="mx-auto flex w-full max-w-[1280px] flex-col gap-8 px-6 pt-8 pb-28">
