@@ -21,7 +21,7 @@ const AdminSidebar = () => {
     { icon: <LayoutDashboard size={20} />, label: 'Tổng quan', path: '/admin' },
     { icon: <GraduationCap size={20} />, label: 'Tuyển sinh', path: '/admin/admission' },
     { icon: <BookOpen size={20} />, label: 'Khóa học', path: '/admin/courses' },
-    { icon: <Handshake size={20} />, label: 'Đối tác', path: '/admin/partners' },
+    // { icon: <Handshake size={20} />, label: 'Đối tác', path: '/admin/partners' },
     { icon: <FileText size={20} />, label: 'Bài viết', path: '/admin/posts' },
     { icon: <UserSquare2 size={20} />, label: 'Người dùng', path: '/admin/users' },
     { icon: <Settings size={20} />, label: 'Cài đặt', path: '/admin/settings' },
