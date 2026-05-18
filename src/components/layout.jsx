@@ -3,6 +3,10 @@ import Footer from "./footer";
 import ScrollToTop from "./scrollToTop";
 import { Outlet } from "react-router-dom";
 
+/**
+ * Component: Layout
+ * Thành phần khung chung cho toàn bộ website
+ */
 function Layout() {
   return (
     <>

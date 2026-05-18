@@ -60,6 +60,10 @@ const roadmap = [
 ];
 
 /* ─── COMPONENT ─────────────────────────────────────────────── */
+/**
+ * Component: FormalEducation
+ * Trang giới thiệu chương trình đào tạo chính quy, lộ trình 3 năm
+ */
 const FormalEducation = () => {
   return (
     <div className="w-full min-h-screen bg-white font-sans text-slate-800">

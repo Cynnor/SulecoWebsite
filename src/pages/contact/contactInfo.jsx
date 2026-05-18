@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 
+/**
+ * Component: ContactInfo
+ * Trang cung cấp thông tin liên hệ và các văn phòng của Suleco
+ */
 const ContactInfo = () => {
   const [formData, setFormData] = useState({
     name: '',

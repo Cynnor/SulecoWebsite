@@ -7,6 +7,10 @@ import {
   ChevronRight,
 } from "lucide-react";
 
+/**
+ * Component: GeneralIntroduction
+ * Trang giới thiệu chung về Suleco
+ */
 const GeneralIntroduction = () => {
   const coreValues = [
     {

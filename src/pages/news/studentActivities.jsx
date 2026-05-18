@@ -1,3 +1,7 @@
+/**
+ * Component: StudentActivities
+ * Trang góc Nhật Bản, văn hóa và đời sống thực tập sinh
+ */
 export default function StudentActivities() {
   return (
     <section className="w-full bg-white">

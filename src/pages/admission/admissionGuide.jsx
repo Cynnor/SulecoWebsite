@@ -68,6 +68,10 @@ const scheduleRows = [
 ];
 
 /* ─── COMPONENT ─────────────────────────────────────── */
+/**
+ * Component: AdmissionGuide
+ * Trang hướng dẫn thông tin và hồ sơ tuyển sinh của Suleco
+ */
 const AdmissionGuide = () => {
   return (
     <div className="w-full min-h-screen bg-white font-sans text-slate-800">

@@ -37,6 +37,10 @@ const roadmap = [
 ];
 
 /* ─── COMPONENT ─────────────────────────────────────── */
+/**
+ * Component: InternshipDiary
+ * Trang nhật ký thực tập và cam kết việc làm
+ */
 const InternshipDiary = () => {
   return (
     <div className="w-full min-h-screen bg-white font-sans text-slate-800 pb-20">

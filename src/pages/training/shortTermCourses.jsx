@@ -2,6 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaCalendarAlt, FaCertificate, FaTools, FaGlobe } from 'react-icons/fa';
 
+/**
+ * Component: ShortTermCourses
+ * Trang giới thiệu các khóa học nghề ngắn hạn (3-6 tháng)
+ */
 const ShortTermCourses = () => {
   const benefits = [
     {

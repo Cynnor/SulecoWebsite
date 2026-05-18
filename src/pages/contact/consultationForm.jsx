@@ -1,3 +1,7 @@
+/**
+ * Component: ConsultationForm
+ * Trang form đăng ký tư vấn và thông tin khóa học cụ thể
+ */
 export default function ConsultationForm() {
   return (
     <section className="w-full bg-white">

@@ -7,6 +7,10 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 
+/**
+ * Component: PartnerNetwork
+ * Trang giới thiệu mạng lưới đối tác và doanh nghiệp liên kết
+ */
 const PartnerNetwork = () => {
   return (
     <div className="bg-slate-50">

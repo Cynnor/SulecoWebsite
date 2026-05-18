@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * Component: DomesticOpportunities
+ * Trang giới thiệu cơ hội thực tập và việc làm trong nước
+ */
 const DomesticOpportunities = () => {
   const jobPositions = [
     {

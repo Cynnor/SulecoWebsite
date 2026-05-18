@@ -13,6 +13,10 @@ import {
   UserRound,
 } from "lucide-react";
 
+/**
+ * Component: FacilitiesAndVirtualTour
+ * Trang giới thiệu cơ sở vật chất và tour tham quan thực tế ảo
+ */
 const FacilitiesAndVirtualTour = () => {
   const campusHighlights = [
     {

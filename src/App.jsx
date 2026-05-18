@@ -35,8 +35,31 @@ import ResourceLibrary from "./pages/news/resourceLibrary";
 import ContactInfo from "./pages/contact/contactInfo";
 import ConsultationForm from "./pages/contact/consultationForm";
 
+// Admin Pages
+import AdminLayout from "./components/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdmissionManagement from "./pages/admin/AdmissionManagement";
+import ContactConsultation from "./pages/admin/ContactConsultation";
+import CourseManagement from "./pages/admin/CourseManagement";
+import PartnerManagement from "./pages/admin/PartnerManagement";
+import PostEditor from "./pages/admin/PostEditor";
+import SettingsPage from "./pages/admin/SettingsPage";
+
 function App() {
   const router = createBrowserRouter([
+    {
+      path: "/admin",
+      element: <AdminLayout />,
+      children: [
+        { index: true, element: <AdminDashboard /> },
+        { path: "admission", element: <AdmissionManagement /> },
+        { path: "courses", element: <CourseManagement /> },
+        { path: "partners", element: <PartnerManagement /> },
+        { path: "posts", element: <PostEditor /> },
+        { path: "users", element: <ContactConsultation /> },
+        { path: "settings", element: <SettingsPage /> },
+      ]
+    },
     {
       path: "/",
       element: <Layout />,

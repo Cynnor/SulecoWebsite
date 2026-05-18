@@ -12,6 +12,10 @@ import {
   Quote,
 } from "lucide-react";
 
+/**
+ * Component: PhilosophyAndMotto
+ * Trang giới thiệu triết lý và phương châm của Suleco
+ */
 const PhilosophyAndMotto = () => {
   const foundationCards = [
     {
