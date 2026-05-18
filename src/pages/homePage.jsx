@@ -78,6 +78,10 @@ const news = [
 ];
 
 /* ─────────────── CONSULTATION FORM (inline mini-form) ─────────────── */
+/**
+ * Component: MiniConsultForm
+ * Form tư vấn thu nhỏ hiển thị trên trang chủ
+ */
 const MiniConsultForm = () => {
   const [form, setForm] = useState({ name: '', phone: '', email: '', program: '', message: '' });
   const [sent, setSent] = useState(false);
@@ -155,6 +159,10 @@ const MiniConsultForm = () => {
 };
 
 /* ─────────────────────────── HOMEPAGE ─────────────────────────── */
+/**
+ * Component: HomePage
+ * Trang chủ chính của Suleco City
+ */
 const HomePage = () => {
   const [heroLoaded, setHeroLoaded] = useState(false);
 

@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 /* ─── COMPONENT ─────────────────────────────────────── */
+/**
+ * Component: OnlineApplication
+ * Trang đăng ký xét tuyển trực tuyến của Suleco
+ */
 const OnlineApplication = () => {
   const [form, setForm] = useState({
     fullName: '',

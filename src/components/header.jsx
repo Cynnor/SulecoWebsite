@@ -1,6 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/logo_transparent.png';
 
+/**
+ * Component: NavDropdown
+ * Hiển thị menu thả xuống cho các mục điều hướng
+ */
 const NavDropdown = ({ label, items, title }) => (
   <div className="relative group">
     <button className="flex items-center gap-2 py-2 hover:text-blue-700 transition-colors border-b-2 border-transparent group-hover:border-blue-700 font-bold uppercase tracking-widest text-[11px]">
@@ -27,6 +32,10 @@ const NavDropdown = ({ label, items, title }) => (
   </div>
 );
 
+/**
+ * Component: Header
+ * Thành phần đầu trang chính với menu điều hướng
+ */
 export default function Header() {
   const navData = {
     aboutUs: {
@@ -90,12 +99,14 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-100 bg-white/95 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 lg:px-20">
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-3 lg:px-20">
         <Link to="/" className="flex items-center gap-4 group">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-700 text-xl font-black text-white shadow-xl shadow-blue-900/10 group-hover:bg-slate-900 transition-colors">S</div>
+          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-white shadow-lg border border-slate-50 group-hover:scale-105 transition-transform overflow-hidden p-1">
+             <img src={logo} alt="Suleco City Logo" className="w-full h-full object-contain" />
+          </div>
           <div>
             <h1 className="text-xl font-black tracking-tight text-slate-900 uppercase">
-              Suleco <span className="text-blue-700">City</span>
+              Newcity <span className="text-blue-700">Suleco</span>
             </h1>
             <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]">Hệ thống Giáo dục Quốc tế</p>
           </div>

@@ -8,6 +8,10 @@ import {
   Newspaper,
 } from "lucide-react";
 
+/**
+ * Component: NewsAndEvents
+ * Trang tin tức và các sự kiện nổi bật của Suleco
+ */
 const NewsAndEvents = () => {
   const newsList = [
     {

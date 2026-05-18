@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * Component: PartnerNetwork
+ * Trang giới thiệu mạng lưới đối tác và doanh nghiệp liên kết
+ */
 const PartnerNetwork = () => {
   const partnerTypes = [
     {

@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * Component: InternationalCareer
+ * Trang giới thiệu lộ trình liên kết và tu nghiệp quốc tế
+ */
 const InternationalCareer = () => {
   const internationalPrograms = [
     {

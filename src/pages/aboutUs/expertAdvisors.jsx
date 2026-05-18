@@ -9,6 +9,10 @@ import {
   MessageCircle,
 } from "lucide-react";
 
+/**
+ * Component: ExpertAdvisors
+ * Trang giới thiệu đội ngũ chuyên gia và cố vấn của Suleco
+ */
 const ExpertAdvisors = () => {
   const leaders = [
     {

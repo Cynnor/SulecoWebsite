@@ -1,5 +1,10 @@
 import React from 'react';
+import logo from '../assets/logo_transparent.png';
 
+/**
+ * Component: FooterColumn
+ * Hiển thị một cột liên kết trong Footer
+ */
 const FooterColumn = ({ title, links }) => (
   <div>
     <h3 className="text-xs font-black uppercase tracking-[0.2em] text-white border-b border-white/10 pb-4 mb-6">
@@ -17,6 +22,10 @@ const FooterColumn = ({ title, links }) => (
   </div>
 );
 
+/**
+ * Component: Footer
+ * Thành phần chân trang chính của Suleco City
+ */
 export default function Footer() {
   const footerData = [
     {
@@ -68,9 +77,12 @@ export default function Footer() {
     <footer id="lien-he" className="border-t border-slate-900 bg-slate-950 text-slate-400 py-20">
       <div className="mx-auto grid max-w-[1400px] gap-x-12 gap-y-16 px-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 lg:px-20">
         <div className="col-span-2 md:col-span-1 xl:col-span-1">
-          <h2 className="text-2xl font-black text-white uppercase tracking-tight">Suleco <span className="text-blue-700">City</span></h2>
-          <p className="mt-6 text-[11px] leading-7 text-slate-500 text-justify">
-            Hệ thống Giáo dục Quốc tế Suleco City - Nơi kiến tạo tương lai và nâng tầm trí tuệ cho thế hệ trẻ Việt Nam thông qua các chương trình đào tạo chuẩn mực.
+          <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-white/5 border border-white/10 p-2 mb-6 shadow-2xl">
+             <img src={logo} alt="Suleco City Logo" className="w-full h-full object-contain" />
+          </div>
+          <h2 className="text-2xl font-black text-white uppercase tracking-tight">Newcity <span className="text-blue-700">Suleco</span></h2>
+          <p className="mt-4 text-[11px] leading-7 text-slate-500 text-justify">
+            Hệ thống Giáo dục Quốc tế Newcity Suleco - Nơi kiến tạo tương lai và nâng tầm trí tuệ cho thế hệ trẻ Việt Nam thông qua các chương trình đào tạo chuẩn mực.
           </p>
         </div>
 

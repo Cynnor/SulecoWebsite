@@ -24,6 +24,10 @@ const smallCards = [
 ];
 
 /* ─── COMPONENT ────────────────────────────────────── */
+/**
+ * Component: TrainingPartnerships
+ * Trang giới thiệu các chương trình liên kết đào tạo chiến lược
+ */
 const TrainingPartnerships = () => {
   return (
     <div className="w-full min-h-screen bg-white font-sans text-slate-800">

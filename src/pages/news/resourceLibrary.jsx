@@ -10,6 +10,10 @@ import {
   FolderOpen,
 } from "lucide-react";
 
+/**
+ * Component: ResourceLibrary
+ * Trang thư viện tài liệu, video và quy trình hồ sơ
+ */
 const ResourceLibrary = () => {
   const resources = [
     {

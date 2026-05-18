@@ -34,6 +34,10 @@ const scheduleRows = [
 ];
 
 /* ─── COMPONENT ───────────────────────────────────────── */
+/**
+ * Component: LanguageTraining
+ * Trang giới thiệu các chương trình đào tạo ngoại ngữ (Nhật, Anh, Trung)
+ */
 const LanguageTraining = () => {
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);

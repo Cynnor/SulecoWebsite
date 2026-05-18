@@ -40,6 +40,10 @@ const govScholarships = [
 ];
 
 /* ─── COMPONENT ────────────────────────────────────── */
+/**
+ * Component: ScholarshipsAndTuition
+ * Trang thông tin về học bổng và học phí của Suleco
+ */
 const ScholarshipsAndTuition = () => {
   return (
     <div className="w-full min-h-screen bg-white font-sans text-slate-800">

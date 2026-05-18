@@ -8,6 +8,10 @@ import {
   Clock3,
 } from "lucide-react";
 
+/**
+ * Component: TrainingNotifications
+ * Trang thông báo từ Phòng Đào tạo (lịch học, lịch thi, kết quả...)
+ */
 const TrainingNotifications = () => {
   const timelineData = [
     {
