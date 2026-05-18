@@ -2,7 +2,35 @@
  * Component: ConsultationForm
  * Trang form đăng ký tư vấn và thông tin khóa học cụ thể
  */
+import { useState } from 'react';
+import { submitContact } from '../../services/contactService';
+
 export default function ConsultationForm() {
+  const [form, setForm] = useState({ fullName: '', phone: '', email: '', message: '' });
+  const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      await submitContact({ fullName: form.fullName, phone: form.phone, email: form.email || undefined, message: form.message || undefined });
+      setSent(true);
+      setForm({ fullName: '', phone: '', email: '', message: '' });
+    } catch (err) {
+      setError(err.response?.data?.message || 'Gửi yêu cầu thất bại, vui lòng thử lại.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className="w-full bg-white">
       <div className="mx-auto flex w-full max-w-[1280px] flex-col items-center gap-20 pb-24">
@@ -187,61 +215,67 @@ export default function ConsultationForm() {
                 Vui lòng điền thông tin, chúng tôi sẽ liên hệ lại ngay trong 24h.
               </p>
 
-              <form className="mt-8 space-y-5">
-                <div>
-                  <label className="mb-2 block text-sm font-semibold uppercase tracking-wide text-zinc-500">
-                    Họ và Tên *
-                  </label>
+              <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+                {sent && (
+                  <div className="rounded-xl bg-emerald-50 border border-emerald-300 p-4 text-emerald-700 text-sm font-semibold text-center">
+                    Yêu cầu tư vấn đã được gửi thành công! Chúng tôi sẽ liên hệ bạn sớm.
+                  </div>
+                )}
+                {error && (
+                  <div className="rounded-xl bg-red-50 border border-red-300 p-4 text-red-700 text-sm">
+                    {error}
+                  </div>
+                )}
 
-                  <input
-                    type="text"
-                    placeholder="Nhập họ tên của bạn"
-                    className="w-full rounded-xl border border-neutral-300 bg-blue-50 px-4 py-4 outline-none transition focus:border-sky-950"
-                  />
-                </div>
+                {!sent && (
+                  <>
+                    <div>
+                      <label className="mb-2 block text-sm font-semibold uppercase tracking-wide text-zinc-500">
+                        Họ và Tên *
+                      </label>
+                      <input type="text" name="fullName" required value={form.fullName} onChange={handleChange}
+                        placeholder="Nhập họ tên của bạn"
+                        className="w-full rounded-xl border border-neutral-300 bg-blue-50 px-4 py-4 outline-none transition focus:border-sky-950"
+                      />
+                    </div>
 
-                <div>
-                  <label className="mb-2 block text-sm font-semibold uppercase tracking-wide text-zinc-500">
-                    Số Điện Thoại *
-                  </label>
+                    <div>
+                      <label className="mb-2 block text-sm font-semibold uppercase tracking-wide text-zinc-500">
+                        Số Điện Thoại *
+                      </label>
+                      <input type="tel" name="phone" required value={form.phone} onChange={handleChange}
+                        placeholder="Ví dụ: 0912 345 678"
+                        className="w-full rounded-xl border border-neutral-300 bg-blue-50 px-4 py-4 outline-none transition focus:border-sky-950"
+                      />
+                    </div>
 
-                  <input
-                    type="text"
-                    placeholder="Ví dụ: 0912 345 678"
-className="w-full rounded-xl border border-neutral-300 bg-blue-50 px-4 py-4 outline-none transition focus:border-sky-950"
-                  />
-                </div>
+                    <div>
+                      <label className="mb-2 block text-sm font-semibold uppercase tracking-wide text-zinc-500">
+                        Email
+                      </label>
+                      <input type="email" name="email" value={form.email} onChange={handleChange}
+                        placeholder="email@vi-du.com"
+                        className="w-full rounded-xl border border-neutral-300 bg-blue-50 px-4 py-4 outline-none transition focus:border-sky-950"
+                      />
+                    </div>
 
-                <div>
-                  <label className="mb-2 block text-sm font-semibold uppercase tracking-wide text-zinc-500">
-                    Email
-                  </label>
+                    <div>
+                      <label className="mb-2 block text-sm font-semibold uppercase tracking-wide text-zinc-500">
+                        Lời Nhắn
+                      </label>
+                      <textarea name="message" rows={5} value={form.message} onChange={handleChange}
+                        placeholder="Bạn cần tư vấn thêm điều gì?"
+                        className="w-full rounded-xl border border-neutral-300 bg-blue-50 px-4 py-4 outline-none transition focus:border-sky-950"
+                      />
+                    </div>
 
-                  <input
-                    type="email"
-                    placeholder="email@vi-du.com"
-                    className="w-full rounded-xl border border-neutral-300 bg-blue-50 px-4 py-4 outline-none transition focus:border-sky-950"
-                  />
-                </div>
-
-                <div>
-                  <label className="mb-2 block text-sm font-semibold uppercase tracking-wide text-zinc-500">
-                    Lời Nhắn
-                  </label>
-
-                  <textarea
-                    rows={5}
-                    placeholder="Bạn cần tư vấn thêm điều gì?"
-                    className="w-full rounded-xl border border-neutral-300 bg-blue-50 px-4 py-4 outline-none transition focus:border-sky-950"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full rounded-xl bg-amber-500 py-4 text-base font-semibold text-white transition hover:bg-amber-600"
-                >
-                  GỬI YÊU CẦU NGAY
-                </button>
+                    <button type="submit" disabled={loading}
+                      className="w-full rounded-xl bg-amber-500 py-4 text-base font-semibold text-white transition hover:bg-amber-600 disabled:opacity-60"
+                    >
+                      {loading ? 'ĐANG GỬI...' : 'GỬI YÊU CẦU NGAY'}
+                    </button>
+                  </>
+                )}
               </form>
 
               <div className="mt-8 border-t border-neutral-200 pt-8 space-y-5">
