@@ -10,6 +10,8 @@ import FacilitiesAndVirtualTour from "./pages/aboutUs/facilitiesAndVirtualTour";
 
 // Training Pages
 import LanguagesConnection from "./pages/training/languagesConnection";
+import CourseList from "./pages/training/courseList";
+import CourseCategories from "./pages/training/courseCategories";
 
 // Admission Pages
 import AdmissionGuide from "./pages/admission/admissionGuide";
@@ -35,6 +37,7 @@ import ConsultationForm from "./pages/contact/consultationForm";
 // Admin Pages
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import Login from "./pages/admin/Login";
 import AdmissionManagement from "./pages/admin/AdmissionManagement";
 import ContactConsultation from "./pages/admin/ContactConsultation";
 import CourseManagement from "./pages/admin/CourseManagement";
@@ -43,10 +46,17 @@ import PostEditor from "./pages/admin/PostEditor";
 import SettingsPage from "./pages/admin/SettingsPage";
 
 function App() {
+  const ProtectedRoute = ({ children }) => {
+    const token = localStorage.getItem('token');
+    if (!token) return <Navigate to="/admin/login" replace />;
+    return children;
+  };
+
   const router = createBrowserRouter([
+    { path: "/admin/login", element: <Login /> },
     {
       path: "/admin",
-      element: <AdminLayout />,
+      element: <ProtectedRoute><AdminLayout /></ProtectedRoute>,
       children: [
         { index: true, element: <AdminDashboard /> },
         { path: "admission", element: <AdmissionManagement /> },
@@ -65,6 +75,8 @@ function App() {
         {
           path: "training",
           children: [
+            { path: "courses", element: <CourseList /> },
+            { path: "course-categories", element: <CourseCategories /> },
             { path: "languages-connection", element: <LanguagesConnection /> },
           ],
         },

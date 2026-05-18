@@ -1,11 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo_transparent.png';
+import { getCourseCategories, getCourses } from '../services/courseService';
 
-/**
- * Component: NavDropdown
- * Hiển thị menu thả xuống cho các mục điều hướng
- */
 const NavDropdown = ({ label, items, title }) => (
   <div className="relative group">
     <button className="flex items-center gap-2 py-2 hover:text-blue-700 transition-colors border-b-2 border-transparent group-hover:border-blue-700 font-bold uppercase tracking-widest text-[11px]">
@@ -14,15 +11,15 @@ const NavDropdown = ({ label, items, title }) => (
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
       </svg>
     </button>
-    
+
     <div className="absolute top-full left-0 mt-0 w-72 origin-top-left bg-white shadow-2xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-[60] rounded-2xl overflow-hidden">
       <div className="p-2 bg-slate-50 border-b border-slate-100">
          <p className="text-[10px] text-slate-400 px-4 py-2 font-black uppercase tracking-tighter">{title}</p>
       </div>
       {items.map((item, idx) => (
-        <Link 
-          key={idx} 
-          to={item.to} 
+        <Link
+          key={idx}
+          to={item.to}
           className={`block px-6 py-4 hover:bg-blue-700 hover:text-white transition-all text-[11px] font-bold uppercase tracking-widest ${idx !== items.length - 1 ? 'border-b border-slate-50' : ''}`}
         >
           {item.label}
@@ -32,10 +29,124 @@ const NavDropdown = ({ label, items, title }) => (
   </div>
 );
 
-/**
- * Component: Header
- * Thành phần đầu trang chính với menu điều hướng
- */
+const TrainingMegaMenu = () => {
+  const [categories, setCategories] = useState([]);
+  const [courseMap, setCourseMap] = useState({});
+  const [open, setOpen] = useState(false);
+  const [showCategories, setShowCategories] = useState(false);
+  const [selectedCat, setSelectedCat] = useState(null);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    getCourseCategories({ limit: 100 }).then((res) => {
+      const cats = res.data?.categories || [];
+      setCategories(cats);
+    }).catch(() => {});
+    getCourses({ limit: 100 }).then((courses) => {
+      const map = {};
+      courses.forEach((c) => {
+        const catId = c.categoryId?._id || 'other';
+        if (!map[catId]) map[catId] = [];
+        map[catId].push(c);
+      });
+      setCourseMap(map);
+    }).catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) { setOpen(false); setShowCategories(false); setSelectedCat(null); }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => { setOpen(!open); if (!open) { setShowCategories(false); setSelectedCat(null); } }}
+        className={`flex items-center gap-2 py-2 transition-colors border-b-2 font-bold uppercase tracking-widest text-[11px] ${
+          open ? 'text-blue-700 border-blue-700' : 'text-slate-500 border-transparent hover:text-blue-700'
+        }`}
+      >
+        Đào tạo
+        <svg xmlns="http://www.w3.org/2000/svg" className={`h-3 w-3 transition-transform ${open ? 'rotate-180' : 'opacity-50'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      <div className={`absolute top-full left-0 mt-0 w-[780px] origin-top-left bg-white shadow-2xl border border-slate-100 transition-all duration-300 transform z-[60] rounded-2xl overflow-hidden ${
+        open ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2 pointer-events-none'
+      }`}>
+        <div className="p-2 bg-slate-50 border-b border-slate-100">
+          <p className="text-[10px] text-slate-400 px-4 py-2 font-black uppercase tracking-tighter">Training Programs</p>
+        </div>
+        <div className="flex">
+          <div className="w-[260px] border-r border-slate-100 shrink-0">
+            <div
+              onClick={() => { setShowCategories(!showCategories); if (showCategories) setSelectedCat(null); }}
+              className={`flex items-center justify-between px-6 py-4 cursor-pointer transition-all text-[11px] font-bold uppercase tracking-widest ${
+                showCategories ? 'bg-blue-700 text-white' : 'hover:bg-blue-50 text-slate-700'
+              }`}
+            >
+              <span>Danh mục đào tạo</span>
+              <span className="text-[10px] text-slate-400">
+                ({Object.values(courseMap).reduce((sum, arr) => sum + arr.length, 0)})
+              </span>
+            </div>
+          </div>
+
+          {showCategories && (
+            <div className="w-[260px] border-r border-slate-100 shrink-0 overflow-y-auto max-h-[400px]">
+              {categories.map((cat) => {
+                const count = (courseMap[cat._id] || []).length;
+                return (
+                  <div
+                    key={cat._id}
+                    onClick={() => setSelectedCat(selectedCat === cat._id ? null : cat._id)}
+                    className={`flex items-center justify-between px-6 py-4 cursor-pointer transition-all text-[11px] font-bold uppercase tracking-widest ${
+                      selectedCat === cat._id ? 'bg-blue-700 text-white' : 'hover:bg-blue-50 text-slate-700'
+                    }`}
+                  >
+                    <span>{cat.name}</span>
+                    <span className="text-[10px] text-slate-400">({count})</span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {selectedCat && (
+            <div className="flex-1 overflow-y-auto max-h-[400px]">
+              {(courseMap[selectedCat] || []).length > 0 ? (
+                (courseMap[selectedCat] || []).map((course) => (
+                  <Link
+                    key={course._id}
+                    to={`/training/courses?course=${course._id}`}
+                    className="block px-6 py-4 hover:bg-blue-700 hover:text-white transition-all text-[11px] font-bold uppercase tracking-widest border-b border-slate-50 last:border-b-0 text-slate-600"
+                    onClick={() => setOpen(false)}
+                  >
+                    {course.title}
+                  </Link>
+                ))
+              ) : (
+                <div className="px-6 py-8 text-center text-slate-400 text-[11px] uppercase tracking-widest">
+                  Chưa có khóa học
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+        <div className="p-3 bg-slate-50 border-t border-slate-100 text-center">
+          <Link to="/training/courses" className="text-[10px] text-blue-700 font-bold uppercase tracking-widest hover:underline" onClick={() => setOpen(false)}>
+            Xem tất cả khóa học →
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function Header() {
   const navData = {
     aboutUs: {
@@ -48,13 +159,6 @@ export default function Header() {
         { label: "Cơ sở vật chất & Tour", to: "/about-us/facilities" },
       ]
     },
-    training: {
-      label: "Đào tạo",
-      title: "Training Programs",
-      items: [
-        { label: "Liên kết Ngoại ngữ", to: "/training/languages-connection" },
-      ]
-    },
     admission: {
       label: "Tuyển sinh",
       title: "Admission Portal",
@@ -64,22 +168,22 @@ export default function Header() {
         { label: "Đăng ký trực tiếp", to: "/admission/apply" },
       ]
     },
-    career: {
-      label: "Nghề nghiệp",
-      title: "Career & Linkage",
-      items: [
-        { label: "Mạng lưới đối tác", to: "/career/partners" },
-        { label: "Việc làm trong nước", to: "/career/domestic" },
-        { label: "Tu nghiệp quốc tế", to: "/career/international" },
-        { label: "Nhật ký & Cam kết", to: "/career/diary" },
-      ]
-    },
+    // career: {
+    //   label: "Nghề nghiệp",
+    //   title: "Career & Linkage",
+    //   items: [
+    //     { label: "Mạng lưới đối tác", to: "/career/partners" },
+    //     { label: "Việc làm trong nước", to: "/career/domestic" },
+    //     { label: "Tu nghiệp quốc tế", to: "/career/international" },
+    //     { label: "Nhật ký & Cam kết", to: "/career/diary" },
+    //   ]
+    // },
     news: {
       label: "Tin tức",
       title: "News & Resources",
       items: [
         { label: "Tin tức & Sự kiện", to: "/news/events" },
-        { label: "Thông báo đào tạo", to: "/news/notifications" },
+        // { label: "Thông báo đào tạo", to: "/news/notifications" },
         { label: "Thư viện tư liệu", to: "/news/library" },
       ]
     },
@@ -113,18 +217,18 @@ export default function Header() {
             Trang chủ
           </Link>
           <NavDropdown {...navData.aboutUs} />
-          <NavDropdown {...navData.training} />
+          <TrainingMegaMenu />
           <NavDropdown {...navData.admission} />
-          <NavDropdown {...navData.career} />
+          {/* <NavDropdown {...navData.career} /> */}
           <NavDropdown {...navData.news} />
           <NavDropdown {...navData.contact} />
         </nav>
 
         <Link 
-          to="/contact/consultation"
+          to="/admin/login"
           className="bg-blue-700 px-7 py-3 text-[11px] font-black text-white uppercase tracking-widest shadow-xl shadow-blue-900/10 transition-all hover:bg-slate-900 active:scale-95 rounded-xl hidden xl:block"
         >
-          Tư vấn học thuật
+          Login
         </Link>
       </div>
     </header>

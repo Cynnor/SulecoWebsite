@@ -13,11 +13,6 @@ const defaultStats = [
   { number: "--", label: "Chương trình đào tạo", icon: "📚" },
 ];
 
-/* ─────────────── CONSULTATION FORM (inline mini-form) ─────────────── */
-/**
- * Component: MiniConsultForm
- * Form tư vấn thu nhỏ hiển thị trên trang chủ
- */
 const MiniConsultForm = () => {
   const [form, setForm] = useState({ fullName: '', phone: '', email: '', dateOfBirth: '', address: '', intendedCourse: '', message: '' });
   const [sent, setSent] = useState(false);
@@ -62,55 +57,42 @@ const MiniConsultForm = () => {
     }
   };
 
-  const inputClass = "w-full px-4 py-3.5 bg-white/15 border border-amber-300/30 rounded-xl text-white placeholder-amber-200/60 focus:outline-none focus:border-amber-400 focus:bg-white/20 transition-all backdrop-blur-sm";
-  const selectClass = "w-full px-4 py-3.5 bg-white/15 border border-amber-300/30 rounded-xl text-white focus:outline-none focus:border-amber-400 focus:bg-white/20 transition-all backdrop-blur-sm appearance-none";
+  const inputClass = "w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/50 focus:outline-none focus:border-amber-400 focus:bg-white/15 transition-all text-sm";
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-3.5">
       {sent && (
-        <div className="flex items-center gap-3 p-4 bg-emerald-500/30 border border-emerald-400/50 rounded-xl text-emerald-200 text-sm font-semibold backdrop-blur-sm">
-          <span className="text-xl">✓</span> Yêu cầu tư vấn đã được gửi thành công! Chúng tôi sẽ liên hệ bạn sớm.
+        <div className="flex items-center gap-3 p-4 bg-emerald-500/20 border border-emerald-400/30 rounded-xl text-emerald-300 text-sm font-medium backdrop-blur-sm">
+          <span className="text-lg">✓</span> Yêu cầu tư vấn đã được gửi thành công!
         </div>
       )}
       {error && (
-        <div className="p-4 bg-red-500/30 border border-red-400/50 rounded-xl text-red-200 text-sm font-semibold">
-          {error}
-        </div>
+        <div className="p-4 bg-red-500/20 border border-red-400/30 rounded-xl text-red-300 text-sm">{error}</div>
       )}
 
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 gap-3.5">
         <input type="text" name="fullName" required placeholder="Họ và tên *" value={form.fullName} onChange={handleChange} className={inputClass} />
         <input type="tel" name="phone" required placeholder="Số điện thoại *" value={form.phone} onChange={handleChange} className={inputClass} />
       </div>
-
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 gap-3.5">
         <input type="email" name="email" placeholder="Email liên hệ" value={form.email} onChange={handleChange} className={inputClass} />
         <input type="date" name="dateOfBirth" placeholder="Ngày sinh" value={form.dateOfBirth} onChange={handleChange} className={inputClass} />
       </div>
-
       <input type="text" name="address" placeholder="Địa chỉ liên hệ" value={form.address} onChange={handleChange} className={inputClass} />
-
-      <select name="intendedCourse" value={form.intendedCourse} onChange={handleChange} className="w-full px-4 py-3.5 bg-white/15 border border-amber-300/30 rounded-xl text-white focus:outline-none focus:border-amber-400 focus:bg-white/20 transition-all backdrop-blur-sm" style={{ color: form.intendedCourse ? 'white' : 'rgba(255,255,255,0.6)' }}>
+      <select name="intendedCourse" value={form.intendedCourse} onChange={handleChange} className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:border-amber-400 focus:bg-white/15 transition-all text-sm" style={{ color: form.intendedCourse ? 'white' : 'rgba(255,255,255,0.5)' }}>
         <option value="" className="text-gray-800">{coursesLoading ? 'Đang tải...' : 'Chương trình quan tâm'}</option>
         {!coursesLoading && courses.map((c) => (
           <option key={c._id} value={c._id} className="text-gray-800">{c.title}</option>
         ))}
       </select>
-
       <textarea name="message" placeholder="Nội dung cần tư vấn (tuỳ chọn)" value={form.message} onChange={handleChange} rows="3" className={`${inputClass} resize-none`} />
-
-      <button type="submit" disabled={loading} className="w-full py-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-amber-950 font-bold rounded-xl transition-all duration-200 shadow-lg shadow-amber-500/40 hover:shadow-amber-400/50 hover:-translate-y-0.5 active:translate-y-0 text-sm tracking-wide disabled:opacity-60">
+      <button type="submit" disabled={loading} className="w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-amber-950 font-bold rounded-xl transition-all duration-200 shadow-lg shadow-amber-500/30 hover:shadow-amber-400/40 hover:-translate-y-0.5 active:translate-y-0 text-sm disabled:opacity-60">
         {loading ? 'Đang gửi...' : 'Gửi yêu cầu tư vấn →'}
       </button>
     </form>
   );
 };
 
-/* ─────────────────────────── HOMEPAGE ─────────────────────────── */
-/**
- * Component: HomePage
- * Trang chủ chính của Suleco City
- */
 const HomePage = () => {
   const [heroLoaded, setHeroLoaded] = useState(false);
   const [courses, setCourses] = useState([]);
@@ -149,9 +131,7 @@ const HomePage = () => {
           { number: "90%", label: "Có việc làm sau tốt nghiệp", icon: "📈" },
           { number: `${postTotal || 0}+`, label: "Bài viết & tin tức", icon: "🎓" },
         ]);
-      } catch (e) {
-        /* fallback to static data */
-      }
+      } catch (e) {}
     };
     fetchData();
   }, []);
@@ -161,15 +141,12 @@ const HomePage = () => {
 
       {/* ── HERO ── */}
       <section className="relative overflow-hidden bg-sky-950" style={{ minHeight: '760px' }}>
-        {/* Background gradient layers */}
         <div className="absolute inset-0 bg-gradient-to-br from-sky-950 via-sky-900 to-sky-800" />
         <div className="absolute inset-0 bg-gradient-to-r from-sky-950/95 via-sky-950/60 to-transparent" />
-        {/* Decorative circles */}
         <div className="absolute -top-32 -right-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl" />
         <div className="absolute top-1/2 right-1/4 w-64 h-64 bg-sky-400/10 rounded-full blur-2xl" />
         <div className="absolute bottom-0 right-0 w-80 h-80 bg-amber-400/5 rounded-full blur-3xl" />
 
-        {/* Hero image */}
         <img
           src="https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=1400&auto=format&fit=crop&q=80"
           alt="Suleco đào tạo nghề ô tô"
@@ -177,53 +154,33 @@ const HomePage = () => {
           onLoad={() => setHeroLoaded(true)}
         />
 
-        {/* Content */}
-        <div
-          className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex items-center"
-          style={{ minHeight: '760px' }}
-        >
-          <div
-            className="max-w-2xl transition-all duration-700"
-            style={{
-              opacity: heroLoaded ? 1 : 0,
-              transform: heroLoaded ? 'translateY(0)' : 'translateY(24px)',
-            }}
-          >
-            {/* Badge */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20 flex items-center" style={{ minHeight: '760px' }}>
+          <div className="max-w-2xl transition-all duration-700" style={{ opacity: heroLoaded ? 1 : 0, transform: heroLoaded ? 'translateY(0)' : 'translateY(24px)' }}>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-500/20 border border-amber-400/30 rounded-full mb-6">
               <span className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
               <span className="text-amber-300 text-xs font-bold tracking-widest uppercase">Newcitygroup – Suleco</span>
             </div>
 
-            <h1 className="text-5xl md:text-6xl font-black text-white mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-[1.15] tracking-tight">
               Đào tạo nghề<br />
               <span className="text-amber-400">gắn kết</span> doanh nghiệp
             </h1>
 
-            <p className="text-lg text-white/75 mb-10 leading-relaxed max-w-xl">
+            <p className="text-base md:text-lg text-white/75 mb-10 leading-relaxed max-w-xl">
               Hệ thống đào tạo nghề và kết nối doanh nghiệp — giúp học viên lựa chọn chương trình phù hợp, đăng ký tuyển sinh trực tuyến và tiếp cận cơ hội việc làm sau đào tạo.
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Link
-                to="/admission/apply"
-                id="hero-cta-apply"
-                className="px-8 py-4 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl transition-all duration-200 shadow-lg shadow-amber-500/30 hover:-translate-y-0.5 active:translate-y-0 text-sm tracking-wide"
-              >
+              <Link to="/admission/apply" id="hero-cta-apply" className="px-8 py-3.5 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl transition-all duration-200 shadow-lg shadow-amber-500/30 hover:-translate-y-0.5 active:translate-y-0 text-sm tracking-wide">
                 Đăng ký xét tuyển
               </Link>
-              <Link
-                to="/training/formal-education"
-                id="hero-cta-programs"
-                className="px-8 py-4 border-2 border-white/30 hover:border-white/60 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-200 text-sm tracking-wide"
-              >
+              <Link to="/training/formal-education" id="hero-cta-programs" className="px-8 py-3.5 border-2 border-white/30 hover:border-white/60 text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-200 text-sm tracking-wide">
                 Xem chương trình →
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Bottom wave */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none">
             <path d="M0,40 C360,80 1080,0 1440,40 L1440,60 L0,60 Z" fill="white" />
@@ -232,17 +189,14 @@ const HomePage = () => {
       </section>
 
       {/* ── STATS BAR ── */}
-      <section className="bg-white py-0 px-6 md:px-12 lg:px-20">
+      <section className="bg-white px-6 md:px-12 lg:px-20 pb-20">
         <div className="max-w-7xl mx-auto -mt-8 relative z-20">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
             {stats.map((stat, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-2xl p-6 shadow-xl shadow-sky-950/8 border border-gray-100 flex flex-col items-center text-center group hover:-translate-y-1 transition-transform duration-200"
-              >
-                <span className="text-3xl mb-3">{stat.icon}</span>
-                <p className="text-3xl font-black text-sky-950 mb-1">{stat.number}</p>
-                <p className="text-xs text-zinc-500 font-semibold uppercase tracking-wide leading-tight">{stat.label}</p>
+              <div key={i} className="bg-white rounded-2xl p-6 shadow-lg shadow-sky-950/5 border border-gray-100 flex flex-col items-center text-center group hover:-translate-y-1 hover:shadow-xl transition-all duration-200">
+                <span className="text-2xl mb-3">{stat.icon}</span>
+                <p className="text-2xl md:text-3xl font-black text-sky-950 mb-1.5">{stat.number}</p>
+                <p className="text-xs text-zinc-500 font-semibold uppercase tracking-wider">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -250,28 +204,26 @@ const HomePage = () => {
       </section>
 
       {/* ── NEWCITY GROUP – SULECO ── */}
-      <section className="relative overflow-hidden bg-sky-950 py-24 px-6 md:px-12 lg:px-20">
+      <section className="relative overflow-hidden bg-sky-950 py-20 px-6 md:px-12 lg:px-20">
         <div className="absolute -top-40 -right-20 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl" />
         <div className="absolute -bottom-40 -left-20 w-80 h-80 bg-sky-400/5 rounded-full blur-3xl" />
 
         <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left: info */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="text-white">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-500/20 border border-amber-400/30 rounded-full mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-500/20 border border-amber-400/30 rounded-full mb-5">
                 <span className="w-2 h-2 bg-amber-400 rounded-full" />
                 <span className="text-amber-300 text-xs font-bold tracking-widest uppercase">Newcitygroup – Suleco</span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-black leading-tight mb-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight mb-5 tracking-tight">
                 Hệ thống đào tạo nghề<br />
                 <span className="text-amber-400">gắn kết doanh nghiệp</span>
               </h2>
-              <p className="text-white/70 text-lg leading-relaxed mb-10 max-w-lg">
+              <p className="text-white/70 text-base leading-relaxed mb-8 max-w-lg">
                 Trực thuộc Newcity Group, Suleco là hệ thống giáo dục nghề nghiệp tiên phong 
                 kết nối đào tạo chuyên môn với thực tiễn doanh nghiệp, mở ra cơ hội việc làm 
                 bền vững cho học viên tại Việt Nam và quốc tế.
               </p>
-
               <div className="grid grid-cols-3 gap-6">
                 {[
                   { number: "40+", label: "Năm kinh nghiệm" },
@@ -279,14 +231,13 @@ const HomePage = () => {
                   { number: "90%", label: "Việc làm sau tốt nghiệp" },
                 ].map((item, i) => (
                   <div key={i}>
-                    <p className="text-3xl font-black text-amber-400">{item.number}</p>
+                    <p className="text-2xl md:text-3xl font-black text-amber-400">{item.number}</p>
                     <p className="text-white/50 text-xs font-bold uppercase tracking-wider mt-1">{item.label}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Right: highlight cards */}
             <div className="grid grid-cols-2 gap-4">
               {[
                 { title: "Đào tạo bài bản", desc: "Chương trình chuẩn quốc tế, giáo trình cập nhật, giảng viên giàu kinh nghiệm thực tế.", icon: "📚" },
@@ -294,9 +245,9 @@ const HomePage = () => {
                 { title: "Kết nối doanh nghiệp", desc: "Liên kết trực tiếp với 120+ doanh nghiệp, gara, xưởng dịch vụ trên toàn quốc.", icon: "🤝" },
                 { title: "Cơ hội quốc tế", desc: "Lộ trình tu nghiệp & việc làm tại Nhật Bản, Australia, CHLB Đức.", icon: "🌏" },
               ].map((item, i) => (
-                <div key={i} className="bg-white/10 border border-white/20 rounded-2xl p-5 backdrop-blur-sm hover:bg-white/15 transition-all">
-                  <span className="text-2xl mb-3 block">{item.icon}</span>
-                  <h3 className="text-white font-bold text-sm mb-1 uppercase tracking-wider">{item.title}</h3>
+                <div key={i} className="bg-white/10 border border-white/20 rounded-2xl p-5 backdrop-blur-sm hover:bg-white/15 transition-all group">
+                  <span className="text-xl mb-3 block group-hover:scale-110 transition-transform">{item.icon}</span>
+                  <h3 className="text-white font-bold text-xs mb-1.5 uppercase tracking-wider">{item.title}</h3>
                   <p className="text-white/50 text-xs leading-relaxed">{item.desc}</p>
                 </div>
               ))}
@@ -306,22 +257,17 @@ const HomePage = () => {
       </section>
 
       {/* ── FEATURED PROGRAMS ── */}
-      <section className="bg-white py-24 px-6 md:px-12 lg:px-20">
+      <section className="bg-white py-20 px-6 md:px-12 lg:px-20">
         <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-4 mb-14">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-4 mb-12">
             <div className="max-w-xl">
-              <p className="text-amber-500 font-bold text-xs uppercase tracking-widest mb-3">Chương trình nổi bật</p>
-              <h2 className="text-4xl font-black text-sky-950 leading-tight">Đào tạo trọng điểm</h2>
-              <p className="text-zinc-500 mt-3 leading-relaxed">
+              <p className="text-amber-600 font-bold text-xs uppercase tracking-widest mb-2">Chương trình nổi bật</p>
+              <h2 className="text-3xl md:text-4xl font-black text-sky-950 leading-tight tracking-tight">Đào tạo trọng điểm</h2>
+              <p className="text-zinc-500 mt-2 leading-relaxed text-sm">
                 Các khóa học bám sát thực tiễn, kết nối trực tiếp với doanh nghiệp và mạng lưới Garage.
               </p>
             </div>
-            <Link
-              to="/training/formal-education"
-              id="programs-view-all"
-              className="flex items-center gap-2 text-sky-950 font-bold hover:text-amber-600 transition-colors text-sm whitespace-nowrap group"
-            >
+            <Link to="/training/formal-education" id="programs-view-all" className="flex items-center gap-2 text-sky-950 font-bold hover:text-amber-600 transition-colors text-sm whitespace-nowrap group">
               Xem tất cả chương trình
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </Link>
@@ -333,27 +279,24 @@ const HomePage = () => {
               description: 'Chương trình đào tạo toàn diện từ nền tảng đến chuyên sâu về kỹ thuật ô tô.',
               coverImageUrl: 'https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=900&auto=format&fit=crop&q=80'
             }]).map((p) => (
-              <div key={p._id} className="lg:col-span-2 relative rounded-3xl overflow-hidden group" style={{ minHeight: '420px' }}>
+              <div key={p._id} className="lg:col-span-2 relative rounded-2xl overflow-hidden group" style={{ minHeight: '380px' }}>
                 <div className="absolute inset-0 bg-gradient-to-br from-sky-950 via-sky-900 to-sky-800" />
                 <img
                   src={p.coverImageUrl || 'https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?w=900&auto=format&fit=crop&q=80'}
                   alt={p.title}
-                  className="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-40 group-hover:scale-105 transition-all duration-500"
+                  className="absolute inset-0 w-full h-full object-cover opacity-25 group-hover:opacity-35 group-hover:scale-105 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-sky-950 via-sky-950/60 to-transparent" />
 
-                <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-                  <div className="inline-block px-3 py-1 bg-amber-500 rounded-full mb-4">
+                <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10">
+                  <div className="inline-block px-3 py-1 bg-amber-500 rounded-full mb-3">
                     <span className="text-amber-950 text-xs font-black uppercase tracking-wider">Hệ chính quy</span>
                   </div>
-                  <h3 className="text-3xl md:text-4xl font-black text-white mb-3">{p.title}</h3>
-                  <p className="text-white/70 text-sm leading-relaxed mb-6 max-w-2xl">{p.description || p.courseOverview || ''}</p>
+                  <h3 className="text-2xl md:text-3xl font-black text-white mb-2">{p.title}</h3>
+                  <p className="text-white/70 text-sm leading-relaxed mb-4 max-w-2xl">{p.description || p.courseOverview || ''}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-amber-400 text-xs font-bold uppercase tracking-wider">⏱ {p.courseDuration || 'Liên hệ'}</span>
-                    <Link
-                      to={`/training/formal-education`}
-                      className="px-6 py-2.5 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl text-sm transition-all hover:-translate-y-0.5"
-                    >
+                    <Link to="/training/formal-education" className="px-6 py-2.5 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl text-sm transition-all hover:-translate-y-0.5">
                       Tìm hiểu thêm
                     </Link>
                   </div>
@@ -365,12 +308,12 @@ const HomePage = () => {
       </section>
 
       {/* ── PARTNERS ── */}
-      <section className="bg-gradient-to-br from-slate-50 to-blue-50/50 py-24 px-6 md:px-12 lg:px-20">
+      <section className="bg-gradient-to-br from-slate-50 to-blue-50/50 py-20 px-6 md:px-12 lg:px-20">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14">
-            <p className="text-amber-500 font-bold text-xs uppercase tracking-widest mb-3">Hệ sinh thái</p>
-            <h2 className="text-4xl font-black text-sky-950">Đối tác &amp; Cơ hội nghề nghiệp</h2>
-            <p className="text-zinc-500 mt-3 max-w-xl mx-auto leading-relaxed">
+          <div className="text-center mb-12">
+            <p className="text-amber-600 font-bold text-xs uppercase tracking-widest mb-2">Hệ sinh thái</p>
+            <h2 className="text-3xl md:text-4xl font-black text-sky-950 tracking-tight">Đối tác &amp; Cơ hội nghề nghiệp</h2>
+            <p className="text-zinc-500 mt-2 max-w-xl mx-auto leading-relaxed text-sm">
               Mạng lưới doanh nghiệp, gara và đối tác giáo dục giúp học viên tiếp cận việc làm ngay sau tốt nghiệp.
             </p>
           </div>
@@ -384,17 +327,17 @@ const HomePage = () => {
               };
               const cfg = categoryConfig[p.category] || { icon: '🤝', color: 'from-slate-700 to-slate-500', label: 'Đối tác' };
               return (
-                <div key={p._id || i} className="bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl hover:shadow-sky-950/8 hover:-translate-y-1 transition-all duration-200 group">
-                  <div className={`h-2 bg-gradient-to-r ${cfg.color}`} />
-                  <div className="p-8">
+                <div key={p._id || i} className="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg hover:shadow-sky-950/5 hover:-translate-y-1 transition-all duration-200 group">
+                  <div className={`h-1.5 bg-gradient-to-r ${cfg.color}`} />
+                  <div className="p-6">
                     {p.logoUrl ? (
-                      <img src={p.logoUrl} alt={p.name} className="h-12 object-contain mb-4" />
+                      <img src={p.logoUrl} alt={p.name} className="h-10 object-contain mb-4" />
                     ) : (
-                      <span className="text-4xl">{cfg.icon}</span>
+                      <span className="text-3xl block mb-4">{cfg.icon}</span>
                     )}
-                    <h3 className="text-xl font-black text-sky-950 mt-4 mb-3">{p.name || cfg.label}</h3>
-                    <p className="text-zinc-500 text-sm leading-relaxed mb-6">{p.description || cfg.label}</p>
-                    <button className="w-full py-3 border-2 border-sky-950/20 text-sky-950 font-bold rounded-xl hover:bg-sky-950 hover:text-white hover:border-sky-950 transition-all duration-200 text-sm">
+                    <h3 className="text-lg font-black text-sky-950 mb-2">{p.name || cfg.label}</h3>
+                    <p className="text-zinc-500 text-sm leading-relaxed mb-5">{p.description || cfg.label}</p>
+                    <button className="w-full py-2.5 border-2 border-sky-950/20 text-sky-950 font-bold rounded-xl hover:bg-sky-950 hover:text-white hover:border-sky-950 transition-all duration-200 text-sm">
                       Xem chi tiết
                     </button>
                   </div>
@@ -406,48 +349,43 @@ const HomePage = () => {
       </section>
 
       {/* ── CONSULTATION CTA ── */}
-      <section className="relative overflow-hidden py-24 px-6 md:px-12 lg:px-20 bg-sky-950">
-        {/* Decorative */}
+      <section className="relative overflow-hidden py-20 px-6 md:px-12 lg:px-20 bg-sky-950">
         <div className="absolute -top-40 -left-20 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl" />
         <div className="absolute -bottom-40 -right-20 w-96 h-96 bg-sky-400/10 rounded-full blur-3xl" />
 
         <div className="relative z-10 max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left content */}
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <div className="text-white">
-              <p className="text-amber-400 font-bold text-xs uppercase tracking-widest mb-4">Tư vấn miễn phí</p>
-              <h2 className="text-4xl md:text-5xl font-black leading-tight mb-6">
+              <p className="text-amber-400 font-bold text-xs uppercase tracking-widest mb-3">Tư vấn miễn phí</p>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black leading-tight mb-5 tracking-tight">
                 Bạn cần tư vấn<br />
                 <span className="text-amber-400">lộ trình học?</span>
               </h2>
-              <p className="text-white/70 text-lg leading-relaxed mb-10">
+              <p className="text-white/70 text-base leading-relaxed mb-8">
                 Để lại thông tin, đội ngũ tư vấn tuyển sinh sẽ liên hệ và hỗ trợ bạn chọn chương trình phù hợp.
               </p>
-
-              <div className="space-y-4">
+              <div className="space-y-3.5">
                 {[
                   { icon: "✅", text: "Tư vấn chương trình đào tạo phù hợp" },
                   { icon: "📋", text: "Hướng dẫn hồ sơ đăng ký từng bước" },
                   { icon: "💼", text: "Kết nối cơ hội việc làm sau tốt nghiệp" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-4">
-                    <span className="text-xl">{item.icon}</span>
-                    <span className="text-white/85 font-medium">{item.text}</span>
+                    <span className="text-lg">{item.icon}</span>
+                    <span className="text-white/85 text-sm font-medium">{item.text}</span>
                   </div>
                 ))}
               </div>
-
-              <div className="mt-10 p-5 bg-white/10 border border-white/20 rounded-2xl backdrop-blur-sm">
+              <div className="mt-8 p-5 bg-white/10 border border-white/20 rounded-2xl backdrop-blur-sm">
                 <p className="text-white/50 text-xs font-bold uppercase tracking-widest mb-1">Hotline tư vấn 24/7</p>
-                <p className="text-2xl font-black text-amber-400">{hotline}</p>
+                <p className="text-xl md:text-2xl font-black text-amber-400">{hotline}</p>
               </div>
             </div>
 
-            {/* Right form */}
-            <div className="bg-gradient-to-br from-amber-500/20 via-orange-500/10 to-amber-600/20 border border-amber-400/30 rounded-3xl p-8 md:p-10 backdrop-blur-sm shadow-2xl shadow-amber-500/20">
-              <div className="flex items-center gap-3 mb-6">
-                <span className="text-2xl">📝</span>
-                <h3 className="text-xl font-black text-white">Đăng ký tư vấn ngay</h3>
+            <div className="bg-gradient-to-br from-amber-500/20 via-orange-500/10 to-amber-600/20 border border-amber-400/30 rounded-2xl p-8 md:p-10 backdrop-blur-sm shadow-2xl shadow-amber-500/20">
+              <div className="flex items-center gap-3 mb-5">
+                <span className="text-xl">📝</span>
+                <h3 className="text-lg font-black text-white">Đăng ký tư vấn ngay</h3>
               </div>
               <MiniConsultForm />
             </div>
@@ -456,18 +394,14 @@ const HomePage = () => {
       </section>
 
       {/* ── NEWS & EVENTS ── */}
-      <section className="bg-white py-24 px-6 md:px-12 lg:px-20">
+      <section className="bg-white py-20 px-6 md:px-12 lg:px-20">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-4 mb-14">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-4 mb-12">
             <div>
-              <p className="text-amber-500 font-bold text-xs uppercase tracking-widest mb-3">Cập nhật mới nhất</p>
-              <h2 className="text-4xl font-black text-sky-950">Tin tức &amp; Sự kiện</h2>
+              <p className="text-amber-600 font-bold text-xs uppercase tracking-widest mb-2">Cập nhật mới nhất</p>
+              <h2 className="text-3xl md:text-4xl font-black text-sky-950 tracking-tight">Tin tức &amp; Sự kiện</h2>
             </div>
-            <Link
-              to="/news/events"
-              id="news-view-all"
-              className="flex items-center gap-2 text-sky-950 font-bold hover:text-amber-600 transition-colors text-sm whitespace-nowrap group"
-            >
+            <Link to="/news/events" id="news-view-all" className="flex items-center gap-2 text-sky-950 font-bold hover:text-amber-600 transition-colors text-sm whitespace-nowrap group">
               Xem tất cả tin tức <span className="group-hover:translate-x-1 transition-transform">→</span>
             </Link>
           </div>
@@ -482,35 +416,31 @@ const HomePage = () => {
               ];
               const date = item.publishedAt ? new Date(item.publishedAt).toLocaleDateString('vi-VN') : '';
               return (
-                <div key={item._id || i} className="group rounded-3xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl hover:shadow-sky-950/8 hover:-translate-y-1 transition-all duration-200 bg-white flex flex-col">
-                  <div className="relative overflow-hidden h-44" style={{
-                    background: `linear-gradient(135deg, ${gradients[i % 3][0]} 0%, ${gradients[i % 3][1]} 100%)`
-                  }}>
+                <div key={item._id || i} className="group rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg hover:shadow-sky-950/5 hover:-translate-y-1 transition-all duration-200 bg-white flex flex-col">
+                  <div className="relative overflow-hidden h-40" style={{ background: `linear-gradient(135deg, ${gradients[i % 3][0]} 0%, ${gradients[i % 3][1]} 100%)` }}>
                     <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
                     {item.coverImageUrl ? (
-                      <img src={item.coverImageUrl} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-40" />
+                      <img src={item.coverImageUrl} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-500" />
                     ) : (
-                      <div className="absolute inset-0 flex items-center justify-center text-white/15 text-7xl font-black select-none">
+                      <div className="absolute inset-0 flex items-center justify-center text-white/15 text-6xl font-black select-none">
                         {emojis[i % 3]}
                       </div>
                     )}
-                    <div className="absolute top-4 left-4 px-3 py-1 bg-amber-500/90 backdrop-blur-sm rounded-full">
+                    <div className="absolute top-3 left-3 px-3 py-1 bg-amber-500/90 backdrop-blur-sm rounded-full">
                       <span className="text-amber-950 text-xs font-black uppercase tracking-wider">{item.category || 'Tin tức'}</span>
                     </div>
                   </div>
 
-                  <div className="p-6 flex flex-col flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs text-slate-400">{date}</span>
-                    </div>
-                    <h3 className="text-sky-950 font-black leading-snug text-sm group-hover:text-sky-700 transition-colors mb-3">
+                  <div className="p-5 flex flex-col flex-1">
+                    <span className="text-xs text-slate-400 mb-2">{date}</span>
+                    <h3 className="text-sky-950 font-black text-sm leading-snug group-hover:text-sky-700 transition-colors mb-2">
                       {item.title}
                     </h3>
                     <p className="text-zinc-500 text-xs leading-relaxed flex-1">
                       {item.excerpt || ''}
                     </p>
-                    <div className="mt-4 pt-4 border-t border-slate-100">
-                      <span className="text-amber-600 font-bold text-sm group-hover:gap-2 flex items-center gap-1 transition-all">
+                    <div className="mt-3 pt-3 border-t border-slate-100">
+                      <span className="text-amber-600 font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
                         Đọc tiếp <span className="group-hover:translate-x-1 transition-transform">→</span>
                       </span>
                     </div>

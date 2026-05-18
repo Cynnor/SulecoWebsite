@@ -1,4 +1,4 @@
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   Users, 
@@ -16,6 +16,12 @@ import logo from '../../assets/logo_transparent.png';
 
 const AdminSidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/admin/login');
+  };
   
   const menuItems = [
     { icon: <LayoutDashboard size={20} />, label: 'Tổng quan', path: '/admin' },
@@ -77,7 +83,7 @@ const AdminSidebar = () => {
           <div className="w-6 h-6 flex items-center justify-center text-xs font-bold italic border border-gray-400 rounded-full">?</div>
           <span className="font-medium">Hỗ trợ</span>
         </button>
-        <button className="w-full flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-white/5 hover:text-red-400 rounded-xl transition-all">
+        <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-white/5 hover:text-red-400 rounded-xl transition-all">
           <LogOut size={20} />
           <span className="font-medium">Đăng xuất</span>
         </button>
