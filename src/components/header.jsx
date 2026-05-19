@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo_transparent.png';
 import { getCourseCategories, getCourses } from '../services/courseService';
@@ -12,10 +12,8 @@ const NavDropdown = ({ label, items, title }) => (
       </svg>
     </button>
 
-    <div className="absolute top-full left-0 mt-0 w-72 origin-top-left bg-white shadow-2xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-[60] rounded-2xl overflow-hidden">
-      <div className="p-2 bg-slate-50 border-b border-slate-100">
-         <p className="text-[10px] text-slate-400 px-4 py-2 font-black uppercase tracking-tighter">{title}</p>
-      </div>
+    <div className="absolute top-full left-0 mt-0 w-72 origin-top-left bg-white shadow-2xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-[60] rounded-none overflow-hidden">
+
       {items.map((item, idx) => (
         <Link
           key={idx}
@@ -32,10 +30,8 @@ const NavDropdown = ({ label, items, title }) => (
 const TrainingMegaMenu = () => {
   const [categories, setCategories] = useState([]);
   const [courseMap, setCourseMap] = useState({});
-  const [open, setOpen] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
   const [selectedCat, setSelectedCat] = useState(null);
-  const ref = useRef(null);
 
   useEffect(() => {
     getCourseCategories({ limit: 100 }).then((res) => {
@@ -53,38 +49,23 @@ const TrainingMegaMenu = () => {
     }).catch(() => {});
   }, []);
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) { setOpen(false); setShowCategories(false); setSelectedCat(null); }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
   return (
-    <div className="relative" ref={ref}>
+    <div className="relative group">
       <button
-        onClick={() => { setOpen(!open); if (!open) { setShowCategories(false); setSelectedCat(null); } }}
-        className={`flex items-center gap-2 py-2 transition-colors border-b-2 font-bold uppercase tracking-widest text-[11px] ${
-          open ? 'text-blue-700 border-blue-700' : 'text-slate-500 border-transparent hover:text-blue-700'
-        }`}
+        className="flex items-center gap-2 py-2 hover:text-blue-700 transition-colors border-b-2 border-transparent group-hover:border-blue-700 font-bold uppercase tracking-widest text-[11px]"
       >
         Đào tạo
-        <svg xmlns="http://www.w3.org/2000/svg" className={`h-3 w-3 transition-transform ${open ? 'rotate-180' : 'opacity-50'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 opacity-50 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
 
-      <div className={`absolute top-full left-0 mt-0 w-[780px] origin-top-left bg-white shadow-2xl border border-slate-100 transition-all duration-300 transform z-[60] rounded-2xl overflow-hidden ${
-        open ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2 pointer-events-none'
-      }`}>
-        <div className="p-2 bg-slate-50 border-b border-slate-100">
-          <p className="text-[10px] text-slate-400 px-4 py-2 font-black uppercase tracking-tighter">Training Programs</p>
-        </div>
+      <div className="absolute top-full left-0 mt-0 w-[780px] origin-top-left bg-white shadow-2xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-[60] rounded-none overflow-hidden">
+
         <div className="flex">
           <div className="w-[260px] border-r border-slate-100 shrink-0">
             <div
-              onClick={() => { setShowCategories(!showCategories); if (showCategories) setSelectedCat(null); }}
+              onMouseEnter={() => setShowCategories(true)}
               className={`flex items-center justify-between px-6 py-4 cursor-pointer transition-all text-[11px] font-bold uppercase tracking-widest ${
                 showCategories ? 'bg-blue-700 text-white' : 'hover:bg-blue-50 text-slate-700'
               }`}
@@ -103,7 +84,7 @@ const TrainingMegaMenu = () => {
                 return (
                   <div
                     key={cat._id}
-                    onClick={() => setSelectedCat(selectedCat === cat._id ? null : cat._id)}
+                    onMouseEnter={() => setSelectedCat(cat._id)}
                     className={`flex items-center justify-between px-6 py-4 cursor-pointer transition-all text-[11px] font-bold uppercase tracking-widest ${
                       selectedCat === cat._id ? 'bg-blue-700 text-white' : 'hover:bg-blue-50 text-slate-700'
                     }`}
