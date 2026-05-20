@@ -7,10 +7,10 @@ import { getSettings } from '../services/settingService';
 import { submitContact } from '../services/contactService';
 
 const defaultStats = [
-  { number: "--", label: "Học viên tốt nghiệp", icon: "🎓" },
-  { number: "--", label: "Doanh nghiệp đối tác", icon: "🤝" },
-  { number: "--", label: "Có việc làm sau tốt nghiệp", icon: "📈" },
-  { number: "--", label: "Chương trình đào tạo", icon: "📚" },
+  { number: "--", label: "Học viên tốt nghiệp" },
+  { number: "--", label: "Doanh nghiệp đối tác" },
+  { number: "--", label: "Có việc làm sau tốt nghiệp" },
+  { number: "--", label: "Chương trình đào tạo" },
 ];
 
 const MiniConsultForm = () => {
@@ -126,10 +126,10 @@ const HomePage = () => {
         const partnerTotal = partnersRes.value?.data?.total || partnersRes.value?.total || (Array.isArray(partnersRes.value?.data?.partners) ? partnersRes.value.data.partners.length : 0);
         const postTotal = postsRes.value?.data?.total || postsRes.value?.total || (Array.isArray(postsRes.value?.data?.posts) ? postsRes.value.data.posts.length : 0);
         setStats([
-          { number: `${courseLen || 0}+`, label: "Chương trình đào tạo", icon: "📚" },
-          { number: `${partnerTotal || 0}+`, label: "Doanh nghiệp đối tác", icon: "🤝" },
-          { number: "90%", label: "Có việc làm sau tốt nghiệp", icon: "📈" },
-          { number: `${postTotal || 0}+`, label: "Bài viết & tin tức", icon: "🎓" },
+          { number: `${courseLen || 0}+`, label: "Chương trình đào tạo" },
+          { number: `${partnerTotal || 0}+`, label: "Doanh nghiệp đối tác" },
+          { number: "90%", label: "Có việc làm sau tốt nghiệp" },
+          { number: `${postTotal || 0}+`, label: "Bài viết & tin tức" },
         ]);
       } catch (e) {}
     };
@@ -193,10 +193,9 @@ const HomePage = () => {
         <div className="max-w-7xl mx-auto -mt-8 relative z-20">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
             {stats.map((stat, i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 shadow-lg shadow-sky-950/5 border border-gray-100 flex flex-col items-center text-center group hover:-translate-y-1 hover:shadow-xl transition-all duration-200">
-                <span className="text-2xl mb-3">{stat.icon}</span>
-                <p className="text-2xl md:text-3xl font-black text-sky-950 mb-1.5">{stat.number}</p>
-                <p className="text-xs text-zinc-500 font-semibold uppercase tracking-wider">{stat.label}</p>
+              <div key={i} className="bg-white rounded-2xl p-6 shadow-lg shadow-sky-950/5 border border-gray-100 flex flex-col items-center justify-center text-center group hover:-translate-y-1 hover:shadow-xl transition-all duration-200 min-h-[140px]">
+                <p className="text-4xl md:text-5xl font-black text-sky-950 mb-3 group-hover:text-amber-500 transition-colors">{stat.number}</p>
+                <p className="text-xs md:text-sm text-zinc-500 font-bold uppercase tracking-wider">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -240,15 +239,14 @@ const HomePage = () => {
 
             <div className="grid grid-cols-2 gap-4">
               {[
-                { title: "Đào tạo bài bản", desc: "Chương trình chuẩn quốc tế, giáo trình cập nhật, giảng viên giàu kinh nghiệm thực tế.", icon: "📚" },
-                { title: "Thực hành 100%", desc: "Mô hình đào tạo gắn xưởng thực tế — học viên được cầm tay chỉ việc trên xe thật.", icon: "🔧" },
-                { title: "Kết nối doanh nghiệp", desc: "Liên kết trực tiếp với 120+ doanh nghiệp, gara, xưởng dịch vụ trên toàn quốc.", icon: "🤝" },
-                { title: "Cơ hội quốc tế", desc: "Lộ trình tu nghiệp & việc làm tại Nhật Bản, Australia, CHLB Đức.", icon: "🌏" },
+                { title: "Đào tạo bài bản", desc: "Chương trình chuẩn quốc tế, giáo trình cập nhật, giảng viên giàu kinh nghiệm thực tế." },
+                { title: "Thực hành 100%", desc: "Mô hình đào tạo gắn xưởng thực tế — học viên được cầm tay chỉ việc trên xe thật." },
+                { title: "Kết nối doanh nghiệp", desc: "Liên kết trực tiếp với 120+ doanh nghiệp, gara, xưởng dịch vụ trên toàn quốc." },
+                { title: "Cơ hội quốc tế", desc: "Lộ trình tu nghiệp & việc làm tại Nhật Bản, Australia, CHLB Đức." },
               ].map((item, i) => (
-                <div key={i} className="bg-white/10 border border-white/20 rounded-2xl p-5 backdrop-blur-sm hover:bg-white/15 transition-all group">
-                  <span className="text-xl mb-3 block group-hover:scale-110 transition-transform">{item.icon}</span>
-                  <h3 className="text-white font-bold text-xs mb-1.5 uppercase tracking-wider">{item.title}</h3>
-                  <p className="text-white/50 text-xs leading-relaxed">{item.desc}</p>
+                <div key={i} className="bg-white/10 border border-white/20 rounded-2xl p-6 backdrop-blur-sm hover:bg-white/15 transition-all flex flex-col justify-center min-h-[140px]">
+                  <h3 className="text-white font-bold text-sm md:text-base mb-2 uppercase tracking-wider">{item.title}</h3>
+                  <p className="text-white/70 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>

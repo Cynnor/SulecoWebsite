@@ -193,7 +193,7 @@ export default function Header() {
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex text-slate-500">
+        <nav className="hidden items-center gap-8 lg:flex text-slate-800">
           <Link to="/" className="py-2 hover:text-blue-700 transition-colors border-b-2 border-transparent hover:border-blue-700 font-bold uppercase tracking-widest text-[11px]">
             Trang chủ
           </Link>
